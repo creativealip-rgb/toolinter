@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AiChatbot from "@/components/ai-chatbot";
+import AiChatbotLoader from "@/components/ai-chatbot-loader";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="id" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         {children}
-        <AiChatbot />
+        <AiChatbotLoader />
       </body>
     </html>
   );
