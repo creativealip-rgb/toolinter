@@ -34,7 +34,7 @@ const tools = [
     icon: Receipt,
     color: "text-warning",
     bg: "bg-warning/10",
-    ready: false,
+    ready: true,
   },
   {
     title: "Kalkulator THR",
@@ -44,7 +44,7 @@ const tools = [
     icon: Gift,
     color: "text-success",
     bg: "bg-success/10",
-    ready: false,
+    ready: true,
   },
   {
     title: "Kalkulator BPJS",
@@ -54,7 +54,7 @@ const tools = [
     icon: Shield,
     color: "text-primary",
     bg: "bg-primary/10",
-    ready: false,
+    ready: true,
   },
 ];
 

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Camera, ArrowRight } from "lucide-react";
+import { Camera, ArrowRight, Shrink } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Foto Dokumen Online — Toolinter",
@@ -15,6 +15,7 @@ const fotoTools = [
     description:
       "Ubah ukuran foto ke 3×4 cm untuk CPNS, SNBP, SKCK, akta, dan dokumen resmi lainnya.",
     size: "3×4 cm (354×472 px)",
+    icon: "camera" as const,
   },
   {
     slug: "resize-4x6",
@@ -22,7 +23,23 @@ const fotoTools = [
     description:
       "Ubah ukuran foto ke 4×6 cm untuk paspor, visa, SIM, dan dokumen internasional.",
     size: "4×6 cm (472×709 px)",
-    disabled: true,
+    icon: "camera" as const,
+  },
+  {
+    slug: "resize-2x3",
+    title: "Resize Foto 2×3 cm",
+    description:
+      "Ubah ukuran foto ke 2×3 cm untuk dokumen sekolah, PPDB, dan keperluan administrasi.",
+    size: "2×3 cm (236×354 px)",
+    icon: "camera" as const,
+  },
+  {
+    slug: "kompres",
+    title: "Kompres Foto",
+    description:
+      "Kompres foto untuk upload ke portal CPNS, SNBP, dan situs pendaftaran online.",
+    size: "Target: 200 KB / 500 KB / custom",
+    icon: "shrink" as const,
   },
 ];
 
@@ -50,11 +67,13 @@ export default function FotoPage() {
           {fotoTools.map((tool) => (
             <div
               key={tool.slug}
-              className={`bg-canvas rounded-xl border border-border p-6 flex flex-col ${
-                tool.disabled ? "opacity-60" : ""
-              }`}
+              className="bg-canvas rounded-xl border border-border p-6 flex flex-col"
             >
-              <Camera className="w-8 h-8 text-primary mb-3" />
+              {tool.icon === "shrink" ? (
+                <Shrink className="w-8 h-8 text-primary mb-3" />
+              ) : (
+                <Camera className="w-8 h-8 text-primary mb-3" />
+              )}
               <h2 className="font-semibold text-ink text-lg mb-2">
                 {tool.title}
               </h2>
@@ -62,19 +81,13 @@ export default function FotoPage() {
                 {tool.description}
               </p>
               <p className="text-ink-muted text-xs mb-4">{tool.size}</p>
-              {tool.disabled ? (
-                <span className="text-sm text-ink-muted font-medium py-2 px-4 rounded-xl border border-border text-center">
-                  Segera hadir
-                </span>
-              ) : (
-                <Link
-                  href={`/foto/${tool.slug}`}
-                  className="flex items-center justify-center gap-2 bg-primary text-white font-medium py-2 px-4 rounded-xl hover:opacity-90 transition-opacity text-sm"
-                >
-                  Mulai Resize
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              )}
+              <Link
+                href={`/foto/${tool.slug}`}
+                className="flex items-center justify-center gap-2 bg-primary text-white font-medium py-2 px-4 rounded-xl hover:opacity-90 transition-opacity text-sm"
+              >
+                {tool.icon === "shrink" ? "Mulai Kompres" : "Mulai Resize"}
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           ))}
         </div>

@@ -431,6 +431,173 @@ _________________________
 dr. ________________
 SIP: ________________`;
   },
+  "izin-kuliah": (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `Kepada Yth.
+Dekan/Wakil Dekan
+Fakultas ${data.prodi || "[Program Studi]"}
+${data.universitas || "[Nama Universitas]"}
+
+Dengan hormat,
+
+Saya yang bertanda tangan di bawah ini:
+Nama: ${data.nama_mahasiswa || "[Nama Mahasiswa]"}
+NIM: ${data.nim || "[NIM]"}
+Program Studi: ${data.prodi || "[Program Studi]"}
+Semester: ${data.semester || "[Semester]"}
+
+Dengan ini memohon izin untuk tidak mengikuti kegiatan perkuliahan pada tanggal ${data.tanggal || "[Tanggal]"}.
+
+Dikarenakan: ${data.alasan || "[Alasan Izin]"}.
+
+Demikian surat izin ini saya buat dengan sebenar-benarnya. Atas perhatian dan kebijaksanaan Bapak/Ibu, saya ucapkan terima kasih.
+
+Hormat saya,
+
+
+${data.nama_mahasiswa || "[Nama Mahasiswa]"}
+NIM: ${data.nim || "[NIM]"}
+${tanggalSurat}`;
+  },
+  "izin-kerja": (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `Kepada Yth.
+HRD Manager / Pimpinan
+${data.perusahaan || "[Nama Perusahaan]"}
+
+Dengan hormat,
+
+Saya yang bertanda tangan di bawah ini:
+Nama: ${data.nama || "[Nama Lengkap]"}
+Jabatan: ${data.jabatan || "[Jabatan]"}
+
+Dengan ini memohon izin untuk tidak masuk kerja pada:
+Tanggal mulai: ${data.tanggal_mulai || "[Tanggal Mulai]"}
+Tanggal selesai: ${data.tanggal_selesai || "[Tanggal Selesai]"}
+
+Dikarenakan: ${data.alasan || "[Alasan Izin]"}.
+
+Selama izin tersebut, saya akan memastikan bahwa tugas-tugas saya dapat terhandle dengan baik oleh rekan kerja atau atasan saya.
+
+Demikian surat izin ini saya buat dengan sebenar-benarnya. Atas perhatian dan kebijaksanaan Bapak/Ibu, saya ucapkan terima kasih.
+
+Hormat saya,
+
+
+${data.nama || "[Nama Lengkap]"}
+${data.jabatan || "[Jabatan]"}
+${tanggalSurat}`;
+  },
+  "kuasa-bpkb": (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `SURAT KUASA PENGAMBILAN BPKB
+
+Yang bertanda tangan di bawah ini:
+Nama: ${data.pemberi_kuasa || "[Nama Pemberi Kuasa]"}
+NIK: ${data.nik_pemberi || "[NIK Pemberi Kuasa]"}
+Alamat: ${data.alamat_pemberi || "[Alamat Pemberi Kuasa]"}
+
+Dengan ini memberikan kuasa kepada:
+Nama: ${data.penerima_kuasa || "[Nama Penerima Kuasa]"}
+NIK: ${data.nik_penerima || "[NIK Penerima Kuasa]"}
+Alamat: ${data.alamat_penerima || "[Alamat Penerima Kuasa]"}
+
+Untuk mengambil dan menerima BPKB dengan data sebagai berikut:
+Nomor BPKB: ${data.no_bpkb || "[Nomor BPKB]"}
+Nomor Polisi: ${data.no_polisi || "[Nomor Polisi]"}
+
+Demikian surat kuasa ini dibuat dengan sebenar-benarnya untuk dipergunakan sebagaimana mestinya.
+
+${tanggalSurat}
+
+Pemberi Kuasa,                    Penerima Kuasa,
+
+
+${data.pemberi_kuasa || "[Nama Pemberi Kuasa]"}       ${data.penerima_kuasa || "[Nama Penerima Kuasa]"}
+Meterai Rp 10.000`;
+  },
+  "keterangan-usaha": (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `SURAT KETERANGAN USAHA
+
+Yang bertanda tangan di bawah ini, Kepala Desa/Kelurahan, dengan ini menerangkan bahwa:
+
+Nama: ${data.nama || "[Nama Lengkap]"}
+NIK: ${data.nik || "[NIK]"}
+Alamat: ${data.alamat || "[Alamat]"}
+
+Benar yang bersangkutan memiliki usaha dengan data sebagai berikut:
+Jenis Usaha: ${data.jenis_usaha || "[Jenis Usaha]"}
+Alamat Usaha: ${data.alamat_usaha || "[Alamat Usaha]"}
+Lama Usaha: ${data.lama_usaha || "[Lama Usaha]"}
+
+Surat keterangan ini dibuat untuk keperluan administrasi dan dapat dipergunakan sebagaimana mestinya.
+
+${tanggalSurat}
+
+Kepala Desa/Kelurahan
+
+
+_________________________`;
+  },
+  "keterangan-tidak-mampu": (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `SURAT KETERANGAN TIDAK MAMPU
+
+Yang bertanda tangan di bawah ini, Kepala Desa/Kelurahan, dengan ini menerangkan bahwa:
+
+Nama: ${data.nama || "[Nama Lengkap]"}
+NIK: ${data.nik || "[NIK]"}
+Alamat: ${data.alamat || "[Alamat]"}
+Pekerjaan: ${data.pekerjaan || "[Pekerjaan]"}
+Penghasilan per Bulan: ${data.penghasilan || "[Penghasilan]"}
+
+Benar yang bersangkutan adalah warga kami yang termasuk dalam kategori keluarga kurang mampu / tidak mampu.
+
+Surat keterangan ini dibuat untuk keperluan: ${data.keperluan || "[Keperluan]"}.
+
+Demikian surat keterangan ini dibuat dengan sebenar-benarnya dan dapat dipergunakan sebagaimana mestinya.
+
+${tanggalSurat}
+
+Kepala Desa/Kelurahan
+
+
+_________________________`;
+  },
+  "pengunduran-diri": (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `SURAT PENGUNDURAN DIRI
+
+Kepada Yth.
+HRD Manager
+${data.perusahaan || "[Nama Perusahaan]"}
+
+Dengan hormat,
+
+Saya yang bertanda tangan di bawah ini:
+Nama: ${data.nama || "[Nama Lengkap]"}
+Jabatan: ${data.jabatan || "[Jabatan]"}
+NIP/NIK: ${data.nip_nik || "[NIP/NIK]"}
+Tanggal Masuk: ${data.tanggal_masuk || "[Tanggal Masuk]"}
+
+Dengan ini mengajukan pengunduran diri dari jabatan saya sebagai ${data.jabatan || "[Jabatan]"} di ${data.perusahaan || "[Nama Perusahaan]"}, terhitung efektif per tanggal ${data.tanggal_berhenti || "[Tanggal Berhenti]"}.
+
+${data.alasan ? `Alasan pengunduran diri ini adalah ${data.alasan}.` : "Alasan pengunduran diri ini adalah untuk kepentingan pengembangan pribadi saya selanjutnya."}
+
+Saya bersedia melaksanakan serah terima tugas dan tanggung jawab saya kepada pihak yang ditunjuk oleh perusahaan. Saya mengucapkan terima kasih atas kesempatan, bimbingan, dan pengalaman yang telah diberikan selama bekerja di perusahaan ini.
+
+Demikian surat pengunduran diri ini saya buat dengan sebenar-benarnya dan tanpa ada paksaan dari pihak manapun.
+
+${tanggalSurat}
+
+Hormat saya,
+
+
+${data.nama || "[Nama Lengkap]"}
+${data.jabatan || "[Jabatan]"}
+NIP/NIK: ${data.nip_nik || "[NIP/NIK]"}`;
+  },
 };
 
 export default function SuratGenerator({

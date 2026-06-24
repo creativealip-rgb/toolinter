@@ -6,6 +6,8 @@ import {
   TrendingUp,
   BookOpen,
   ArrowRight,
+  DollarSign,
+  UtensilsCrossed,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -23,6 +25,26 @@ const tools = [
     icon: Calculator,
     color: "text-primary",
     bg: "bg-primary/10",
+    ready: true,
+  },
+  {
+    title: "Kalkulator Harga Jual",
+    description:
+      "Hitung harga jual produk berdasarkan HPP, target margin, biaya operasional, dan diskon marketplace.",
+    href: "/umkm/harga-jual",
+    icon: DollarSign,
+    color: "text-primary",
+    bg: "bg-primary/10",
+    ready: true,
+  },
+  {
+    title: "Kalkulator Food Cost",
+    description:
+      "Hitung food cost percentage untuk bisnis F&B. Ketahui apakah biaya bahan baku sudah optimal.",
+    href: "/umkm/food-cost",
+    icon: UtensilsCrossed,
+    color: "text-warning",
+    bg: "bg-warning/10",
     ready: true,
   },
   {
