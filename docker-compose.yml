@@ -1,0 +1,26 @@
+services:
+  toolinter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: toolinter
+    restart: unless-stopped
+    expose:
+      - "3000"
+    networks:
+      - dokploy-network
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=dokploy-network
+      - traefik.http.routers.toolinter-secure.rule=Host(`toolinter-168-144-37-19.sslip.io`)
+      - traefik.http.routers.toolinter-secure.entrypoints=websecure
+      - traefik.http.routers.toolinter-secure.tls.certresolver=letsencrypt
+      - traefik.http.routers.toolinter-http.rule=Host(`toolinter-168-144-37-19.sslip.io`)
+      - traefik.http.routers.toolinter-http.entrypoints=web
+      - traefik.http.routers.toolinter-http.middlewares=toolinter-redirect
+      - traefik.http.middlewares.toolinter-redirect.redirectscheme.scheme=https
+      - traefik.http.services.toolinter.loadbalancer.server.port=3000
+
+networks:
+  dokploy-network:
+    external: true
