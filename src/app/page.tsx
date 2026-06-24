@@ -15,16 +15,16 @@ const categories = [
   {
     icon: Image,
     title: "Foto & Dokumen",
-    desc: "Resize pas foto 3x4, 4x6, 2x3 dan kompres foto untuk dokumen",
-    count: 4,
+    desc: "Resize pas foto 3x4, 4x6, 2x3, kompres, dan panduan foto KTP/CPNS/SNBP",
+    count: 7,
     badge: "badge-red",
     href: "/foto",
   },
   {
     icon: Calculator,
     title: "Gaji & Keuangan",
-    desc: "Kalkulator gaji bersih, PPh21, THR, BPJS, dan simulasi pinjaman",
-    count: 4,
+    desc: "Kalkulator gaji bersih, PPh21, THR, BPJS, lembur",
+    count: 5,
     badge: "badge-green",
     href: "/gaji",
   },
@@ -47,8 +47,8 @@ const categories = [
   {
     icon: Wrench,
     title: "UMKM & Bisnis",
-    desc: "Hitung HPP, harga jual, invoice, dan kalkulator bisnis untuk UMKM",
-    count: 4,
+    desc: "Hitung HPP, harga jual, food cost, invoice, margin marketplace",
+    count: 6,
     badge: "badge-orange",
     href: "/umkm",
   },
@@ -148,7 +148,7 @@ function TrustBadges() {
     <div className="flex flex-wrap justify-center gap-8 py-6 px-6 bg-surface">
       {[
         { value: "100%", label: "Gratis" },
-        { value: "60+", label: "Tool Tersedia" },
+        { value: "70+", label: "Tool Tersedia" },
         { value: "Tanpa", label: "Install" },
       ].map((item) => (
         <div key={item.label} className="text-center">

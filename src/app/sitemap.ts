@@ -5,6 +5,7 @@ const BASE_URL = "https://toolinter.net";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${BASE_URL}/`, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
+    { url: `${BASE_URL}/tools`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     
     // Surat (22 templates)
     { url: `${BASE_URL}/surat`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
@@ -31,21 +32,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/surat/pengunduran-diri`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/surat/kuasa-rekening`, lastModified: new Date(), changeFrequency: "monthly" },
 
-    // Foto (4 tools)
+    // Foto (7 pages)
     { url: `${BASE_URL}/foto`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE_URL}/foto/resize-3x4`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/foto/resize-4x6`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/foto/resize-2x3`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/foto/kompres`, lastModified: new Date(), changeFrequency: "monthly" },
+    { url: `${BASE_URL}/foto/ktp`, lastModified: new Date(), changeFrequency: "monthly" },
+    { url: `${BASE_URL}/foto/cpns`, lastModified: new Date(), changeFrequency: "monthly" },
+    { url: `${BASE_URL}/foto/snbp`, lastModified: new Date(), changeFrequency: "monthly" },
 
-    // Gaji (4 tools)
+    // Gaji (5 tools)
     { url: `${BASE_URL}/gaji`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE_URL}/gaji/bersih`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/gaji/pph21`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/gaji/thr`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/gaji/bpjs`, lastModified: new Date(), changeFrequency: "monthly" },
+    { url: `${BASE_URL}/gaji/lembur`, lastModified: new Date(), changeFrequency: "monthly" },
 
-    // PDF (4 tools + 2 placeholder)
+    // PDF (6 tools)
     { url: `${BASE_URL}/pdf`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE_URL}/pdf/gabung`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/pdf/kompres`, lastModified: new Date(), changeFrequency: "monthly" },
@@ -62,14 +67,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/cv/cv-bumn`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/cv/contoh-surat-lamaran`, lastModified: new Date(), changeFrequency: "monthly" },
 
-    // UMKM (4 tools)
+    // UMKM (6 tools)
     { url: `${BASE_URL}/umkm`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE_URL}/umkm/hpp`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/umkm/harga-jual`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/umkm/food-cost`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/umkm/invoice`, lastModified: new Date(), changeFrequency: "monthly" },
+    { url: `${BASE_URL}/umkm/margin-marketplace`, lastModified: new Date(), changeFrequency: "monthly" },
+    { url: `${BASE_URL}/umkm/catatan`, lastModified: new Date(), changeFrequency: "monthly" },
 
-    // Blog (10 posts)
+    // Blog (15 posts)
     { url: `${BASE_URL}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
     { url: `${BASE_URL}/blog/cara-membuat-surat-resign`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/blog/ukuran-foto-cpns-2026`, lastModified: new Date(), changeFrequency: "monthly" },
@@ -81,6 +88,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/blog/cara-hitungan-thr-karyawan`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/blog/cara-membuat-cv-fresh-graduate`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/blog/cara-hitung-hpp-produk-umkm`, lastModified: new Date(), changeFrequency: "monthly" },
+    { url: `${BASE_URL}/blog/contoh-surat-izin-sekolah`, lastModified: new Date(), changeFrequency: "monthly" },
+    { url: `${BASE_URL}/blog/cara-membuat-surat-lamaran-kerja`, lastModified: new Date(), changeFrequency: "monthly" },
+    { url: `${BASE_URL}/blog/ukuran-foto-visa-passport`, lastModified: new Date(), changeFrequency: "monthly" },
+    { url: `${BASE_URL}/blog/perbedaan-gaji-bruto-netto`, lastModified: new Date(), changeFrequency: "monthly" },
+    { url: `${BASE_URL}/blog/cara-buat-invoice-profesional`, lastModified: new Date(), changeFrequency: "monthly" },
 
     // Static
     { url: `${BASE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
