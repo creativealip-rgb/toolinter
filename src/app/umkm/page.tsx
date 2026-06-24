@@ -58,14 +58,14 @@ const tools = [
     ready: true,
   },
   {
-    title: "Kalkulator Margin",
+    title: "Kalkulator Margin Marketplace",
     description:
-      "Hitung margin keuntungan, markup, dan titik impas (break-even point) untuk produk atau jasa Anda.",
-    href: "/umkm/margin",
+      "Hitung margin keuntungan setelah potongan fee marketplace Tokopedia, Shopee, Lazada, atau platform custom.",
+    href: "/umkm/margin-marketplace",
     icon: TrendingUp,
     color: "text-success",
     bg: "bg-success/10",
-    ready: false,
+    ready: true,
   },
   {
     title: "Catatan Keuangan Sederhana",
@@ -75,7 +75,7 @@ const tools = [
     icon: BookOpen,
     color: "text-primary",
     bg: "bg-primary/10",
-    ready: false,
+    ready: true,
   },
 ];
 

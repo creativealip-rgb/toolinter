@@ -1,4 +1,5 @@
-import { Search, FileText, Image, Calculator, FileDown, Briefcase, Wrench, Zap, Shield, Download, Users, TrendingUp, Star } from "lucide-react";
+import { Search, FileText, Image, Calculator, FileDown, Briefcase, Wrench, Zap, Shield, Download, Users, TrendingUp, Star, GraduationCap, Clock } from "lucide-react";
+import { blogPosts } from "@/data/blog";
 
 // ─── Data ───
 
@@ -6,16 +7,16 @@ const categories = [
   {
     icon: FileText,
     title: "Surat & Dokumen",
-    desc: "Generator surat resign, izin sekolah, lamaran kerja, dan 15+ template lain",
-    count: 15,
+    desc: "Generator surat resign, izin sekolah, lamaran kerja, dan 20+ template lain",
+    count: 22,
     badge: "badge-blue",
     href: "/surat",
   },
   {
     icon: Image,
     title: "Foto & Dokumen",
-    desc: "Resize pas foto 3x4, 4x6 untuk CPNS, SNBP, KTP, visa, dan keperluan lain",
-    count: 8,
+    desc: "Resize pas foto 3x4, 4x6, 2x3 dan kompres foto untuk dokumen",
+    count: 4,
     badge: "badge-red",
     href: "/foto",
   },
@@ -23,7 +24,7 @@ const categories = [
     icon: Calculator,
     title: "Gaji & Keuangan",
     desc: "Kalkulator gaji bersih, PPh21, THR, BPJS, dan simulasi pinjaman",
-    count: 10,
+    count: 4,
     badge: "badge-green",
     href: "/gaji",
   },
@@ -31,7 +32,7 @@ const categories = [
     icon: FileDown,
     title: "PDF & Converter",
     desc: "Gabung PDF, kompres PDF, PDF ke Word, dan konversi dokumen lainnya",
-    count: 8,
+    count: 6,
     badge: "badge-teal",
     href: "/pdf",
   },
@@ -39,7 +40,7 @@ const categories = [
     icon: Briefcase,
     title: "CV & Lamaran",
     desc: "Generator CV ATS, surat lamaran kerja, dan template profesional",
-    count: 6,
+    count: 5,
     badge: "badge-purple",
     href: "/cv",
   },
@@ -47,7 +48,7 @@ const categories = [
     icon: Wrench,
     title: "UMKM & Bisnis",
     desc: "Hitung HPP, harga jual, invoice, dan kalkulator bisnis untuk UMKM",
-    count: 6,
+    count: 4,
     badge: "badge-orange",
     href: "/umkm",
   },
@@ -147,7 +148,7 @@ function TrustBadges() {
     <div className="flex flex-wrap justify-center gap-8 py-6 px-6 bg-surface">
       {[
         { value: "100%", label: "Gratis" },
-        { value: "50+", label: "Tool Tersedia" },
+        { value: "60+", label: "Tool Tersedia" },
         { value: "Tanpa", label: "Install" },
       ].map((item) => (
         <div key={item.label} className="text-center">
@@ -236,6 +237,74 @@ function PopularQueries() {
               {query}
             </a>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeaturedBanner() {
+  return (
+    <section className="py-12 px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-primary-hover p-8 md:p-12 text-white">
+          <div className="relative z-10 flex flex-col md:flex-row items-center gap-6">
+            <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center flex-shrink-0">
+              <GraduationCap className="w-8 h-8" />
+            </div>
+            <div className="text-center md:text-left flex-1">
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">Butuh Surat atau Foto untuk Kebutuhan Sekolah/Kerja?</h2>
+              <p className="text-white/80 text-lg">Buat surat resmi, resize foto dokumen, dan hitung gaji — semua gratis, tanpa install.</p>
+            </div>
+            <a href="/surat" className="inline-flex items-center px-6 py-3 bg-white text-primary font-semibold rounded-full hover:bg-white/90 transition-colors flex-shrink-0">
+              Coba Sekarang
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BlogPreview() {
+  const posts = blogPosts.slice(0, 3);
+  return (
+    <section className="py-16 px-6 bg-surface">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h2 className="text-2xl font-bold text-ink mb-2">Panduan Terbaru</h2>
+            <p className="text-ink-tertiary">Tips dan panduan untuk kebutuhan dokumen Anda</p>
+          </div>
+          <a href="/blog" className="hidden md:inline-flex text-sm font-semibold text-primary hover:text-primary-hover transition-colors">
+            Lihat Semua Panduan →
+          </a>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {posts.map((post) => (
+            <a
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="group block p-6 bg-canvas border border-border rounded-xl hover:shadow-lg hover:border-primary/20 transition-all"
+            >
+              <span className="inline-block text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
+                {post.category}
+              </span>
+              <h3 className="text-lg font-semibold text-ink mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                {post.title}
+              </h3>
+              <p className="text-sm text-ink-tertiary mb-4 line-clamp-2">{post.excerpt}</p>
+              <div className="flex items-center gap-2 text-xs text-ink-muted">
+                <Clock className="w-3.5 h-3.5" />
+                <span>{post.readTime}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+        <div className="mt-6 text-center md:hidden">
+          <a href="/blog" className="text-sm font-semibold text-primary hover:text-primary-hover transition-colors">
+            Lihat Semua Panduan →
+          </a>
         </div>
       </div>
     </section>
@@ -347,6 +416,8 @@ export default function HomePage() {
         <CategoryGrid />
         <PopularTools />
         <PopularQueries />
+        <FeaturedBanner />
+        <BlogPreview />
         <WhyUsSection />
         <FAQSection />
       </main>
