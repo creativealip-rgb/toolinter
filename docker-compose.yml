@@ -12,12 +12,18 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=dokploy-network
-      - traefik.http.routers.toolinter-secure.rule=Host(`toolinter-168-144-37-19.sslip.io`)
+      # toolinter.net
+      - traefik.http.routers.toolinter-secure.rule=Host(`toolinter.net`) || Host(`www.toolinter.net`)
       - traefik.http.routers.toolinter-secure.entrypoints=websecure
       - traefik.http.routers.toolinter-secure.tls.certresolver=letsencrypt
-      - traefik.http.routers.toolinter-http.rule=Host(`toolinter-168-144-37-19.sslip.io`)
+      - traefik.http.routers.toolinter-http.rule=Host(`toolinter.net`) || Host(`www.toolinter.net`)
       - traefik.http.routers.toolinter-http.entrypoints=web
       - traefik.http.routers.toolinter-http.middlewares=toolinter-redirect
+      # sslip fallback
+      - traefik.http.routers.toolinter-sslip.rule=Host(`toolinter-168-144-37-19.sslip.io`)
+      - traefik.http.routers.toolinter-sslip.entrypoints=websecure
+      - traefik.http.routers.toolinter-sslip.tls.certresolver=letsencrypt
+      # middlewares + service
       - traefik.http.middlewares.toolinter-redirect.redirectscheme.scheme=https
       - traefik.http.services.toolinter.loadbalancer.server.port=3000
 
