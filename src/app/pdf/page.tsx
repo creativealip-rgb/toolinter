@@ -22,6 +22,18 @@ const pdfTools = [
       "Kurangi ukuran file PDF tanpa mengurangi kualitas secara signifikan. Cocok untuk lampiran email.",
   },
   {
+    slug: "foto-ke-pdf",
+    title: "Foto ke PDF",
+    description:
+      "Ubah foto JPG, PNG, WEBP menjadi PDF. Setiap foto jadi satu halaman A4.",
+  },
+  {
+    slug: "halaman",
+    title: "Ambil Halaman PDF",
+    description:
+      "Ekstrak halaman tertentu dari file PDF. Pilih dengan rentang seperti 1-3,5,7-9.",
+  },
+  {
     slug: "pdf-ke-word",
     title: "PDF ke Word",
     description: "Ubah file PDF menjadi dokumen Word yang bisa diedit.",
@@ -55,7 +67,7 @@ export default function PdfPage() {
         </div>
 
         {/* Tool cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {pdfTools.map((tool) => (
             <div
               key={tool.slug}
@@ -111,6 +123,16 @@ export default function PdfPage() {
               sehingga lebih mudah dikirim via email atau diupload ke platform
               yang memiliki batasan ukuran file. Kompresi dilakukan dengan
               mengoptimalkan struktur internal PDF tanpa mengubah kontennya.
+            </p>
+            <p>
+              <strong>Foto ke PDF</strong> mengubah foto atau gambar (JPG, PNG,
+              WEBP) menjadi dokumen PDF. Setiap foto menjadi satu halaman dengan
+              ukuran A4, cocok untuk cetak atau pengumpulan dokumen digital.
+            </p>
+            <p>
+              <strong>Ambil Halaman PDF</strong> memungkinkan Anda mengekstrak
+              halaman tertentu dari file PDF. Cukup masukkan rentang halaman
+              (misalnya 1-3,5,7-9) dan download hasilnya.
             </p>
             <p>
               Semua proses berjalan langsung di browser Anda menggunakan

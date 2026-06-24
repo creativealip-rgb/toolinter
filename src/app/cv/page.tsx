@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FileText, FileCheck, Mail } from "lucide-react";
+import { FileText, FileCheck, Mail, GraduationCap, Briefcase, Building2, FileSignature } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "CV & Lamaran Kerja — Toolinter",
@@ -22,6 +22,34 @@ const cards = [
     desc: "Buat surat lamaran kerja profesional dengan mudah. Isi data, generate, download.",
     href: "/surat/lamaran-kerja",
     icon: FileCheck,
+    available: true,
+  },
+  {
+    title: "Template CV Fresh Graduate",
+    desc: "Template CV untuk lulusan baru tanpa pengalaman kerja. Fokus pendidikan, proyek, magang, dan keahlian.",
+    href: "/cv/fresh-graduate",
+    icon: GraduationCap,
+    available: true,
+  },
+  {
+    title: "Template CV Admin",
+    desc: "Template CV untuk posisi staff administrasi, admin kantor, dan resepsionis. Format ATS-friendly.",
+    href: "/cv/cv-admin",
+    icon: Briefcase,
+    available: true,
+  },
+  {
+    title: "Template CV BUMN",
+    desc: "Template CV khusus untuk melamar di BUMN: Pertamina, PLN, Telkom, Bank Mandiri, dan lainnya.",
+    href: "/cv/cv-bumn",
+    icon: Building2,
+    available: true,
+  },
+  {
+    title: "Contoh Surat Lamaran Kerja",
+    desc: "Contoh surat lamaran kerja formal yang benar. Download template PDF dan lihat panduan lengkap.",
+    href: "/cv/contoh-surat-lamaran",
+    icon: FileSignature,
     available: true,
   },
   {
@@ -47,7 +75,7 @@ export default function CvLandingPage() {
       </section>
 
       {/* Cards */}
-      <section className="mx-auto grid max-w-4xl gap-6 px-4 pb-12 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="mx-auto grid max-w-5xl gap-6 px-4 pb-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {cards.map((c) => {
           const Icon = c.icon;
           const inner = (

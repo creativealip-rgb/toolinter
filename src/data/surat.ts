@@ -313,6 +313,22 @@ export const suratTypes: SuratType[] = [
       { name: "alasan", label: "Alasan Pengunduran Diri", type: "textarea", placeholder: "Contoh: untuk melanjutkan studi S2", required: false },
     ],
   },
+  {
+    slug: "kuasa-rekening",
+    title: "Surat Kuasa Pengelolaan Rekening",
+    description: "Buat surat kuasa untuk pengelolaan rekening bank atas nama Anda",
+    icon: "landmark",
+    fields: [
+      { name: "pemberi_kuasa", label: "Nama Pemberi Kuasa", type: "text", placeholder: "Masukkan nama pemberi kuasa", required: true },
+      { name: "nik_pemberi", label: "NIK Pemberi Kuasa", type: "text", placeholder: "Masukkan NIK pemberi kuasa", required: true },
+      { name: "alamat_pemberi", label: "Alamat Pemberi Kuasa", type: "textarea", placeholder: "Masukkan alamat pemberi kuasa", required: true },
+      { name: "penerima_kuasa", label: "Nama Penerima Kuasa", type: "text", placeholder: "Masukkan nama penerima kuasa", required: true },
+      { name: "nik_penerima", label: "NIK Penerima Kuasa", type: "text", placeholder: "Masukkan NIK penerima kuasa", required: true },
+      { name: "alamat_penerima", label: "Alamat Penerima Kuasa", type: "textarea", placeholder: "Masukkan alamat penerima kuasa", required: true },
+      { name: "nama_bank", label: "Nama Bank", type: "text", placeholder: "Contoh: Bank Mandiri", required: true },
+      { name: "no_rekening", label: "Nomor Rekening", type: "text", placeholder: "Masukkan nomor rekening", required: true },
+    ],
+  },
 ];
 
 export function getSuratBySlug(slug: string): SuratType | undefined {

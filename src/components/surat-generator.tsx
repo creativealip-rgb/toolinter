@@ -598,6 +598,43 @@ ${data.nama || "[Nama Lengkap]"}
 ${data.jabatan || "[Jabatan]"}
 NIP/NIK: ${data.nip_nik || "[NIP/NIK]"}`;
   },
+  "kuasa-rekening": (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `SURAT KUASA PENGELOLAAN REKENING
+
+Yang bertanda tangan di bawah ini:
+Nama: ${data.pemberi_kuasa || "[Nama Pemberi Kuasa]"}
+NIK: ${data.nik_pemberi || "[NIK Pemberi Kuasa]"}
+Alamat: ${data.alamat_pemberi || "[Alamat Pemberi Kuasa]"}
+
+Dengan ini memberikan kuasa kepada:
+Nama: ${data.penerima_kuasa || "[Nama Penerima Kuasa]"}
+NIK: ${data.nik_penerima || "[NIK Penerima Kuasa]"}
+Alamat: ${data.alamat_penerima || "[Alamat Penerima Kuasa]"}
+
+Untuk melakukan pengelolaan atas rekening bank saya dengan data sebagai berikut:
+Nama Bank: ${data.nama_bank || "[Nama Bank]"}
+Nomor Rekening: ${data.no_rekening || "[Nomor Rekening]"}
+
+Ruang lingkup kuasa yang diberikan meliputi:
+1. Melakukan pengecekan saldo rekening
+2. Melakukan penarikan dana (withdrawal)
+3. Melakukan transfer dana
+4. Melakukan penyetoran dana
+5. Mendapatkan cetak mutasi/rekening koran
+
+Surat kuasa ini berlaku sejak tanggal ditandatangani dan dapat dicabut sewaktu-waktu oleh pemberi kuasa dengan pemberitahuan tertulis kepada pihak bank.
+
+Demikian surat kuasa ini dibuat dengan sebenar-benarnya untuk dipergunakan sebagaimana mestinya.
+
+${tanggalSurat}
+
+Pemberi Kuasa,                    Penerima Kuasa,
+
+
+${data.pemberi_kuasa || "[Nama Pemberi Kuasa]"}       ${data.penerima_kuasa || "[Nama Penerima Kuasa]"}
+Meterai Rp 10.000`;
+  },
 };
 
 export default function SuratGenerator({

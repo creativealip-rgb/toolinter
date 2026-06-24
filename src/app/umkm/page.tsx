@@ -55,7 +55,7 @@ const tools = [
     icon: FileText,
     color: "text-warning",
     bg: "bg-warning/10",
-    ready: false,
+    ready: true,
   },
   {
     title: "Kalkulator Margin",
@@ -171,7 +171,7 @@ export default function UmkmPage() {
               merugi, dan tidak terlalu mahal sehingga kalah saing.
             </p>
             <p>
-              <strong>Generator Invoice</strong> (segera hadir) akan membantu
+              <strong>Generator Invoice</strong> membantu
               Anda membuat faktur penjualan profesional yang bisa langsung
               dikirim ke pelanggan. Tidak perlu desain dari nol — cukup isi
               data, unduh PDF.
