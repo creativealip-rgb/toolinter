@@ -9,6 +9,7 @@ import {
   Tag,
   Info,
 } from "lucide-react";
+import AiInsightBox from "@/components/ai-insight-box";
 
 function formatRp(n: number): string {
   return "Rp " + Math.round(n).toLocaleString("id-ID");
@@ -242,6 +243,17 @@ export default function HargaJualCalculator() {
             </div>
           )}
         </div>
+      )}
+
+      {calculated && result.hpp > 0 && (
+        <AiInsightBox
+          title="AI UMKM Price Advisor"
+          description="Minta AI cek apakah harga jual sudah aman, margin cukup, dan strategi diskon/marketplace."
+          placeholder="Contoh: harga ini terlalu mahal gak? Strategi diskon aman berapa persen?"
+          buttonLabel="Analisis Harga dengan AI"
+          context={`Data harga jual produk:\nHPP/unit: ${formatRp(result.hpp)}\nTarget margin: ${margin}%\nBiaya operasional/unit: ${formatRp(parseNum(operasionalRaw))}\nDiskon/fee marketplace: ${diskon}%\nHarga jual sebelum operasional: ${formatRp(result.hargaJualSebelumOperasional)}\nHarga jual final: ${formatRp(result.hargaJualFinal)}\nHarga setelah diskon: ${formatRp(result.hargaSetelahDiskon)}\nMargin amount/unit: ${formatRp(result.marginAmount)}`}
+          system="Kamu adalah advisor harga produk UMKM Indonesia. Beri saran harga jual, margin, diskon, dan risiko rugi secara praktis."
+        />
       )}
 
       {/* Info note */}

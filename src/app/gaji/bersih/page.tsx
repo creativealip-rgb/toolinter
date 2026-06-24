@@ -12,6 +12,7 @@ import {
   ChevronDown,
   Calculator,
 } from "lucide-react";
+import AiInsightBox from "@/components/ai-insight-box";
 
 // --- Tax & contribution constants ---
 
@@ -336,6 +337,19 @@ export default function GajiBersihPage() {
                 Gaji bersih setelah semua potongan
               </p>
             </div>
+          </div>
+        )}
+
+        {calculated && result.gajiKotor > 0 && (
+          <div className="mt-6">
+            <AiInsightBox
+              title="AI Gaji Explainer"
+              description="Minta AI jelaskan hasil gaji bersih, potongan terbesar, dan saran negosiasi/benefit."
+              placeholder="Contoh: gaji bersih saya sehat gak? Benefit apa yang perlu dinegosiasi?"
+              buttonLabel="Analisis Gaji dengan AI"
+              context={`Data gaji user:\nGaji kotor/bulan: ${formatRp(result.gajiKotor)}\nPTKP/tahun: ${formatRp(result.ptkp)}\nPKP/tahun: ${formatRp(result.pkp)}\nPPh21/bulan: ${formatRp(result.pph21Month)}\nBPJS Kesehatan: ${formatRp(result.bpjsKes)}\nBPJS TK JHT+JP: ${formatRp(result.bpjsJht + result.bpjsJp)}\nTotal potongan/bulan: ${formatRp(result.totalPotongan)}\nTake home pay/bulan: ${formatRp(result.gajiBersih)}`}
+              system="Kamu adalah asisten edukasi gaji Indonesia. Jelaskan take home pay, potongan gaji, dan saran praktis. Jangan memberi klaim pajak final."
+            />
           </div>
         )}
 
