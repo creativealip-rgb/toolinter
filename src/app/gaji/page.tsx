@@ -5,6 +5,7 @@ import {
   Receipt,
   Gift,
   Shield,
+  Clock,
   ArrowRight,
   Calculator,
 } from "lucide-react";
@@ -54,6 +55,16 @@ const tools = [
     icon: Shield,
     color: "text-primary",
     bg: "bg-primary/10",
+    ready: true,
+  },
+  {
+    title: "Kalkulator Lembur",
+    description:
+      "Hitung upah lembur sesuai PP 35/2021. Hari kerja, Sabtu/Minggu, dan libur nasional.",
+    href: "/gaji/lembur",
+    icon: Clock,
+    color: "text-warning",
+    bg: "bg-warning/10",
     ready: true,
   },
 ];
