@@ -8,6 +8,8 @@ import {
   Trash2,
   Download,
   Eye,
+  Loader2,
+  Sparkles,
 } from "lucide-react";
 import { jsPDF } from "jspdf";
 
@@ -281,6 +283,8 @@ export function CvGenerator() {
     keahlian: true,
   });
   const [showPreview, setShowPreview] = useState(false);
+  const [aiTarget, setAiTarget] = useState("");
+  const [aiLoading, setAiLoading] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null);
 
   const toggle = useCallback((key: string) => {
@@ -318,6 +322,61 @@ export function CvGenerator() {
       data.pengalaman.filter((_, i) => i !== idx)
     );
 
+  const generateCvWithAi = async () => {
+    if (!aiTarget.trim() || aiLoading) return;
+    setAiLoading(true);
+
+    const current = JSON.stringify(data, null, 2);
+    const prompt = `Bantu optimasi CV ATS untuk target posisi: ${aiTarget}.\n\nData CV saat ini:\n${current}\n\nBalas hanya JSON valid tanpa markdown dengan format:\n{\n  "ringkasan": "2-3 kalimat ringkasan profesional",\n  "keahlian": "skill dipisah koma",\n  "pengalaman": ["bullet pengalaman 1", "bullet pengalaman 2", "bullet pengalaman 3"]\n}\n\nGunakan bahasa Indonesia profesional. Bullet pengalaman harus berbasis aksi, dampak, dan kata kunci ATS.`;
+
+    try {
+      const res = await fetch("/api/ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt,
+          system: "Kamu adalah career coach dan CV ATS writer Indonesia. Output wajib JSON valid saja.",
+        }),
+      });
+      if (!res.ok || !res.body) throw new Error("AI failed");
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let raw = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        for (const line of chunk.split("\n")) {
+          if (!line.startsWith("data: ") || line === "data: [DONE]") continue;
+          try {
+            const { content } = JSON.parse(line.slice(6));
+            if (content) raw += content;
+          } catch {}
+        }
+      }
+
+      const cleaned = raw.replace(/```json|```/g, "").trim();
+      const parsed = JSON.parse(cleaned) as { ringkasan?: string; keahlian?: string; pengalaman?: string[] };
+      setData((prev) => ({
+        ...prev,
+        ringkasan: parsed.ringkasan || prev.ringkasan,
+        keahlian: parsed.keahlian || prev.keahlian,
+        pengalaman: prev.pengalaman.map((exp, idx) =>
+          idx === 0 && parsed.pengalaman?.length
+            ? { ...exp, deskripsi: parsed.pengalaman.map((b) => `• ${b.replace(/^[•\-]\s*/, "")}`).join("\n") }
+            : exp
+        ),
+      }));
+      setShowPreview(true);
+    } catch (error) {
+      console.error("CV AI error:", error);
+      alert("AI CV belum bisa dipakai. Coba lagi sebentar lagi.");
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
   return (
     <div className="mx-auto max-w-3xl px-4 pb-16">
       {/* Action bar */}
@@ -340,6 +399,33 @@ export function CvGenerator() {
           <Download size={16} />
           Download PDF
         </button>
+      </div>
+
+      <div className="mb-6 rounded-2xl border border-primary/20 bg-primary-tint p-4">
+        <div className="mb-3 flex items-center gap-2 text-primary">
+          <Sparkles size={18} />
+          <h2 className="text-sm font-semibold">AI CV Writer</h2>
+        </div>
+        <p className="mb-3 text-sm text-ink-tertiary">
+          Isi data dasar, lalu AI bantu tulis ringkasan, skill, dan bullet pengalaman agar lebih ATS-friendly.
+        </p>
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <input
+            value={aiTarget}
+            onChange={(e) => setAiTarget(e.target.value)}
+            placeholder="Target posisi, contoh: Digital Marketing, Staff Admin, Frontend Developer"
+            className="min-w-0 flex-1 rounded-lg border border-border bg-canvas px-3 py-2 text-sm text-ink focus:border-primary focus:outline-none"
+          />
+          <button
+            type="button"
+            onClick={generateCvWithAi}
+            disabled={aiLoading || !aiTarget.trim()}
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:brightness-110 disabled:opacity-50"
+          >
+            {aiLoading ? <Loader2 size={16} className="animate-spin" /> : <Sparkles size={16} />}
+            Optimasi AI
+          </button>
+        </div>
       </div>
 
       {/* Preview */}
