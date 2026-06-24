@@ -669,8 +669,8 @@ export default function SuratGenerator({
     }, 500);
   };
 
-  const handleAiGenerate = async () => {
-    if (!aiPrompt.trim()) return;
+  const handleAiGenerate = async (quickPrompt?: string) => {
+    const instruction = (quickPrompt || aiPrompt).trim() || "Buatkan surat resmi yang rapi, sopan, dan siap dipakai.";
     setIsAiGenerating(true);
     setShowPreview(true);
 
@@ -682,7 +682,7 @@ export default function SuratGenerator({
 
     const fullPrompt = `Buatkan ${title} dengan data berikut:
 ${context ? context + "\n\n" : ""}
-Instruksi tambahan: ${aiPrompt}
+Instruksi tambahan: ${instruction}
 
 Tuliskan surat lengkap dengan format yang benar.`;
 
@@ -847,13 +847,26 @@ Tuliskan surat lengkap dengan format yang benar.`;
                     <textarea
                       value={aiPrompt}
                       onChange={(e) => setAiPrompt(e.target.value)}
-                      placeholder="Contoh: Buatkan surat resign yang sopan untuk pindah ke perusahaan lain..."
+                      placeholder="Opsional: tulis gaya/tujuan khusus, contoh: lebih formal untuk HRD..."
                       rows={3}
                       className="w-full px-3 py-2.5 text-sm bg-surface border border-border rounded-lg text-ink placeholder:text-ink-muted focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500/20 resize-none"
                     />
+                    <div className="flex flex-wrap gap-2">
+                      {["Buat lebih formal", "Buat singkat", "Buat sopan dan hangat"].map((q) => (
+                        <button
+                          key={q}
+                          type="button"
+                          onClick={() => handleAiGenerate(q)}
+                          disabled={isAiGenerating}
+                          className="rounded-full border border-purple-200 px-3 py-1 text-xs text-purple-700 hover:bg-purple-50 disabled:opacity-50"
+                        >
+                          {q}
+                        </button>
+                      ))}
+                    </div>
                     <button
-                      onClick={handleAiGenerate}
-                      disabled={isAiGenerating || !aiPrompt.trim()}
+                      onClick={() => handleAiGenerate()}
+                      disabled={isAiGenerating}
                       className="w-full flex items-center justify-center gap-2 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 text-sm"
                     >
                       {isAiGenerating ? (

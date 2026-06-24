@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { blogPosts, getBlogPost, getAllSlugs } from "@/data/blog";
 import { ArrowLeft, Clock, Calendar, Tag } from "lucide-react";
+import AiInsightBox from "@/components/ai-insight-box";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -94,6 +95,17 @@ export default async function BlogPostPage({ params }: PageProps) {
               </div>
             </section>
           ))}
+        </div>
+
+        <div className="mt-10">
+          <AiInsightBox
+            title="AI Ringkasan & Rekomendasi Tool"
+            description="Minta AI ringkas artikel ini, kasih checklist tindakan, atau rekomendasi tool Toolinter yang relevan."
+            placeholder="Contoh: ringkas artikel ini jadi checklist 5 langkah"
+            buttonLabel="Bantu dengan AI"
+            context={`Artikel Toolinter:\nJudul: ${post.title}\nKategori: ${post.category}\nRingkasan: ${post.excerpt}\nCTA tool: ${post.ctaHref}\nIsi artikel:\n${post.content.map((section) => `${section.heading || ""}\n${section.paragraphs.join("\n")}`).join("\n\n")}`}
+            system="Kamu adalah asisten blog Toolinter. Ringkas artikel, buat checklist, dan rekomendasikan link tool internal yang paling relevan. Jawab singkat, praktis, bahasa Indonesia."
+          />
         </div>
 
         {/* CTA */}
