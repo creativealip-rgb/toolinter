@@ -223,7 +223,7 @@ function PopularTools() {
 
 function PopularQueries() {
   return (
-    <section className="py-12 px-6">
+    <section className="py-12 px-6 content-visibility-auto">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-xl font-semibold text-ink mb-6">Pencarian Populer</h2>
         <div className="flex flex-wrap justify-center gap-3">
@@ -245,7 +245,7 @@ function PopularQueries() {
 
 function FeaturedBanner() {
   return (
-    <section className="py-12 px-6">
+    <section className="py-12 px-6 content-visibility-auto">
       <div className="max-w-6xl mx-auto">
         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-primary-hover p-8 md:p-12 text-white">
           <div className="relative z-10 flex flex-col md:flex-row items-center gap-6">
@@ -269,7 +269,7 @@ function FeaturedBanner() {
 function BlogPreview() {
   const posts = blogPosts.slice(0, 3);
   return (
-    <section className="py-16 px-6 bg-surface">
+    <section className="py-16 px-6 bg-surface content-visibility-auto">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>

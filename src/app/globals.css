@@ -127,6 +127,12 @@ body {
   outline-offset: 2px;
 }
 
+/* Performance: skip offscreen rendering until sections near viewport */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
