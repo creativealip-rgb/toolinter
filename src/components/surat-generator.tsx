@@ -164,6 +164,273 @@ Pemberi Kuasa,                    Penerima Kuasa,
 ${data.pemberi_kuasa || "[Nama Pemberi Kuasa]"}       ${data.penerima_kuasa || "[Nama Penerima Kuasa]"}
 Meterai Rp 10.000`;
   },
+  "surat-undangan": (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `${data.instansi || "[Instansi]"}
+${data.nama_pengirim || "[Nama Pengirim]"}
+
+Kepada Yth.
+${data.untuk || "[Ditujukan Kepada]"}
+
+Dengan hormat,
+
+Dengan ini kami mengundang Bapak/Ibu untuk menghadiri acara:
+
+Acara: ${data.acara || "[Nama Acara]"}
+Hari/Tanggal: ${data.tanggal_acara || "[Tanggal Acara]"}
+Waktu: ${data.waktu || "[Waktu Acara]"}
+Tempat: ${data.tempat || "[Tempat Acara]"}
+
+Mengingat pentingnya acara tersebut, kami sangat mengharapkan kehadiran Bapak/Ibu tepat pada waktunya. Atas perhatian dan kehadirannya, kami ucapkan terima kasih.
+
+Hormat kami,
+
+
+${data.nama_pengirim || "[Nama Pengirim]"}
+${tanggalSurat}`;
+  },
+  permohonan: (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `SURAT PERMOHONAN
+
+Yang bertanda tangan di bawah ini:
+Nama: ${data.nama || "[Nama Lengkap]"}
+NIK: ${data.nik || "[NIK]"}
+Alamat: ${data.alamat || "[Alamat]"}
+
+Dengan ini mengajukan permohonan kepada:
+
+Kepada Yth.
+${data.instansi_tujuan || "[Instansi Tujuan]"}
+
+Perihal: ${data.tujuan_permohonan || "[Tujuan Permohonan]"}
+
+Bersama surat ini, saya lampirkan dokumen-dokumen yang diperlukan sebagai berikut:
+1. Fotokopi KTP
+2. Fotokopi Kartu Keluarga
+3. Surat Pengantar RT/RW
+
+Demikian surat permohonan ini saya buat dengan sebenar-benarnya. Besar harapan saya agar permohonan ini dapat dipertimbangkan dan dikabulkan. Atas perhatian dan kebijaksanaannya, saya ucapkan terima kasih.
+
+Hormat saya,
+
+
+${data.nama || "[Nama Lengkap]"}
+${tanggalSurat}`;
+  },
+  "keterangan-kerja": (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `SURAT KETERANGAN KERJA
+
+Yang bertanda tangan di bawah ini:
+Nama: Pimpinan ${data.perusahaan || "[Nama Perusahaan]"}
+
+Dengan ini menerangkan bahwa:
+Nama: ${data.nama || "[Nama Lengkap]"}
+Jabatan: ${data.jabatan || "[Jabatan]"}
+Tanggal Masuk: ${data.tanggal_masuk || "[Tanggal Masuk]"}
+
+Benar yang bersangkutan adalah karyawan ${data.perusahaan || "[Nama Perusahaan]"} dan telah bekerja sejak tanggal tersebut di atas.
+${data.keterangan ? `\nKeterangan: ${data.keterangan}` : ""}
+
+Surat keterangan ini dibuat untuk keperluan administrasi dan dapat dipergunakan sebagaimana mestinya.
+
+${tanggalSurat}
+
+Pimpinan ${data.perusahaan || "[Nama Perusahaan]"}
+
+
+_________________________`;
+  },
+  domisili: (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `SURAT KETERANGAN DOMISILI
+
+Yang bertanda tangan di bawah ini:
+Pemerintah Kelurahan ${data.kelurahan || "[Kelurahan]"}, Kecamatan ${data.kecamatan || "[Kecamatan]"}
+
+Dengan ini menerangkan bahwa:
+Nama: ${data.nama || "[Nama Lengkap]"}
+NIK: ${data.nik || "[NIK]"}
+Alamat: ${data.alamat || "[Alamat]"}
+RT/RW: ${data.rt_rw || "[RT/RW]"}
+Kelurahan: ${data.kelurahan || "[Kelurahan]"}
+Kecamatan: ${data.kecamatan || "[Kecamatan]"}
+
+Adalah benar penduduk yang berdomisili di alamat tersebut di atas.
+
+Surat keterangan ini dibuat untuk keperluan administrasi kependudukan dan dapat dipergunakan sebagaimana mestinya.
+
+${tanggalSurat}
+
+Lurah ${data.kelurahan || "[Kelurahan]"}
+
+
+_________________________`;
+  },
+  sewa: (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `SURAT PERJANJIAN SEWA
+
+Pada hari ini ${tanggalSurat}, telah dibuat dan disepakati perjanjian sewa-menyewa oleh dan antara:
+
+1. Nama: ${data.nama_pemilik || "[Nama Pemilik]"}
+   Selanjutnya disebut sebagai PIHAK PERTAMA (Pemilik)
+
+2. Nama: ${data.nama_penyewa || "[Nama Penyewa]"}
+   Selanjutnya disebut sebagai PIHAK KEDUA (Penyewa)
+
+Kedua belah pihak sepakat untuk mengikatkan diri dalam perjanjian sewa-menyewa dengan ketentuan sebagai berikut:
+
+Pasal 1 - Objek Sewa
+PIHAK PERTAMA menyewakan kepada PIHAK KEDUA berupa:
+${data.alamat_barang || "[Alamat/Deskripsi Barang]"}
+
+Pasal 2 - Jangka Waktu Sewa
+Jangka waktu sewa adalah ${data.durasi || "[Durasi Sewa]"} terhitung mulai tanggal ${data.tanggal_mulai || "[Tanggal Mulai Sewa]"}.
+
+Pasal 3 - Harga Sewa
+Harga sewa yang disepakati adalah sebesar ${data.harga_sewa || "[Harga Sewa]"}.
+
+Pasal 4 - Pembayaran
+Pembayaran dilakukan di muka pada awal setiap periode sewa.
+
+Demikian perjanjian ini dibuat dengan sebenar-benarnya dan berlaku sejak tanggal ditandatangani.
+
+PIHAK PERTAMA,                    PIHAK KEDUA,
+
+
+${data.nama_pemilik || "[Nama Pemilik]"}       ${data.nama_penyewa || "[Nama Penyewa]"}
+Meterai Rp 10.000                 Meterai Rp 10.000`;
+  },
+  tugas: (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `SURAT TUGAS
+
+Nomor: .../ST/${new Date().getMonth() + 1}/${new Date().getFullYear()}
+
+Yang bertanda tangan di bawah ini:
+Pimpinan ${data.instansi || "[Nama Instansi]"}
+
+Dengan ini menugaskan:
+Nama: ${data.nama || "[Nama Lengkap]"}
+Jabatan: ${data.jabatan || "[Jabatan]"}
+
+Untuk melaksanakan tugas:
+${data.tugas || "[Deskripsi Tugas]"}
+
+Tugas tersebut dilaksanakan terhitung mulai tanggal ${data.tanggal_mulai || "[Tanggal Mulai]"} sampai dengan tanggal ${data.tanggal_selesai || "[Tanggal Selesai]"}.
+
+Demikian surat tugas ini dibuat untuk dilaksanakan dengan penuh tanggung jawab.
+
+${tanggalSurat}
+
+Pimpinan ${data.instansi || "[Nama Instansi]"}
+
+
+_________________________`;
+  },
+  rekomendasi: (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `SURAT REKOMENDASI
+
+Yang bertanda tangan di bawah ini:
+Nama: ${data.nama_rekomendasi || "[Nama Pemberi Rekomendasi]"}
+Jabatan: ${data.jabatan || "[Jabatan]"}
+
+Dengan ini memberikan rekomendasi kepada:
+Nama: ${data.nama_terrekomendasi || "[Nama yang Direkomendasikan]"}
+
+Untuk: ${data.tujuan || "[Tujuan Rekomendasi]"}
+
+Bahwa berdasarkan pengetahuan saya, yang bersangkutan adalah seorang yang memiliki kualifikasi dan kemampuan sebagai berikut:
+
+${data.isi_rekomendasi || "[Isi Rekomendasi]"}
+
+Demikian surat rekomendasi ini saya buat dengan sebenar-benarnya dan dapat dipergunakan sebagaimana mestinya.
+
+${tanggalSurat}
+
+
+${data.nama_rekomendasi || "[Nama Pemberi Rekomendasi]"}
+${data.jabatan || "[Jabatan]"}`;
+  },
+  "belum-menikah": (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `SURAT PERNYATAAN BELUM MENIKAH
+
+Saya yang bertanda tangan di bawah ini:
+Nama: ${data.nama || "[Nama Lengkap]"}
+NIK: ${data.nik || "[NIK]"}
+Tempat/Tanggal Lahir: ${data.tempat_lahir || "[Tempat Lahir]"}, ${data.tanggal_lahir || "[Tanggal Lahir]"}
+Pekerjaan: ${data.pekerjaan || "[Pekerjaan]"}
+Alamat: ${data.alamat || "[Alamat]"}
+
+Dengan ini menyatakan dengan sebenar-benarnya bahwa sampai dengan saat ini saya belum pernah menikah dan tidak sedang dalam ikatan pernikahan dengan pihak manapun.
+
+Apabila pernyataan ini tidak benar, saya bersedia menanggung segala konsekuensi hukum yang berlaku.
+
+${tanggalSurat}
+
+
+${data.nama || "[Nama Lengkap]"}
+Meterai Rp 10.000`;
+  },
+  kesehatan: (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `SURAT KETERANGAN SEHAT
+
+Nomor: .../SKS/${new Date().getMonth() + 1}/${new Date().getFullYear()}
+
+Yang bertanda tangan di bawah ini, dokter yang praktik di fasilitas kesehatan, dengan ini menerangkan bahwa:
+
+Nama: ${data.nama || "[Nama Lengkap]"}
+NIK: ${data.nik || "[NIK]"}
+Tanggal Lahir: ${data.tanggal_lahir || "[Tanggal Lahir]"}
+
+Setelah dilakukan pemeriksaan, yang bersangkutan dinyatakan dalam keadaan SEHAT dan tidak memiliki keluhan penyakit yang berarti.
+
+Surat keterangan ini dikeluarkan untuk keperluan: ${data.keperluan || "[Keperluan]"}
+
+Demikian surat keterangan ini dibuat untuk dapat dipergunakan sebagaimana mestinya.
+
+${tanggalSurat}
+
+Dokter Pemeriksa,
+
+
+_________________________
+dr. ________________
+SIP: ________________`;
+  },
+  "bebas-narkoba": (data) => {
+    const tanggalSurat = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    return `SURAT KETERANGAN BEBAS NARKOBA
+
+Nomor: .../SKBN/${new Date().getMonth() + 1}/${new Date().getFullYear()}
+
+Yang bertanda tangan di bawah ini, dokter yang praktik di fasilitas kesehatan, dengan ini menerangkan bahwa:
+
+Nama: ${data.nama || "[Nama Lengkap]"}
+NIK: ${data.nik || "[NIK]"}
+Tanggal Lahir: ${data.tanggal_lahir || "[Tanggal Lahir]"}
+Alamat: ${data.alamat || "[Alamat]"}
+
+Setelah dilakukan pemeriksaan/tes urine pada tanggal ${tanggalSurat}, hasil menunjukkan bahwa yang bersangkutan NEGATIF mengandung zat narkotika, psikotropika, dan zat adiktif lainnya.
+
+Surat keterangan ini dikeluarkan untuk keperluan: ${data.keperluan || "[Keperluan]"}
+
+Demikian surat keterangan ini dibuat untuk dapat dipergunakan sebagaimana mestinya.
+
+${tanggalSurat}
+
+Dokter Pemeriksa,
+
+
+_________________________
+dr. ________________
+SIP: ________________`;
+  },
 };
 
 export default function SuratGenerator({
