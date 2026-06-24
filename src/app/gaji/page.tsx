@@ -6,6 +6,7 @@ import {
   Gift,
   Shield,
   Clock,
+  CalendarDays,
   ArrowRight,
   Calculator,
 } from "lucide-react";
@@ -65,6 +66,16 @@ const tools = [
     icon: Clock,
     color: "text-warning",
     bg: "bg-warning/10",
+    ready: true,
+  },
+  {
+    title: "Kalkulator Gaji Prorata",
+    description:
+      "Hitung gaji prorata untuk karyawan masuk atau resign di tengah bulan.",
+    href: "/gaji/prorata",
+    icon: CalendarDays,
+    color: "text-success",
+    bg: "bg-success/10",
     ready: true,
   },
 ];

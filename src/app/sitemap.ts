@@ -42,13 +42,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/foto/cpns`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/foto/snbp`, lastModified: new Date(), changeFrequency: "monthly" },
 
-    // Gaji (5 tools)
+    // Gaji (6 tools)
     { url: `${BASE_URL}/gaji`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE_URL}/gaji/bersih`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/gaji/pph21`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/gaji/thr`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/gaji/bpjs`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/gaji/lembur`, lastModified: new Date(), changeFrequency: "monthly" },
+    { url: `${BASE_URL}/gaji/prorata`, lastModified: new Date(), changeFrequency: "monthly" },
 
     // PDF (6 tools)
     { url: `${BASE_URL}/pdf`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },

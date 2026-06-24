@@ -23,8 +23,8 @@ const categories = [
   {
     icon: Calculator,
     title: "Gaji & Keuangan",
-    desc: "Kalkulator gaji bersih, PPh21, THR, BPJS, lembur",
-    count: 5,
+    desc: "Kalkulator gaji bersih, PPh21, THR, BPJS, lembur, prorata",
+    count: 6,
     badge: "badge-green",
     href: "/gaji",
   },
