@@ -58,7 +58,7 @@ export default function BlogPage() {
                 {post.title}
               </h2>
 
-              <p className="mb-4 flex-1 text-sm leading-relaxed text-ink-tertiary">
+              <p className="mb-4 flex-1 text-sm leading-relaxed text-ink-secondary">
                 {post.excerpt}
               </p>
 
@@ -75,7 +75,7 @@ export default function BlogPage() {
                 </div>
               )}
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between mt-auto">
                 <div className="flex items-center gap-2">
                   <time className="text-xs text-ink-muted" dateTime={post.date}>
                     {new Date(post.date).toLocaleDateString("id-ID", {

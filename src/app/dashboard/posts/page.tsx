@@ -140,7 +140,7 @@ export default function DashboardPostsPage() {
   const [page, setPage] = useState(1);
   const [selectedSlugs, setSelectedSlugs] = useState<Set<string>>(new Set());
   const [bulkDeleting, setBulkDeleting] = useState(false);
-  const [seoOpen, setSeoOpen] = useState(false);
+  const [seoOpen, setSeoOpen] = useState(true);
   const [tagInput, setTagInput] = useState("");
   const [editorTab, setEditorTab] = useState<"form" | "markdown-preview">("form");
 
@@ -583,12 +583,17 @@ export default function DashboardPostsPage() {
                   value={editing.excerpt}
                   onChange={(e) => updateField("excerpt", e.target.value)}
                   rows={2}
-                  className="w-full px-3 py-2 rounded-lg bg-surface border border-border text-ink text-sm focus:outline-none focus:border-primary resize-y"
+                  className="w-full px-3 py-2 rounded-lg bg-surface border border-border text-ink text-sm focus:outline-none focus:border-primary resize-y min-h-[60px]"
+                  onInput={(e) => {
+                    const t = e.currentTarget;
+                    t.style.height = "auto";
+                    t.style.height = t.scrollHeight + "px";
+                  }}
                   placeholder="Ringkasan singkat artikel..."
                 />
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                 <div>
                   <label className="block text-xs font-medium text-ink-tertiary mb-1">
                     Tanggal
@@ -694,6 +699,11 @@ export default function DashboardPostsPage() {
                 />
                 {editing.featuredImage && (
                   <img src={editing.featuredImage} alt="Preview" className="mt-2 h-24 rounded-lg object-cover border border-border" />
+                )}
+                {!editing.featuredImage && (
+                  <div className="mt-2 h-24 w-40 rounded-lg border border-dashed border-border bg-canvas flex items-center justify-center">
+                    <ImageIcon className="h-6 w-6 text-ink-muted" />
+                  </div>
                 )}
               </div>
 
@@ -884,7 +894,12 @@ export default function DashboardPostsPage() {
                           value={p}
                           onChange={(e) => updateParagraph(si, pi, e.target.value)}
                           rows={3}
-                          className="flex-1 px-3 py-2 rounded-lg bg-canvas border border-border text-ink text-sm focus:outline-none focus:border-primary resize-y font-mono"
+                          className="flex-1 px-3 py-2 rounded-lg bg-canvas border border-border text-ink text-sm focus:outline-none focus:border-primary resize-y font-mono min-h-[80px]"
+                          onInput={(e) => {
+                            const t = e.currentTarget;
+                            t.style.height = "auto";
+                            t.style.height = t.scrollHeight + "px";
+                          }}
                           placeholder={`Paragraf ${pi + 1} (Markdown didukung)`}
                         />
                         <button
@@ -982,7 +997,7 @@ export default function DashboardPostsPage() {
                 <BarChart3 className="h-3.5 w-3.5" />
                 Views
               </div>
-              <p className="text-xl font-bold text-ink">{stats.totalViews.toLocaleString()}</p>
+              <p className={`text-xl font-bold ${stats.totalViews === 0 ? "text-ink-muted" : "text-ink"}`}>{stats.totalViews.toLocaleString()}</p>
             </div>
           </div>
         )}
@@ -1102,10 +1117,10 @@ export default function DashboardPostsPage() {
                     <th className="text-left py-3 px-2 font-medium text-ink-tertiary w-28">
                       Tanggal
                     </th>
-                    <th className="text-left py-3 px-2 font-medium text-ink-tertiary w-16">
+                    <th className="text-center py-3 px-2 font-medium text-ink-tertiary w-16">
                       Views
                     </th>
-                    <th className="text-right py-3 px-2 font-medium text-ink-tertiary w-24">
+                    <th className="text-center py-3 px-2 font-medium text-ink-tertiary w-24">
                       Aksi
                     </th>
                   </tr>
@@ -1114,7 +1129,7 @@ export default function DashboardPostsPage() {
                   {paged.map((post) => (
                     <tr
                       key={post.slug}
-                      className="border-b border-border/50 hover:bg-surface/50"
+                      className="border-b border-border/50 hover:bg-surface/50 even:bg-surface/50"
                     >
                       <td className="py-3 px-2">
                         <button onClick={() => toggleSelect(post.slug)} className="text-ink-muted hover:text-primary">
@@ -1161,24 +1176,24 @@ export default function DashboardPostsPage() {
                         {post.author}
                       </td>
                       <td className="py-3 px-2 text-ink-tertiary">{post.date}</td>
-                      <td className="py-3 px-2 text-ink-tertiary text-xs">
+                      <td className="py-3 px-2 text-ink-tertiary text-xs text-center">
                         {post.views.toLocaleString()}
                       </td>
-                      <td className="py-3 px-2 text-right">
+                      <td className="py-3 px-2 text-center">
                         <button
                           onClick={() => {
                             setEditing({ ...post });
                             setIsNew(false);
                             setError("");
                           }}
-                          className="inline-flex items-center p-1.5 text-ink-muted hover:text-primary rounded"
+                          className="inline-flex items-center p-1.5 text-primary hover:bg-primary/10 border border-border rounded"
                           title="Edit"
                         >
                           <Pencil className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => setDeleteTarget(post)}
-                          className="inline-flex items-center p-1.5 text-ink-muted hover:text-error rounded ml-1"
+                          className="inline-flex items-center p-1.5 text-error hover:bg-error/10 border border-border rounded ml-1"
                           title="Hapus"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -1244,13 +1259,13 @@ export default function DashboardPostsPage() {
                           setIsNew(false);
                           setError("");
                         }}
-                        className="p-1.5 text-ink-muted hover:text-primary rounded"
+                        className="p-1.5 text-primary hover:bg-primary/10 border border-border rounded"
                       >
                         <Pencil className="h-4 w-4" />
                       </button>
                       <button
                         onClick={() => setDeleteTarget(post)}
-                        className="p-1.5 text-ink-muted hover:text-error rounded"
+                        className="p-1.5 text-error hover:bg-error/10 border border-border rounded"
                       >
                         <Trash2 className="h-4 w-4" />
                       </button>
@@ -1294,7 +1309,7 @@ export default function DashboardPostsPage() {
             )}
 
             <p className="mt-4 text-xs text-ink-muted text-center">
-              {filtered.length} dari {posts.length} artikel
+              Menampilkan {(page - 1) * PER_PAGE + 1}-{Math.min(page * PER_PAGE, filtered.length)} dari {filtered.length} artikel
               {totalPages > 1 && ` · Halaman ${page} dari ${totalPages}`}
             </p>
           </>

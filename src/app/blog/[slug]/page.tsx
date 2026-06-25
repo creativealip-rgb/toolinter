@@ -112,7 +112,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         )}
 
         {/* Content */}
-        <div className="space-y-8">
+        <div className="space-y-8 max-w-[700px]">
           {post.content.map((section, i) => (
             <section key={i}>
               {section.heading && (
@@ -138,7 +138,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                 {section.paragraphs.map((p, j) => (
                   <p
                     key={j}
-                    className="whitespace-pre-wrap leading-relaxed text-ink-tertiary"
+                    className={`whitespace-pre-wrap leading-relaxed text-ink-tertiary ${
+                      (p.includes("Q:") || p.includes("•") || p.startsWith("- ")) ? "mb-4" : ""
+                    }`}
                   >
                     {p}
                   </p>
