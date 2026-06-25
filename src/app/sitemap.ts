@@ -95,6 +95,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/blog/perbedaan-gaji-bruto-netto`, lastModified: new Date(), changeFrequency: "monthly" },
     { url: `${BASE_URL}/blog/cara-buat-invoice-profesional`, lastModified: new Date(), changeFrequency: "monthly" },
 
+    // Keuangan (3 tools)
+    { url: `${BASE_URL}/keuangan`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE_URL}/keuangan/kpr`, lastModified: new Date(), changeFrequency: "monthly" },
+    { url: `${BASE_URL}/keuangan/cek-npwp`, lastModified: new Date(), changeFrequency: "monthly" },
+    { url: `${BASE_URL}/keuangan/pinjol`, lastModified: new Date(), changeFrequency: "monthly" },
+
+    // Pendidikan
+    { url: `${BASE_URL}/pendidikan`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE_URL}/pendidikan/kalender`, lastModified: new Date(), changeFrequency: "monthly" },
+
     // Static
     { url: `${BASE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
     { url: `${BASE_URL}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },

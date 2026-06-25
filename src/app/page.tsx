@@ -1,4 +1,7 @@
-import { Search, FileText, Image, Calculator, FileDown, Briefcase, Wrench, Zap, Shield, Download, Users, TrendingUp, Star, GraduationCap, Clock } from "lucide-react";
+import { FileText, Image, Calculator, FileDown, Briefcase, Wrench, Zap, Shield, Download, Users, TrendingUp, Star, GraduationCap, Clock, CreditCard, Calendar } from "lucide-react";
+import { Search } from "lucide-react";
+import HeroSearch from "@/components/hero-search";
+import ThemeToggle from "@/components/theme-toggle";
 import { blogPosts } from "@/data/blog";
 import JsonLd from "@/components/json-ld";
 
@@ -48,10 +51,26 @@ const categories = [
   {
     icon: Wrench,
     title: "UMKM & Bisnis",
-    desc: "Hitung HPP, harga jual, food cost, invoice, margin marketplace",
-    count: 6,
+    desc: "Hitung HPP, harga jual, food cost, invoice, margin marketplace, caption marketplace",
+    count: 7,
     badge: "badge-orange",
     href: "/umkm",
+  },
+  {
+    icon: CreditCard,
+    title: "Keuangan",
+    desc: "Kalkulator KPR, simulasi pinjol OJK, cek format NPWP dan NIK",
+    count: 3,
+    badge: "badge-indigo",
+    href: "/keuangan",
+  },
+  {
+    icon: Calendar,
+    title: "Pendidikan",
+    desc: "Kalender akademik Indonesia: jadwal SNBP, SNBT, PPDB, CPNS, beasiswa",
+    count: 1,
+    badge: "badge-sky",
+    href: "/pendidikan",
   },
 ];
 
@@ -111,9 +130,12 @@ function Header() {
             </a>
           ))}
         </nav>
-        <a href="/tools" className="text-sm font-semibold text-primary hover:text-primary-hover transition-colors">
-          Semua Tool →
-        </a>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <a href="/tools" className="text-sm font-semibold text-primary hover:text-primary-hover transition-colors">
+            Semua Tool →
+          </a>
+        </div>
       </div>
     </header>
   );
@@ -129,17 +151,7 @@ function HeroSection() {
       <p className="text-lg text-ink-tertiary mb-8 max-w-2xl mx-auto">
         Pilih tool, isi data, download hasil. Tanpa install, tanpa ribet, tanpa registrasi.
       </p>
-      <div className="relative max-w-2xl mx-auto">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-muted w-5 h-5" />
-        <input
-          type="text"
-          placeholder="Cari tool... contoh: 'buat surat resign', 'resize foto 3x4'"
-          className="w-full py-4 pl-12 pr-24 rounded-full bg-surface border border-border text-ink placeholder:text-ink-muted text-base focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-        />
-        <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary-hover text-white font-semibold py-2.5 px-6 rounded-full transition-colors">
-          Cari
-        </button>
-      </div>
+      <HeroSearch />
     </section>
   );
 }
