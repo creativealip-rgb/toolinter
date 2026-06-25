@@ -1,33 +1,13 @@
-import { Metadata } from "next";
-import Link from "next/link";
-import { ChevronLeft, FileText, ArrowRight } from "lucide-react";
+import { Metadata } from 'next';
+import Link from 'next/link';
+import { ChevronLeft, FileText } from 'lucide-react';
+import PdfKeWord from '@/components/pdf-ke-word';
 
 export const metadata: Metadata = {
-  title: "PDF ke Word Online — Toolinter",
+  title: 'PDF ke Word Online — Toolinter',
   description:
-    "Ubah file PDF menjadi dokumen Word yang bisa diedit. Tool konversi PDF ke Word online gratis dari Toolinter.",
+    'Ubah file PDF menjadi dokumen Word (.docx) yang bisa diedit. Konversi PDF ke Word online, 100% di browser, gratis.',
 };
-
-const alternativeTools = [
-  {
-    slug: "gabung",
-    title: "Gabung PDF",
-    description:
-      "Gabungkan beberapa file PDF menjadi satu. Upload, atur urutan, dan download hasilnya.",
-  },
-  {
-    slug: "kompres",
-    title: "Kompres PDF",
-    description:
-      "Kurangi ukuran file PDF tanpa mengurangi kualitas secara signifikan.",
-  },
-  {
-    slug: "foto-ke-pdf",
-    title: "Foto ke PDF",
-    description:
-      "Ubah foto JPG, PNG, WEBP menjadi dokumen PDF. Setiap foto jadi satu halaman.",
-  },
-];
 
 export default function PdfKeWordPage() {
   return (
@@ -50,34 +30,14 @@ export default function PdfKeWordPage() {
               PDF ke Word
             </h1>
           </div>
-        </div>
-
-        {/* Coming soon notice */}
-        <div className="bg-canvas rounded-xl border border-border p-8 text-center max-w-2xl">
-          <FileText className="w-12 h-12 text-ink-muted mx-auto mb-4 opacity-40" />
-          <h2 className="text-lg font-semibold text-ink mb-2">
-            Segera hadir
-          </h2>
-          <p className="text-ink-tertiary mb-6">
-            Fitur ini sedang dalam pengembangan. Sementara ini, gunakan tool lain
-            dari Toolinter.
+          <p className="text-ink-tertiary max-w-xl">
+            Ubah file PDF menjadi dokumen Word (.docx) yang bisa diedit.
+            Proses berjalan langsung di browser tanpa upload ke server.
           </p>
-
-          {/* Alternative tools */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-            {alternativeTools.map((tool) => (
-              <Link
-                key={tool.slug}
-                href={`/pdf/${tool.slug}`}
-                className="bg-surface rounded-xl border border-border p-4 text-left hover:border-primary/50 transition-colors"
-              >
-                <FileText className="w-5 h-5 text-primary mb-2" />
-                <h3 className="font-medium text-ink text-sm mb-1">{tool.title}</h3>
-                <p className="text-xs text-ink-tertiary">{tool.description}</p>
-              </Link>
-            ))}
-          </div>
         </div>
+
+        {/* Component */}
+        <PdfKeWord />
 
         {/* SEO content */}
         <section className="mt-12 max-w-3xl">
@@ -92,15 +52,22 @@ export default function PdfKeWordPage() {
               konten ke dokumen baru.
             </p>
             <p>
-              Toolinter sedang mengembangkan fitur konversi PDF ke Word yang
-              berjalan langsung di browser. Fitur ini akan mendukung konversi teks,
-              tabel, dan gambar dari PDF ke format Word dengan hasil yang rapi dan
-              akurat.
+              Toolinter menggunakan teknologi pdf.js untuk mengekstrak teks dari
+              setiap halaman PDF, kemudian mengemasnya ke dalam format Word (.docx)
+              menggunakan library docx. Seluruh proses berjalan langsung di browser
+              — file tidak pernah dikirim ke server manapun.
             </p>
             <p>
-              Sambil menunggu fitur ini, Anda bisa menggunakan tool PDF lainnya
-              dari Toolinter seperti Gabung PDF, Kompres PDF, atau Foto ke PDF.
-              Semua tool berjalan langsung di browser tanpa upload ke server.
+              <strong>Cara menggunakan:</strong>
+            </p>
+            <ul className="list-disc list-inside space-y-1 ml-2">
+              <li>Upload file PDF yang ingin dikonversi</li>
+              <li>Klik tombol &quot;Konversi ke Word&quot;</li>
+              <li>File .docx akan otomatis terdownload</li>
+            </ul>
+            <p>
+              Tool ini cocok untuk dokumen PDF berbasis teks. PDF berupa
+              gambar atau scan belum didukung.
             </p>
           </div>
         </section>

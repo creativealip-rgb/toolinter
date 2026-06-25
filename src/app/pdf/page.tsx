@@ -37,13 +37,11 @@ const pdfTools = [
     slug: "pdf-ke-word",
     title: "PDF ke Word",
     description: "Ubah file PDF menjadi dokumen Word yang bisa diedit.",
-    disabled: true,
   },
   {
     slug: "word-ke-pdf",
     title: "Word ke PDF",
     description: "Ubah dokumen Word menjadi PDF dengan formatting tetap rapi.",
-    disabled: true,
   },
 ];
 
@@ -71,9 +69,7 @@ export default function PdfPage() {
           {pdfTools.map((tool) => (
             <div
               key={tool.slug}
-              className={`bg-canvas rounded-xl border border-border p-6 flex flex-col ${
-                tool.disabled ? "opacity-60" : ""
-              }`}
+              className="bg-canvas rounded-xl border border-border p-6 flex flex-col"
             >
               <FileText className="w-8 h-8 text-primary mb-3" />
               <h2 className="font-semibold text-ink text-lg mb-2">
@@ -82,19 +78,13 @@ export default function PdfPage() {
               <p className="text-ink-tertiary text-sm mb-4 flex-1">
                 {tool.description}
               </p>
-              {tool.disabled ? (
-                <span className="text-sm text-ink-muted font-medium py-2 px-4 rounded-xl border border-border text-center">
-                  Segera hadir
-                </span>
-              ) : (
-                <Link
-                  href={`/pdf/${tool.slug}`}
-                  className="flex items-center justify-center gap-2 bg-primary text-white font-medium py-2 px-4 rounded-xl hover:opacity-90 transition-opacity text-sm"
-                >
-                  Mulai
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              )}
+              <Link
+                href={`/pdf/${tool.slug}`}
+                className="flex items-center justify-center gap-2 bg-primary text-white font-medium py-2 px-4 rounded-xl hover:opacity-90 transition-opacity text-sm"
+              >
+                Mulai
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           ))}
         </div>

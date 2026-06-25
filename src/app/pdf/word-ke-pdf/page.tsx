@@ -1,33 +1,13 @@
-import { Metadata } from "next";
-import Link from "next/link";
-import { ChevronLeft, FileText } from "lucide-react";
+import { Metadata } from 'next';
+import Link from 'next/link';
+import { ChevronLeft, FileText } from 'lucide-react';
+import WordKePdf from '@/components/word-ke-pdf';
 
 export const metadata: Metadata = {
-  title: "Word ke PDF Online — Toolinter",
+  title: 'Word ke PDF Online — Toolinter',
   description:
-    "Ubah dokumen Word (.docx) menjadi PDF. Konversi Word ke PDF online gratis dari Toolinter.",
+    'Ubah dokumen Word (.docx) menjadi PDF. Konversi Word ke PDF online, 100% di browser, gratis.',
 };
-
-const alternativeTools = [
-  {
-    slug: "gabung",
-    title: "Gabung PDF",
-    description:
-      "Gabungkan beberapa file PDF menjadi satu. Upload, atur urutan, dan download hasilnya.",
-  },
-  {
-    slug: "kompres",
-    title: "Kompres PDF",
-    description:
-      "Kurangi ukuran file PDF tanpa mengurangi kualitas secara signifikan.",
-  },
-  {
-    slug: "foto-ke-pdf",
-    title: "Foto ke PDF",
-    description:
-      "Ubah foto JPG, PNG, WEBP menjadi dokumen PDF. Setiap foto jadi satu halaman.",
-  },
-];
 
 export default function WordKePdfPage() {
   return (
@@ -50,34 +30,14 @@ export default function WordKePdfPage() {
               Word ke PDF
             </h1>
           </div>
-        </div>
-
-        {/* Coming soon notice */}
-        <div className="bg-canvas rounded-xl border border-border p-8 text-center max-w-2xl">
-          <FileText className="w-12 h-12 text-ink-muted mx-auto mb-4 opacity-40" />
-          <h2 className="text-lg font-semibold text-ink mb-2">
-            Segera hadir
-          </h2>
-          <p className="text-ink-tertiary mb-6">
-            Fitur ini sedang dalam pengembangan. Sementara ini, gunakan tool lain
-            dari Toolinter.
+          <p className="text-ink-tertiary max-w-xl">
+            Ubah dokumen Word (.docx) menjadi file PDF. Proses berjalan
+            langsung di browser tanpa upload ke server.
           </p>
-
-          {/* Alternative tools */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-            {alternativeTools.map((tool) => (
-              <Link
-                key={tool.slug}
-                href={`/pdf/${tool.slug}`}
-                className="bg-surface rounded-xl border border-border p-4 text-left hover:border-primary/50 transition-colors"
-              >
-                <FileText className="w-5 h-5 text-primary mb-2" />
-                <h3 className="font-medium text-ink text-sm mb-1">{tool.title}</h3>
-                <p className="text-xs text-ink-tertiary">{tool.description}</p>
-              </Link>
-            ))}
-          </div>
         </div>
+
+        {/* Component */}
+        <WordKePdf />
 
         {/* SEO content */}
         <section className="mt-12 max-w-3xl">
@@ -92,14 +52,21 @@ export default function WordKePdfPage() {
               atau saat dokumen perlu dikirim dalam format yang tidak bisa diedit.
             </p>
             <p>
-              Toolinter sedang mengembangkan fitur konversi Word ke PDF yang
-              berjalan langsung di browser. Fitur ini akan mempertahankan teks,
-              gambar, tabel, dan formatting dokumen Word Anda.
+              Toolinter menggunakan library Mammoth.js untuk mengekstrak teks dari
+              dokumen Word, kemudian merender-nya ke PDF menggunakan jsPDF. Seluruh
+              proses berjalan langsung di browser tanpa upload ke server.
             </p>
             <p>
-              Sambil menunggu fitur ini, Anda bisa menggunakan tool PDF lainnya
-              dari Toolinter seperti Gabung PDF, Kompres PDF, atau Foto ke PDF.
-              Semua tool berjalan langsung di browser tanpa upload ke server.
+              <strong>Cara menggunakan:</strong>
+            </p>
+            <ul className="list-disc list-inside space-y-1 ml-2">
+              <li>Upload file Word (.docx) yang ingin dikonversi</li>
+              <li>Klik tombol &quot;Konversi ke PDF&quot;</li>
+              <li>File PDF akan otomatis terdownload</li>
+            </ul>
+            <p>
+              Tool ini mengekstrak teks dari dokumen Word dan merender-nya
+              dengan formatting yang rapi ke dalam file PDF A4.
             </p>
           </div>
         </section>

@@ -54,10 +54,10 @@ const cards = [
   },
   {
     title: "Template Cover Letter",
-    desc: "Template cover letter dalam bahasa Indonesia dan Inggris. Segera hadir!",
-    href: "#",
+    desc: "Template cover letter dalam bahasa Indonesia dan Inggris. Isi formulir, download PDF.",
+    href: "/cv/cover-letter",
     icon: Mail,
-    available: false,
+    available: true,
   },
 ];
 
