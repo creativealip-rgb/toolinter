@@ -1,5 +1,6 @@
 import { Search, FileText, Image, Calculator, FileDown, Briefcase, Wrench, Zap, Shield, Download, Users, TrendingUp, Star, GraduationCap, Clock } from "lucide-react";
 import { blogPosts } from "@/data/blog";
+import JsonLd from "@/components/json-ld";
 
 // ─── Data ───
 
@@ -407,8 +408,37 @@ function Footer() {
 // ─── Page ───
 
 export default function HomePage() {
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Toolinter",
+    url: "https://toolinter.net",
+    description:
+      "Kumpulan tool online gratis untuk surat, foto, CV, PDF, gaji, dan UMKM",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://toolinter.net/tools?q={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+
   return (
     <>
+      <JsonLd data={websiteSchema} />
+      <JsonLd data={faqSchema} />
       <Header />
       <main>
         <HeroSection />

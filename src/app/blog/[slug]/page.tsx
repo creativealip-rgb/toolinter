@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { blogPosts, getBlogPost, getAllSlugs } from "@/data/blog";
 import { ArrowLeft, Clock, Calendar, Tag } from "lucide-react";
 import AiInsightBox from "@/components/ai-insight-box";
+import JsonLd from "@/components/json-ld";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -37,8 +38,23 @@ export default async function BlogPostPage({ params }: PageProps) {
   const post = getBlogPost(slug);
   if (!post) notFound();
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    author: { "@type": "Organization", name: "Toolinter" },
+    publisher: {
+      "@type": "Organization",
+      name: "Toolinter",
+      url: "https://toolinter.net",
+    },
+  };
+
   return (
     <main className="min-h-screen bg-canvas">
+      <JsonLd data={articleSchema} />
       <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Back link */}
         <Link
