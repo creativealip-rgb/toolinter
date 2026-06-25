@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { blogPosts, getBlogPost, getAllSlugs } from "@/data/blog";
-import { ArrowLeft, Clock, Calendar, Tag } from "lucide-react";
+import { readPosts } from "@/lib/posts-store";
+import { blogPosts } from "@/data/blog";
+import { ArrowLeft, Clock, Calendar, Tag, User } from "lucide-react";
 import AiInsightBox from "@/components/ai-insight-box";
 import JsonLd from "@/components/json-ld";
 
@@ -11,45 +12,50 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
+  return blogPosts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const allPosts = readPosts();
+  const post = allPosts.find((p) => p.slug === slug);
   if (!post) return {};
 
   return {
     title: `${post.title} | Blog Toolinter`,
-    description: post.excerpt,
+    description: post.metaDescription || post.excerpt,
     openGraph: {
       title: post.title,
-      description: post.excerpt,
+      description: post.metaDescription || post.excerpt,
       type: "article",
       publishedTime: post.date,
+      ...(post.ogImage ? { images: [{ url: post.ogImage }] } : {}),
     },
   };
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
-  if (!post) notFound();
+  const allPosts = readPosts();
+  const post = allPosts.find((p) => p.slug === slug);
+
+  if (!post || post.status !== "published") notFound();
 
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
-    description: post.excerpt,
+    description: post.metaDescription || post.excerpt,
     datePublished: post.date,
-    author: { "@type": "Organization", name: "Toolinter" },
+    author: { "@type": "Organization", name: post.author },
     publisher: {
       "@type": "Organization",
       name: "Toolinter",
       url: "https://toolinter.net",
     },
+    ...(post.ogImage ? { image: post.ogImage } : {}),
   };
 
   return (
@@ -83,12 +89,27 @@ export default async function BlogPostPage({ params }: PageProps) {
             <Clock className="h-3 w-3" />
             {post.readTime}
           </span>
+          <span className="inline-flex items-center gap-1 text-xs text-ink-muted">
+            <User className="h-3 w-3" />
+            {post.author}
+          </span>
         </div>
 
         {/* Title */}
         <h1 className="mb-8 text-3xl font-bold leading-tight text-ink sm:text-4xl">
           {post.title}
         </h1>
+
+        {/* Featured image */}
+        {post.featuredImage && (
+          <div className="mb-8">
+            <img
+              src={post.featuredImage}
+              alt={post.title}
+              className="w-full rounded-xl object-cover max-h-96"
+            />
+          </div>
+        )}
 
         {/* Content */}
         <div className="space-y-8">
@@ -98,6 +119,20 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <h2 className="mb-3 text-xl font-semibold text-ink">
                   {section.heading}
                 </h2>
+              )}
+              {section.image?.url && (
+                <figure className="mb-4">
+                  <img
+                    src={section.image.url}
+                    alt={section.image.alt || ""}
+                    className="w-full rounded-lg"
+                  />
+                  {section.image.caption && (
+                    <figcaption className="text-xs text-ink-muted text-center mt-1">
+                      {section.image.caption}
+                    </figcaption>
+                  )}
+                </figure>
               )}
               <div className="space-y-4">
                 {section.paragraphs.map((p, j) => (
@@ -112,6 +147,21 @@ export default async function BlogPostPage({ params }: PageProps) {
             </section>
           ))}
         </div>
+
+        {/* Tags */}
+        {post.tags.length > 0 && (
+          <div className="mt-10 flex flex-wrap gap-2">
+            {post.tags.map((tag) => (
+              <span
+                key={tag}
+                className="inline-flex items-center gap-1 rounded-full bg-surface border border-border px-3 py-1 text-xs font-medium text-ink-tertiary hover:border-primary/30 transition"
+              >
+                <Tag className="h-3 w-3" />
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
 
         <div className="mt-10">
           <AiInsightBox
@@ -143,8 +193,8 @@ export default async function BlogPostPage({ params }: PageProps) {
             Artikel Lainnya
           </h3>
           <div className="grid gap-4 sm:grid-cols-2">
-            {blogPosts
-              .filter((p) => p.slug !== slug)
+            {allPosts
+              .filter((p) => p.slug !== slug && p.status === "published")
               .slice(0, 2)
               .map((related) => (
                 <Link
