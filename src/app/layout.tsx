@@ -45,7 +45,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col">
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-3T31T7GX9H"
+          src="https://www.googletagmanager.com/gtag/js?id=G-CNK84V0DY8"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -53,7 +53,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-3T31T7GX9H');
+            gtag('config', 'G-CNK84V0DY8');
           `}
         </Script>
         <NextTopLoader color="#1A8FE3" showSpinner={false} height={3} />
