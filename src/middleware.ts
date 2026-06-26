@@ -40,8 +40,9 @@ export function middleware(request: NextRequest) {
   const pathname = url.pathname;
   const isPreview = url.searchParams.get("preview") === "1";
 
-  // Dashboard auth only for /dashboard routes
-  if (pathname.startsWith("/dashboard") && !isAuthorized(request)) {
+  // Dashboard and preview routes require Basic Auth.
+  // Browser keeps Basic Auth session per domain, so admin preview links opened from dashboard still work.
+  if ((pathname.startsWith("/dashboard") || isPreview) && !isAuthorized(request)) {
     return unauthorizedResponse();
   }
 
