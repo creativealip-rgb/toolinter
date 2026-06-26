@@ -3,6 +3,8 @@ import Link from "next/link";
 import { readPosts } from "@/lib/posts-store";
 import { ArrowRight, Clock, Tag, User } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Blog Toolinter — Tips & Panduan Gratis",
   description:
@@ -18,9 +20,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const isPreview = preview === "1";
   const allPosts = readPosts();
   const today = new Date().toISOString().split("T")[0];
-  const posts = allPosts.filter(
-    (p) => (p.status === "published" || (isPreview && p.status === "scheduled")) && (isPreview || p.date <= today)
-  );
+  const posts = allPosts.filter((p) => {
+    const isReleased = p.status === "published" || (p.status === "scheduled" && p.date <= today);
+    return isPreview ? (p.status === "published" || p.status === "scheduled") : isReleased;
+  });
 
   return (
     <main className="min-h-screen bg-canvas">

@@ -9,6 +9,8 @@ import RichContent from "@/components/rich-content";
 import JsonLd from "@/components/json-ld";
 import ViewCounter from "@/components/view-counter";
 
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ preview?: string }>;
@@ -53,8 +55,8 @@ export default async function BlogPostPage({ params, searchParams }: PageProps) 
   if (!post || (post.status !== "published" && post.status !== "scheduled")) notFound();
 
   const today = new Date().toISOString().split("T")[0];
-  if (post.date > today && !isPreview) notFound();
-  if (post.status === "scheduled" && !isPreview) notFound();
+  const isReleased = post.status === "published" || (post.status === "scheduled" && post.date <= today);
+  if (!isReleased && !isPreview) notFound();
 
   const articleSchema = {
     "@context": "https://schema.org",
