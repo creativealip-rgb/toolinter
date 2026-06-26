@@ -10,6 +10,7 @@ import ViewCounter from "@/components/view-counter";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ preview?: string }>;
 }
 
 export async function generateStaticParams() {
@@ -18,8 +19,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
+  searchParams,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  const { preview } = await searchParams;
+  const isPreview = preview === "1";
   const allPosts = readPosts();
   const post = allPosts.find((p) => p.slug === slug);
   if (!post) return {};
@@ -27,6 +31,7 @@ export async function generateMetadata({
   return {
     title: `${post.title} | Blog Toolinter`,
     description: post.metaDescription || post.excerpt,
+    robots: isPreview ? { index: false, follow: false } : undefined,
     openGraph: {
       title: post.title,
       description: post.metaDescription || post.excerpt,
@@ -37,15 +42,18 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlogPostPage({ params }: PageProps) {
+export default async function BlogPostPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
+  const { preview } = await searchParams;
+  const isPreview = preview === "1";
   const allPosts = readPosts();
   const post = allPosts.find((p) => p.slug === slug);
 
-  if (!post || post.status !== "published") notFound();
+  if (!post || (post.status !== "published" && post.status !== "scheduled")) notFound();
 
   const today = new Date().toISOString().split("T")[0];
-  if (post.date > today) notFound();
+  if (post.date > today && !isPreview) notFound();
+  if (post.status === "scheduled" && !isPreview) notFound();
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -202,10 +210,10 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="grid gap-4 sm:grid-cols-3">
             {(() => {
               const sameCategory = allPosts.filter(
-                (p) => p.slug !== slug && p.status === "published" && p.category === post.category
+                (p) => p.slug !== slug && (p.status === "published" || (isPreview && p.status === "scheduled")) && p.category === post.category
               );
               const others = allPosts.filter(
-                (p) => p.slug !== slug && p.status === "published" && p.category !== post.category
+                (p) => p.slug !== slug && (p.status === "published" || (isPreview && p.status === "scheduled")) && p.category !== post.category
               );
               const related = [...sameCategory, ...others].slice(0, 3);
               return related.map((r) => (

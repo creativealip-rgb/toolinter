@@ -37,28 +37,17 @@ export default function SuratWorkspace({ suratTypes, initialSlug, aiEnabled = fa
     ? suratTypes.filter((s) => s.title.toLowerCase().includes(searchQ.toLowerCase()) || s.description.toLowerCase().includes(searchQ.toLowerCase()))
     : suratTypes;
 
-  if (!showList && selected) {
-    return (
-      <div className="max-w-5xl mx-auto">
-        <button onClick={() => setShowList(true)} className="flex items-center gap-1.5 text-sm text-blue-600 mb-4 md:hidden hover:text-blue-700 transition-colors">
-          <ArrowLeft className="w-4 h-4" />
-          Pilih surat lain
-        </button>
-        <SuratGenerator
-          title={selected.title}
-          description={selected.description}
-          slug={selected.slug}
-          fields={selected.fields}
-          aiEnabled={aiEnabled}
-        />
-      </div>
-    );
-  }
+  const selectSurat = (slug: string) => {
+    setSelectedSlug(slug);
+    setShowList(false);
+  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6">
-      {/* Sidebar */}
-      <div className="bg-white border border-gray-200 rounded-xl overflow-hidden sticky top-24 h-fit shadow-sm">
+      {/* Sidebar — always visible on desktop, toggle on mobile */}
+      <div className={`bg-white border border-gray-200 rounded-xl md:sticky md:top-24 shadow-sm flex flex-col max-h-[calc(100vh-120px)] ${
+        !showList ? "hidden md:flex" : "flex"
+      }`}>
         <div className="p-3 border-b border-gray-100">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -71,11 +60,11 @@ export default function SuratWorkspace({ suratTypes, initialSlug, aiEnabled = fa
             />
           </div>
         </div>
-        <div className="max-h-[60vh] overflow-y-auto">
+        <div className="overflow-y-scroll max-h-[60vh]">
           {filtered.map((s) => (
             <button
               key={s.slug}
-              onClick={() => { setSelectedSlug(s.slug); setShowList(false); }}
+              onClick={() => selectSurat(s.slug)}
               className={`w-full text-left px-4 py-3 border-b border-gray-50 transition-all ${
                 selectedSlug === s.slug
                   ? "bg-blue-50 border-l-2 border-l-blue-500"
@@ -92,8 +81,16 @@ export default function SuratWorkspace({ suratTypes, initialSlug, aiEnabled = fa
         </div>
       </div>
 
-      {/* Main area */}
-      <div>
+      {/* Main area — show on desktop always, toggle on mobile */}
+      <div className={`flex flex-col ${showList ? "hidden md:flex" : "flex"}`}>
+        {/* Back button — mobile only */}
+        {selected && (
+          <button onClick={() => setShowList(true)} className="flex items-center gap-1.5 text-sm text-blue-600 mb-4 md:hidden hover:text-blue-700 transition-colors">
+            <ArrowLeft className="w-4 h-4" />
+            Pilih surat lain
+          </button>
+        )}
+
         {selected ? (
           <SuratGenerator
             title={selected.title}
@@ -103,7 +100,7 @@ export default function SuratWorkspace({ suratTypes, initialSlug, aiEnabled = fa
             aiEnabled={aiEnabled}
           />
         ) : (
-          <div className="flex flex-col items-center justify-center min-h-[400px] bg-white border border-dashed border-gray-300 rounded-xl text-center p-8">
+          <div className="flex flex-col items-center justify-center flex-1 bg-white border border-dashed border-gray-300 rounded-xl text-center p-8">
             <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4">
               <FileText className="w-8 h-8 text-blue-400" />
             </div>

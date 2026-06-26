@@ -18,7 +18,7 @@ export interface BlogPost {
   ctaLabel: string;
   ctaHref: string;
   content: BlogSection[];
-  status: "draft" | "published";
+  status: "draft" | "published" | "scheduled";
   metaDescription: string;
   focusKeyword: string;
   ogImage: string;
@@ -50,7 +50,7 @@ export function mergeDefaults(post: Record<string, unknown>): BlogPost {
     ctaLabel: (post.ctaLabel as string) || "",
     ctaHref: (post.ctaHref as string) || "",
     content: (post.content as BlogSection[]) || [],
-    status: (post.status as "draft" | "published") || defaultPostDefaults.status,
+    status: (post.status as "draft" | "published" | "scheduled") || defaultPostDefaults.status,
     metaDescription: (post.metaDescription as string) || (post.excerpt as string) || "",
     focusKeyword: (post.focusKeyword as string) || defaultPostDefaults.focusKeyword,
     ogImage: (post.ogImage as string) || defaultPostDefaults.ogImage,
@@ -103,10 +103,11 @@ export function getStats() {
   const posts = readPosts();
   const published = posts.filter((p) => p.status === "published").length;
   const drafts = posts.filter((p) => p.status === "draft").length;
+  const scheduled = posts.filter((p) => p.status === "scheduled").length;
   const totalViews = posts.reduce((sum, p) => sum + (p.views || 0), 0);
   const byCategory: Record<string, number> = {};
   posts.forEach((p) => {
     byCategory[p.category] = (byCategory[p.category] || 0) + 1;
   });
-  return { totalPosts: posts.length, published, drafts, byCategory, totalViews };
+  return { totalPosts: posts.length, published, drafts, scheduled, byCategory, totalViews };
 }

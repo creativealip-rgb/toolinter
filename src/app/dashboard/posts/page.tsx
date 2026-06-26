@@ -15,7 +15,7 @@ interface BlogPost {
   date: string;
   category: string;
   readTime: string;
-  status: "draft" | "published";
+  status: "draft" | "published" | "scheduled";
   views: number;
   ctaLabel?: string;
   ctaHref?: string;
@@ -31,7 +31,7 @@ interface BlogPost {
 export default function DashboardPostsPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<"all" | "published" | "draft">("all");
+  const [filter, setFilter] = useState<"all" | "published" | "draft" | "scheduled">("all");
   const [search, setSearch] = useState("");
   const [editing, setEditing] = useState<string | null>(null);
   const [showCreate, setShowCreate] = useState(false);
@@ -52,7 +52,7 @@ export default function DashboardPostsPage() {
     readTime: "5 menit",
     ctaLabel: "",
     ctaHref: "",
-    status: "draft" as "draft" | "published",
+    status: "draft" as "draft" | "published" | "scheduled",
     metaDescription: "",
     focusKeyword: "",
     tags: [] as string[],
@@ -184,7 +184,7 @@ export default function DashboardPostsPage() {
   }
 
   async function handleToggleStatus(post: BlogPost) {
-    const newStatus = post.status === "published" ? "draft" : "published";
+    const newStatus = post.status === "published" ? "draft" : post.status === "scheduled" ? "published" : "scheduled";
     const res = await fetch(`/api/posts/${post.slug}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -273,6 +273,7 @@ export default function DashboardPostsPage() {
     total: posts.length,
     published: posts.filter((p) => p.status === "published").length,
     draft: posts.filter((p) => p.status === "draft").length,
+    scheduled: posts.filter((p) => p.status === "scheduled").length,
     totalViews: posts.reduce((s, p) => s + (p.views || 0), 0),
   };
 
@@ -321,6 +322,10 @@ export default function DashboardPostsPage() {
             <div className="text-xs text-gray-500">Draft</div>
           </div>
           <div className="bg-white rounded-lg border p-4">
+            <div className="text-2xl font-bold text-blue-600">{stats.scheduled}</div>
+            <div className="text-xs text-gray-500">Scheduled</div>
+          </div>
+          <div className="bg-white rounded-lg border p-4">
             <div className="text-2xl font-bold text-blue-600">{stats.totalViews}</div>
             <div className="text-xs text-gray-500">Total Views</div>
           </div>
@@ -329,9 +334,9 @@ export default function DashboardPostsPage() {
         {/* Filters */}
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <div className="flex gap-1 bg-white border rounded-lg p-1">
-            {(["all", "published", "draft"] as const).map((f) => (
+            {(["all", "published", "scheduled", "draft"] as const).map((f) => (
               <button key={f} onClick={() => { setFilter(f); setPage(1); }} className={`px-3 py-1.5 text-sm rounded-md transition ${filter === f ? "bg-blue-600 text-white" : "text-gray-600 hover:bg-gray-100"}`}>
-                {f === "all" ? "Semua" : f === "published" ? "Published" : "Draft"}
+                {f === "all" ? "Semua" : f === "published" ? "Published" : f === "scheduled" ? "Scheduled" : "Draft"}
               </button>
             ))}
           </div>
@@ -383,13 +388,13 @@ export default function DashboardPostsPage() {
                       </div>
                     </td>
                     <td className="px-4 py-3 text-center">
-                      <button onClick={() => handleToggleStatus(post)} className={`inline-block px-2 py-0.5 text-xs rounded-full cursor-pointer transition ${post.status === "published" ? "bg-green-100 text-green-700 hover:bg-green-200" : "bg-yellow-100 text-yellow-700 hover:bg-yellow-200"}`}>
+                      <button onClick={() => handleToggleStatus(post)} className={`inline-block px-2 py-0.5 text-xs rounded-full cursor-pointer transition ${post.status === "published" ? "bg-green-100 text-green-700 hover:bg-green-200" : post.status === "scheduled" ? "bg-blue-100 text-blue-700 hover:bg-blue-200" : "bg-yellow-100 text-yellow-700 hover:bg-yellow-200"}`}>
                         {post.status}
                       </button>
                     </td>
                     <td className="px-4 py-3 text-right">
                       <div className="flex justify-end gap-1">
-                        <a href={`/blog/${post.slug}`} target="_blank" className="px-2 py-1 text-xs text-blue-600 hover:bg-blue-50 rounded transition" title="Lihat">👁</a>
+                        <a href={`/blog/${post.slug}?preview=1`} target="_blank" className="px-2 py-1 text-xs text-blue-600 hover:bg-blue-50 rounded transition" title="Preview">👁</a>
                         <button onClick={() => openEdit(post)} className="px-2 py-1 text-xs text-gray-600 hover:bg-gray-100 rounded transition" title="Edit">✏️</button>
                         <button onClick={() => handleDelete(post.slug)} className="px-2 py-1 text-xs text-red-600 hover:bg-red-50 rounded transition" title="Hapus">🗑</button>
                       </div>
@@ -531,8 +536,9 @@ export default function DashboardPostsPage() {
                     </div>
                     <div>
                       <label className="block text-xs font-medium text-gray-600 mb-1">Status</label>
-                      <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value as "draft" | "published" })} className="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                      <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value as "draft" | "published" | "scheduled" })} className="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
                         <option value="draft">Draft</option>
+                        <option value="scheduled">Scheduled</option>
                         <option value="published">Published</option>
                       </select>
                     </div>

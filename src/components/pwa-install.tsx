@@ -8,11 +8,27 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
 }
 
+const DISMISS_KEY = 'pwa-install-dismissed-at';
+const DISMISS_COOLDOWN = 24 * 60 * 60 * 1000; // 24 hours
+
+function isDismissed(): boolean {
+  if (typeof window === 'undefined') return true;
+  const ts = localStorage.getItem(DISMISS_KEY);
+  if (!ts) return false;
+  return Date.now() - Number(ts) < DISMISS_COOLDOWN;
+}
+
+function dismiss() {
+  localStorage.setItem(DISMISS_KEY, String(Date.now()));
+}
+
 export default function PwaInstallPrompt() {
   const [deferred, setDeferred] = useState<BeforeInstallPromptEvent | null>(null);
-  const [dismissed, setDismissed] = useState(false);
+  const [hidden, setHidden] = useState(true);
 
   useEffect(() => {
+    if (isDismissed()) return;
+
     // Register service worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js').catch(() => {});
@@ -21,12 +37,13 @@ export default function PwaInstallPrompt() {
     function handler(e: Event) {
       e.preventDefault();
       setDeferred(e as BeforeInstallPromptEvent);
+      setHidden(false);
     }
     window.addEventListener('beforeinstallprompt', handler);
     return () => window.removeEventListener('beforeinstallprompt', handler);
   }, []);
 
-  if (!deferred || dismissed) return null;
+  if (!deferred || hidden) return null;
 
   return (
     <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-md rounded-xl border border-primary/20 bg-canvas p-4 shadow-xl">
@@ -51,14 +68,14 @@ export default function PwaInstallPrompt() {
               Install
             </button>
             <button
-              onClick={() => setDismissed(true)}
+              onClick={() => { dismiss(); setHidden(true); }}
               className="rounded-lg px-3 py-1.5 text-xs text-ink-muted hover:text-ink transition-colors"
             >
               Nanti saja
             </button>
           </div>
         </div>
-        <button onClick={() => setDismissed(true)} className="text-ink-muted hover:text-ink">
+        <button onClick={() => { dismiss(); setHidden(true); }} className="text-ink-muted hover:text-ink">
           <X className="w-4 h-4" />
         </button>
       </div>

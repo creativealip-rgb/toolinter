@@ -9,11 +9,17 @@ export const metadata: Metadata = {
     "Kumpulan artikel tips, panduan, dan tutorial seputar dokumen, foto, gaji, CV, dan tools online gratis dari Toolinter.",
 };
 
-export default function BlogPage() {
+interface BlogPageProps {
+  searchParams: Promise<{ preview?: string }>;
+}
+
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  const { preview } = await searchParams;
+  const isPreview = preview === "1";
   const allPosts = readPosts();
   const today = new Date().toISOString().split("T")[0];
   const posts = allPosts.filter(
-    (p) => p.status === "published" && p.date <= today
+    (p) => (p.status === "published" || (isPreview && p.status === "scheduled")) && (isPreview || p.date <= today)
   );
 
   return (
