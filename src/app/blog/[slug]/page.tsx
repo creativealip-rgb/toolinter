@@ -5,6 +5,7 @@ import { readPosts } from "@/lib/posts-store";
 import { blogPosts } from "@/data/blog";
 import { ArrowLeft, Clock, Calendar, Tag, User } from "lucide-react";
 import AiInsightBox from "@/components/ai-insight-box";
+import RichContent from "@/components/rich-content";
 import JsonLd from "@/components/json-ld";
 import ViewCounter from "@/components/view-counter";
 
@@ -147,18 +148,7 @@ export default async function BlogPostPage({ params, searchParams }: PageProps) 
                   )}
                 </figure>
               )}
-              <div className="space-y-4">
-                {section.paragraphs.map((p, j) => (
-                  <p
-                    key={j}
-                    className={`whitespace-pre-wrap leading-relaxed text-ink-tertiary ${
-                      (p.includes("Q:") || p.includes("•") || p.startsWith("- ")) ? "mb-4" : ""
-                    }`}
-                  >
-                    {p}
-                  </p>
-                ))}
-              </div>
+              <RichContent paragraphs={section.paragraphs} />
             </section>
           ))}
         </div>

@@ -39,9 +39,9 @@ export function middleware(request: NextRequest) {
   const url = new URL(request.url);
   const pathname = url.pathname;
   const isPreview = url.searchParams.get("preview") === "1";
-  const needsAuth = pathname.startsWith("/dashboard") || isPreview;
 
-  if (needsAuth && !isAuthorized(request)) {
+  // Dashboard auth only for /dashboard routes
+  if (pathname.startsWith("/dashboard") && !isAuthorized(request)) {
     return unauthorizedResponse();
   }
 
