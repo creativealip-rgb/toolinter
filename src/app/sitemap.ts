@@ -3,6 +3,8 @@ import { blogPosts } from "@/data/blog";
 
 const BASE_URL = "https://toolinter.net";
 
+export const dynamic = "force-dynamic";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     { url: BASE_URL, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 1.0 },
@@ -35,12 +37,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const blogPages = (blogPosts as { slug: string; date?: string }[]).map((post) => ({
-    url: `${BASE_URL}/blog/${post.slug}`,
-    lastModified: new Date(post.date || new Date()),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
+  const today = new Date().toISOString().split("T")[0];
+  const blogPages = (blogPosts as { slug: string; date?: string; status?: string }[])
+    .filter((post) => {
+      const isReleased = post.status === "published" || (post.status === "scheduled" && (post.date || "") <= today);
+      return isReleased;
+    })
+    .map((post) => ({
+      url: `${BASE_URL}/blog/${post.slug}`,
+      lastModified: new Date(post.date || new Date()),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
 
   return [...staticPages, ...categoryPages, ...toolPages, ...blogPages];
 }
