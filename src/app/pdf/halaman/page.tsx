@@ -1,13 +1,17 @@
-import { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft, FileText } from "lucide-react";
 import PdfHalaman from "@/components/pdf-halaman";
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Ambil Halaman PDF — Toolinter",
-  description:
-    "Ekstrak halaman tertentu dari file PDF. Pilih halaman dengan rentang, lalu download. Gratis dan aman di browser.",
-};
+export const metadata = generateToolMetadata({
+  title: "Atur Halaman PDF",
+  description: "Pisah, hapus, dan atur ulang halaman PDF.",
+  path: "/pdf/halaman",
+});
+
+
+
+
 
 export default function HalamanPdfPage() {
   return (

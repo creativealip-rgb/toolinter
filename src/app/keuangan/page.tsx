@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Calculator, FileCheck, CreditCard, ArrowRight } from "lucide-react";
+import { Calculator, FileCheck, CreditCard, ArrowRight,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Kalkulator Keuangan Online — Toolinter",
@@ -51,7 +52,7 @@ export default function KeuanganPage() {
             <Link
               key={tool.slug}
               href={`/keuangan/${tool.slug}`}
-              className="group bg-canvas rounded-xl border border-border p-6 hover:shadow-lg hover:border-primary/20 transition-all"
+              className="group relative flex flex-col rounded-xl border border-gray-200 bg-white p-5 transition-all duration-200 hover:border-blue-400 hover:shadow-lg hover:-translate-y-0.5"
             >
               <tool.icon className="w-8 h-8 text-primary mb-3" />
               <h2 className="font-semibold text-ink text-lg mb-2 group-hover:text-primary transition-colors">

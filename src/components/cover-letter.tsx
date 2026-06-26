@@ -1,5 +1,7 @@
 'use client';
 
+import AiInsightBox from './ai-insight-box';
+import { ActionBar } from './action-bar';
 import { useState, useCallback } from 'react';
 import {
   Download,
@@ -375,6 +377,27 @@ export default function CoverLetter() {
           </div>
         </div>
       </div>
+
+      {/* AI Insight */}
+      <div className="mt-4">
+        <AiInsightBox
+          title="AI Cover Letter Coach"
+          description="Minta AI review cover letter kamu, saran perbaikan bahasa, dan tips interview."
+          placeholder="Contoh: cover letter ini udah menarik belum untuk recruiter?"
+          buttonLabel="Review dengan AI"
+          context={`Cover letter user:\nPosisi: ${data.posisi}\nPerusahaan: ${data.perusahaan}\nPengalaman: ${data.pengalaman}\nKeahlian: ${data.keahlian}\nAlasan: ${data.alasan}`}
+          system="Kamu adalah career coach Indonesia. Review cover letter, saran perbaikan bahasa, dan tips melamar kerja."
+        />
+      </div>
+
+      <ActionBar
+        tool="cv-cover-letter"
+        toolName="Generator Cover Letter"
+        shareItems={[["Posisi", data.posisi || "-"], ["Perusahaan", data.perusahaan || "-"]]}
+        resultElementId="cover-letter-preview"
+        filename="cover-letter.pdf"
+        show={!!data.nama && !!data.posisi}
+      />
     </div>
   );
 }

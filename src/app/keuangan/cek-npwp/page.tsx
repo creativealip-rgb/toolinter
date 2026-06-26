@@ -1,5 +1,7 @@
 'use client';
 
+import AiInsightBox from "@/components/ai-insight-box";
+import { ActionBar } from "@/components/action-bar";
 import { useState } from 'react';
 import Link from 'next/link';
 import {
@@ -491,6 +493,27 @@ export default function CekNpwpPage() {
             )}
           </div>
         )}
+
+        {/* AI Insight */}
+        <div className="mt-6">
+          <AiInsightBox
+            title="AI Pajak Advisor"
+            description="Minta AI jelaskan format NPWP/NIK, arti digit, dan tips keamanan data."
+            placeholder="Contoh: digit ke-9 NPWP itu apa artinya?"
+            buttonLabel="Tanya AI tentang NPWP/NIK"
+            context={`User sedang cek format NPWP dan NIK. NPWP: ${npwpInput || "belum diisi"}, NIK: ${nikInput || "belum diisi"}`}
+            system="Kamu adalah asisten edukasi perpajakan Indonesia. Jelaskan format NPWP (16 digit) dan NIK (16 digit), arti setiap digit, dan tips keamanan data."
+          />
+        </div>
+
+        <ActionBar
+          tool="cek-npwp"
+          toolName="Cek Format NPWP & NIK"
+          shareItems={[["NPWP", npwpInput || "-"], ["NIK", nikInput || "-"]]}
+          resultElementId="hasil-perhitungan"
+          filename="cek-npwp.pdf"
+          show={!!npwpResult || !!nikResult}
+        />
 
         {/* SEO content */}
         <section className="mt-12 border-t border-border pt-8">

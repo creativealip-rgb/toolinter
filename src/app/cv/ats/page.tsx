@@ -1,11 +1,22 @@
-import type { Metadata } from "next";
+import { generateToolMetadata } from "@/lib/seo";
 import { CvGenerator } from "@/components/cv-generator";
 
-export const metadata: Metadata = {
-  title: "Generator CV ATS Online — Toolinter",
-  description:
-    "Buat CV ATS-friendly secara online dan download PDF. Format bersih satu kolom, lolos Applicant Tracking System. Gratis, tanpa registrasi.",
-  alternates: { canonical: "/cv/ats" },
+export const metadata = generateToolMetadata({
+  title: "Generator CV ATS",
+  description: "Buat CV ATS-friendly online. Format satu kolom, lolos Applicant Tracking System.",
+  path: "/cv/ats",
+});
+
+const toolSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Generator CV ATS",
+  "url": "https://toolinter.net/cv/ats",
+  "description": "Buat CV ATS-friendly online",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web Browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" },
+  "inLanguage": "id",
 };
 
 export default function CvAtsPage() {

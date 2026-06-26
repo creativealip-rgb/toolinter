@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Download, ArrowLeft } from "lucide-react";
+import AiInsightBox from "@/components/ai-insight-box";
 import { jsPDF } from "jspdf";
 import Link from "next/link";
 
@@ -208,6 +209,17 @@ export default function FreshGraduatePage() {
           dan lainnya. Download, edit nama dan data Anda, lalu kirim ke perusahaan impian.
         </p>
       </section>
+
+        <div className="mt-8">
+          <AiInsightBox
+            title="AI CV Fresh Graduate Analyst"
+            description="Minta AI review {'CV Fresh Graduate'} Anda dan beri saran perbaikan."
+            placeholder="Contoh: review CV saya untuk posisi fresh graduate..."
+            buttonLabel="Analisis dengan AI"
+            context="User sedang buat CV Fresh Graduate. Beri saran perbaikan: kekuatan, kelemahan, keyword ATS, dan tips lolos screening."
+            system="Anda adalah HRD profesional. Analisis dokumen user dan beri feedback konkret, actionable, dalam bahasa Indonesia."
+          />
+        </div>
     </main>
   );
 }

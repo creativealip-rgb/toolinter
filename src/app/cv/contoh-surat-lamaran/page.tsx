@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Download, ArrowLeft, ExternalLink } from "lucide-react";
+import AiInsightBox from "@/components/ai-insight-box";
 import { jsPDF } from "jspdf";
 import Link from "next/link";
 
@@ -222,6 +223,17 @@ export default function ContohSuratLamaranPage() {
           dari Toolinter — isi data, generate, download. Gratis!
         </p>
       </section>
+
+        <div className="mt-8">
+          <AiInsightBox
+            title="AI Surat Lamaran Kerja Analyst"
+            description="Minta AI review {'Surat Lamaran Kerja'} Anda dan beri saran perbaikan."
+            placeholder="Contoh: review CV saya untuk posisi surat lamaran kerja..."
+            buttonLabel="Analisis dengan AI"
+            context="User sedang buat Surat Lamaran Kerja. Beri saran perbaikan: kekuatan, kelemahan, keyword ATS, dan tips lolos screening."
+            system="Anda adalah HRD profesional. Analisis dokumen user dan beri feedback konkret, actionable, dalam bahasa Indonesia."
+          />
+        </div>
     </main>
   );
 }

@@ -1,5 +1,7 @@
 'use client';
 
+import AiInsightBox from "@/components/ai-insight-box";
+import { ActionBar } from "@/components/action-bar";
 import { useState } from "react";
 import Link from "next/link";
 import {
@@ -21,7 +23,7 @@ function formatRp(n: number): string {
 }
 
 export default function BPJSPage() {
-  const [gajiRaw, setGajiRaw] = useState("");
+  const [gajiRaw, setGajiRaw] = useState("5000000");
   const [calculated, setCalculated] = useState(false);
 
   const [result, setResult] = useState({
@@ -162,8 +164,8 @@ export default function BPJSPage() {
         </div>
 
         {/* Results */}
-        {calculated && result.gaji > 0 && (
-          <div className="space-y-6">
+        {calculated && (
+          <div id="hasil-perhitungan" className="space-y-6">
             {/* Component cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {components.map((c) => {
@@ -237,6 +239,29 @@ export default function BPJSPage() {
             </div>
           </div>
         )}
+
+        {/* AI Insight */}
+        {calculated && (
+          <div className="mt-6">
+            <AiInsightBox
+              title="AI BPJS Explainer"
+              description="Minta AI jelaskan manfaat BPJS, cara klaim, dan tips."
+              placeholder="Contoh: gimana cara klaim BPJS Kesehatan di rumah sakit?"
+              buttonLabel="Analisis BPJS dengan AI"
+              context={`Data BPJS user:\nGaji: ${formatRp(result.gaji)}\nBPJS Kes/bulan: ${formatRp(result.bpjsKes)}\nBPJS TK/bulan: ${formatRp(result.bpjsJht + result.bpjsJp)}\nTotal/bulan: ${formatRp(result.totalBulan)}`}
+              system="Kamu adalah asisten edukasi BPJS Indonesia. Jelaskan BPJS Kesehatan dan Ketenagakerjaan, manfaat, cara klaim, dan tips praktis."
+            />
+          </div>
+        )}
+
+        <ActionBar
+          tool="gaji-bpjs"
+          toolName="Kalkulator BPJS"
+          shareItems={[["Gaji", formatRp(result.gaji)], ["BPJS Kes", formatRp(result.bpjsKes)], ["Total/Bulan", formatRp(result.totalBulan)]]}
+          resultElementId="hasil-perhitungan"
+          filename="gaji-bpjs.pdf"
+          show={calculated}
+        />
 
         {/* SEO content */}
         <section className="mt-12 border-t border-border pt-8">

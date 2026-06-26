@@ -1,13 +1,15 @@
-import { Metadata } from "next";
+import { generateToolMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronLeft, Camera } from "lucide-react";
 import FotoResizer from "@/components/foto-resizer";
 
-export const metadata: Metadata = {
-  title: "Resize Foto 2×3 Online — Toolinter",
-  description:
-    "Ubah ukuran foto ke 2×3 cm untuk dokumen sekolah, PPDB, dan keperluan administrasi. Gratis, langsung download.",
-};
+export const metadata = generateToolMetadata({
+  title: "Resize Foto 2x3 Online",
+  description: "Ubah ukuran pas foto 2x3 untuk dokumen.",
+  path: "/foto/resize-2x3",
+});
+
+
 
 export default function Resize2x3Page() {
   return (

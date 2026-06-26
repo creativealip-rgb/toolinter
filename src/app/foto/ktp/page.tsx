@@ -1,12 +1,16 @@
-import { Metadata } from "next";
 import Link from "next/link";
 import { Camera, ArrowRight, ChevronRight, FileCheck } from "lucide-react";
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Foto KTP Online — Syarat dan Cara Buat — Toolinter",
-  description:
-    "Ketahui syarat foto KTP 2026: ukuran 3×4 cm, background merah, resolusi 300 DPI. Resize foto KTP online gratis langsung di browser.",
-};
+export const metadata = generateToolMetadata({
+  title: "Panduan Foto KTP",
+  description: "Panduan ukuran dan format foto KTP elektronik (e-KTP).",
+  path: "/foto/ktp",
+});
+
+
+
+
 
 const ktpSpecs = [
   { label: "Ukuran Cetak", value: "3 × 4 cm" },

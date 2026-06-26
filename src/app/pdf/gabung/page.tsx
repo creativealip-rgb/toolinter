@@ -1,13 +1,17 @@
-import { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft, FileText } from "lucide-react";
 import PdfMerger from "@/components/pdf-merger";
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Gabung PDF Online — Toolinter",
-  description:
-    "Gabungkan beberapa file PDF menjadi satu. Gratis, proses di browser, langsung download.",
-};
+export const metadata = generateToolMetadata({
+  title: "Gabung PDF Online",
+  description: "Gabungkan beberapa file PDF jadi satu.",
+  path: "/pdf/gabung",
+});
+
+
+
+
 
 export default function GabungPdfPage() {
   return (

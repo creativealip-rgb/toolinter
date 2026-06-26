@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import AiInsightBox from "@/components/ai-insight-box";
+import { ActionBar } from "@/components/action-bar";
 import { ArrowLeft, CalendarDays, Calculator, Info } from "lucide-react";
 
 function formatRp(n: number): string {
@@ -9,8 +11,8 @@ function formatRp(n: number): string {
 }
 
 export default function GajiProrataPage() {
-  const [gajiRaw, setGajiRaw] = useState("");
-  const [hariKerjaRaw, setHariKerjaRaw] = useState("");
+  const [gajiRaw, setGajiRaw] = useState("5000000");
+  const [hariKerjaRaw, setHariKerjaRaw] = useState("1");
   const [totalHariRaw, setTotalHariRaw] = useState("22");
   const [calculated, setCalculated] = useState(false);
   const [result, setResult] = useState({ gaji: 0, hariKerja: 0, totalHari: 22, prorata: 0, perHari: 0 });
@@ -108,8 +110,8 @@ export default function GajiProrataPage() {
           </div>
         </div>
 
-        {calculated && result.gaji > 0 && (
-          <div className="space-y-6 mb-8">
+        {calculated && (
+          <div id="hasil-perhitungan" className="space-y-6 mb-8">
             <div className="bg-primary rounded-xl p-6 text-center">
               <p className="text-white/80 text-sm font-medium mb-1">Gaji Prorata</p>
               <p className="text-3xl md:text-4xl font-bold text-white">{formatRp(result.prorata)}</p>
@@ -138,6 +140,29 @@ export default function GajiProrataPage() {
             <p>Metode umum: gaji bulanan ÷ total hari kerja bulan tersebut × hari kerja aktual. Kebijakan perusahaan bisa berbeda, misalnya pakai hari kalender atau 30 hari tetap.</p>
           </div>
         </div>
+
+        {/* AI Insight */}
+        {calculated && (
+          <div className="mb-8">
+            <AiInsightBox
+              title="AI Prorata Advisor"
+              description="Minta AI analisis gaji prorata dan saran."
+              placeholder="Contoh: gaji prorata saya adil gak?"
+              buttonLabel="Analisis Prorata dengan AI"
+              context={`Data prorata user:\nGaji bulanan: ${formatRp(result.gaji)}\nGaji/hari: ${formatRp(result.perHari)}\nHari kerja: ${result.hariKerja} dari ${result.totalHari}\nGaji prorata: ${formatRp(result.prorata)}`}
+              system="Kamu adalah asisten edukasi gaji Indonesia. Jelaskan perhitungan gaji prorata, kapan berlaku, dan saran praktis."
+            />
+          </div>
+        )}
+
+        <ActionBar
+          tool="gaji-prorata"
+          toolName="Kalkulator Gaji Prorata"
+          shareItems={[["Gaji Bulanan", formatRp(result.gaji)], ["Gaji Prorata", formatRp(result.prorata)]]}
+          resultElementId="hasil-perhitungan"
+          filename="gaji-prorata.pdf"
+          show={calculated}
+        />
 
         <section className="border-t border-border pt-8">
           <h2 className="text-xl font-bold text-ink mb-4">Kapan Gaji Prorata Dipakai?</h2>

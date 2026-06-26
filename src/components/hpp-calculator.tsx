@@ -1,5 +1,7 @@
 'use client';
 
+import AiInsightBox from "./ai-insight-box";
+import { ActionBar } from "./action-bar";
 import { useState } from "react";
 import {
   Calculator,
@@ -230,8 +232,8 @@ export default function HppCalculator() {
       </div>
 
       {/* Results */}
-      {calculated && result.totalBiaya > 0 && (
-        <div className="space-y-6">
+      {calculated && (
+        <div id="hasil-perhitungan" className="space-y-6">
           {/* Cost breakdown cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {costBreakdown.map((c) => {
@@ -356,6 +358,29 @@ export default function HppCalculator() {
           </div>
         </div>
       )}
+
+      {/* AI Insight */}
+      {calculated && (
+        <div className="mt-4">
+          <AiInsightBox
+            title="AI HPP Advisor"
+            description="Minta AI analisis HPP, saran optimasi biaya, dan strategi pricing."
+            placeholder="Contoh: HPP saya terlalu tinggi, gimana cara turunin?"
+            buttonLabel="Analisis HPP dengan AI"
+            context={`Data HPP user:\nBahan baku: ${bahanBakuRaw}\nTenaga kerja: ${tenagaKerjaRaw}\nOverhead: ${overheadRaw}\nJumlah: ${jumlahProduk} pcs\nMargin: ${margin}%\nHPP/pcs: ${formatRp(result.hppPerUnit)}\nHarga jual: ${formatRp(result.hargaJual)}`}
+            system="Kamu adalah advisor bisnis UMKM Indonesia. Jelaskan HPP, saran optimasi biaya, dan strategi harga jual yang kompetitif."
+          />
+        </div>
+      )}
+
+      <ActionBar
+        tool="umkm-hpp"
+        toolName="Kalkulator HPP"
+        shareItems={[["HPP/pcs", formatRp(result.hppPerUnit)], ["Harga Jual", formatRp(result.hargaJual)], ["Margin", `${margin}%`]]}
+        resultElementId="hasil-perhitungan"
+        filename="umkm-hpp.pdf"
+        show={calculated}
+      />
     </div>
   );
 }

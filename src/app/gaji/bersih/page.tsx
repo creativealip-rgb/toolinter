@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import BlogLink from "@/components/blog-link";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -13,6 +14,7 @@ import {
   Calculator,
 } from "lucide-react";
 import AiInsightBox from "@/components/ai-insight-box";
+import { ActionBar, UmrDropdown } from "@/components/action-bar";
 
 // --- Tax & contribution constants ---
 
@@ -62,7 +64,7 @@ function calcPPh21(kpkPerYear: number): number {
 // --- Component ---
 
 export default function GajiBersihPage() {
-  const [gajiRaw, setGajiRaw] = useState("");
+  const [gajiRaw, setGajiRaw] = useState("10000000");
   const [tunjanganRaw, setTunjanganRaw] = useState("");
   const [ptkpIdx, setPtkpIdx] = useState(0);
   const [calculated, setCalculated] = useState(false);
@@ -180,7 +182,10 @@ export default function GajiBersihPage() {
             {/* Gaji bulanan */}
             <div>
               <label className="block text-sm font-medium text-ink mb-1.5">
-                Gaji Kotor / Bulan
+                <span className="flex items-center justify-between w-full">
+                  Gaji Kotor / Bulan
+                  <UmrDropdown onSelect={(_, amount) => setGajiRaw(String(amount))} />
+                </span>
               </label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted text-sm">
@@ -261,8 +266,8 @@ export default function GajiBersihPage() {
         </div>
 
         {/* Results */}
-        {calculated && result.gajiKotor > 0 && (
-          <div className="space-y-6">
+        {calculated && (
+          <div id="hasil-perhitungan" className="space-y-6">
             {/* Summary row */}
             <div className="bg-canvas border border-border rounded-xl p-6">
               <h2 className="text-lg font-semibold text-ink mb-4">
@@ -340,7 +345,7 @@ export default function GajiBersihPage() {
           </div>
         )}
 
-        {calculated && result.gajiKotor > 0 && (
+        {calculated && (
           <div className="mt-6">
             <AiInsightBox
               title="AI Gaji Explainer"
@@ -352,6 +357,16 @@ export default function GajiBersihPage() {
             />
           </div>
         )}
+
+        <BlogLink toolPath="/gaji/bersih" />
+            <ActionBar
+          tool="gaji-bersih"
+          toolName="Kalkulator Gaji Bersih"
+          shareItems={[["Gaji Kotor", formatRp(result.gajiKotor)], ["Total Potongan", formatRp(result.totalPotongan)], ["Take Home Pay", formatRp(result.gajiBersih)]]}
+          resultElementId="hasil-perhitungan"
+          filename="gaji-bersih.pdf"
+          show={calculated}
+        />
 
         {/* Info tooltip */}
         {calculated && (

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Download, ArrowLeft } from "lucide-react";
+import AiInsightBox from "@/components/ai-insight-box";
 import { jsPDF } from "jspdf";
 import Link from "next/link";
 
@@ -182,6 +183,17 @@ export default function CvAdminPage() {
           receptionist, staff administrasi, admin support.
         </p>
       </section>
+
+        <div className="mt-8">
+          <AiInsightBox
+            title="AI CV Admin/Staff Administrasi Analyst"
+            description="Minta AI review {'CV Admin/Staff Administrasi'} Anda dan beri saran perbaikan."
+            placeholder="Contoh: review CV saya untuk posisi staff admin..."
+            buttonLabel="Analisis dengan AI"
+            context="User sedang buat CV Admin/Staff Administrasi. Beri saran perbaikan: kekuatan, kelemahan, keyword ATS, dan tips lolos screening."
+            system="Anda adalah HRD profesional. Analisis dokumen user dan beri feedback konkret, actionable, dalam bahasa Indonesia."
+          />
+        </div>
     </main>
   );
 }

@@ -8,6 +8,7 @@ import {
   ArrowRight,
   DollarSign,
   UtensilsCrossed,
+  Sparkles,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ const tools = [
     color: "text-primary",
     bg: "bg-primary/10",
     ready: true,
+    ai: true,
   },
   {
     title: "Kalkulator Harga Jual",
@@ -36,6 +38,7 @@ const tools = [
     color: "text-primary",
     bg: "bg-primary/10",
     ready: true,
+    ai: true,
   },
   {
     title: "Kalkulator Food Cost",
@@ -46,6 +49,7 @@ const tools = [
     color: "text-warning",
     bg: "bg-warning/10",
     ready: true,
+    ai: true,
   },
   {
     title: "Generator Invoice",
@@ -56,6 +60,7 @@ const tools = [
     color: "text-warning",
     bg: "bg-warning/10",
     ready: true,
+    ai: true,
   },
   {
     title: "Kalkulator Margin Marketplace",
@@ -66,6 +71,7 @@ const tools = [
     color: "text-success",
     bg: "bg-success/10",
     ready: true,
+    ai: true,
   },
   {
     title: "Catatan Keuangan Sederhana",
@@ -76,6 +82,7 @@ const tools = [
     color: "text-primary",
     bg: "bg-primary/10",
     ready: true,
+    ai: true,
   },
 ];
 
@@ -115,6 +122,11 @@ export default function UmkmPage() {
                     <h2 className="text-lg font-semibold text-ink">
                       {tool.title}
                     </h2>
+                    {tool.ai && (
+                      <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary flex items-center gap-1 w-fit mb-2">
+                        <Sparkles className="w-3 h-3" /> AI
+                      </span>
+                    )}
                     {!tool.ready && (
                       <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-surface text-ink-muted">
                         Segera
@@ -137,14 +149,14 @@ export default function UmkmPage() {
               <Link
                 key={tool.href}
                 href={tool.href}
-                className="block rounded-xl border border-border bg-canvas p-6 transition-all hover:shadow-lg hover:border-primary/30 cursor-pointer"
+                className="group block rounded-xl border border-gray-200 bg-white p-5 transition-all duration-200 hover:border-blue-400 hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
               >
                 {content}
               </Link>
             ) : (
               <div
                 key={tool.href}
-                className="rounded-xl border border-border bg-canvas p-6 transition-all opacity-70 cursor-default"
+                className="rounded-xl border border-gray-200 bg-white p-5 transition-all opacity-50 cursor-default"
               >
                 {content}
               </div>

@@ -12,7 +12,8 @@ import {
   Clock,
   TrendingUp,
 } from 'lucide-react';
-import AiInsightBox from '@/components/ai-insight-box';
+import AiInsightBox from "@/components/ai-insight-box";
+import { ActionBar } from "@/components/action-bar";
 
 function formatRp(n: number): string {
   return 'Rp ' + Math.round(n).toLocaleString('id-ID');
@@ -75,12 +76,12 @@ function bandingkanTenor(
 }
 
 export default function PinjolPage() {
-  const [pinjamanRaw, setPinjamanRaw] = useState('');
+  const [pinjamanRaw, setPinjamanRaw] = useState('5000000');
   const [tenor, setTenor] = useState('30');
   const [bungaPerHari, setBungaPerHari] = useState('0.3');
-  const [biayaAdminRaw, setBiayaAdminRaw] = useState('');
+  const [biayaAdminRaw, setBiayaAdminRaw] = useState('50000');
   const [adminMode, setAdminMode] = useState<'rp' | 'pct'>('rp');
-  const [dendaPerHariRaw, setDendaPerHariRaw] = useState('');
+  const [dendaPerHariRaw, setDendaPerHariRaw] = useState('0');
 
   const [calculated, setCalculated] = useState(false);
   const [result, setResult] = useState<PinjolResult | null>(null);
@@ -315,7 +316,7 @@ export default function PinjolPage() {
 
         {/* Results */}
         {calculated && result && (
-          <div className="space-y-6">
+          <div id="hasil-perhitungan" className="space-y-6">
             {/* High rate warning */}
             {isHighRate && (
               <div className="bg-error/10 border border-error/30 rounded-xl p-4 flex items-start gap-3">
@@ -496,10 +497,19 @@ export default function PinjolPage() {
           </p>
         </div>
 
+        <ActionBar
+          tool="keuangan-pinjol"
+          toolName="Kalkulator Pinjol OJK"
+          shareItems={[["Pinjaman", formatRp(pinjaman)], ["Total Bayar", formatRp(result?.totalBayar ?? 0)], ["Bunga/Hari", `${bungaPerHari}%`]]}
+          resultElementId="hasil-perhitungan"
+          filename="pinjol.pdf"
+          show={calculated}
+        />
+
         {/* SEO content */}
         <section className="mt-12 border-t border-border pt-8">
           <h2 className="text-xl font-bold text-ink mb-4">
-            Tentang Kalkulator Pinjol OJK
+            Tentang Validasi NPWP & NIK
           </h2>
           <div className="space-y-4 text-sm text-ink-tertiary leading-relaxed">
             <p>

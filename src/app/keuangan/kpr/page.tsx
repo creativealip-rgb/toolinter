@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import BlogLink from "@/components/blog-link";
 import Link from 'next/link';
 import {
   ArrowLeft,
@@ -9,7 +10,8 @@ import {
   Info,
   ChevronDown,
 } from 'lucide-react';
-import AiInsightBox from '@/components/ai-insight-box';
+import AiInsightBox from "@/components/ai-insight-box";
+import { ActionBar, CompareWrapper } from "@/components/action-bar";
 import { Metadata } from 'next';
 
 // metadata exported from layout or parent, but we add via head for client
@@ -28,15 +30,17 @@ interface AmortRow {
 }
 
 export default function KprPage() {
-  const [hargaRaw, setHargaRaw] = useState('');
+  const [hargaRaw, setHargaRaw] = useState('500000000');
   const [dpPct, setDpPct] = useState('20');
   const [tenor, setTenor] = useState('20');
   const [bunga, setBunga] = useState('8.5');
   const [bungaType, setBungaType] = useState<'fixed' | 'floating'>('fixed');
-  const [notarisRaw, setNotarisRaw] = useState('');
+  const [notarisRaw, setNotarisRaw] = useState('0');
   const [useCustomNotaris, setUseCustomNotaris] = useState(false);
 
   const [calculated, setCalculated] = useState(false);
+  const [compareMode, setCompareMode] = useState(false);
+  const [bunga2, setBunga2] = useState('7.5');
   const [result, setResult] = useState({
     pinjaman: 0,
     cicilan: 0,
@@ -290,12 +294,35 @@ export default function KprPage() {
               <Calculator className="w-4 h-4" />
               Hitung Cicilan KPR
             </button>
+
+            <button
+              type="button"
+              onClick={() => setCompareMode(!compareMode)}
+              className="w-full rounded-lg border border-primary/30 bg-primary/5 px-6 py-3 text-sm font-semibold text-primary hover:bg-primary/10 transition-colors"
+            >
+              {compareMode ? '✕ Tutup' : '🔀 Bandingkan Bank'}
+            </button>
+
+            {compareMode && (
+              <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
+                <label className="block text-sm font-medium text-ink mb-2">
+                  Bunga Bank Lain (%)
+                </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={bunga2}
+                  onChange={(e) => setBunga2(e.target.value)}
+                  className="w-full rounded-lg border border-border bg-canvas px-4 py-3 text-ink focus:border-primary focus:outline-none"
+                />
+              </div>
+            )}
           </div>
         </div>
 
         {/* Results */}
-        {calculated && result.pinjaman > 0 && (
-          <div className="space-y-6">
+        {calculated && (
+          <div id="hasil-perhitungan" className="space-y-6">
             {/* Summary cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-surface rounded-xl border border-border p-6 text-center">
@@ -369,7 +396,7 @@ export default function KprPage() {
         )}
 
         {/* AI Insight */}
-        {calculated && result.pinjaman > 0 && (
+        {calculated && (
           <div className="mt-6">
             <AiInsightBox
               title="AI KPR Advisor"
@@ -399,6 +426,58 @@ export default function KprPage() {
           </div>
         )}
 
+        <BlogLink toolPath="/keuangan/kpr" />
+            <ActionBar
+          tool="keuangan-kpr"
+          toolName="Kalkulator KPR"
+          shareItems={[["Cicilan/Bulan", formatRp(result.cicilan)], ["Total Bunga", formatRp(result.totalBunga)], ["Total Bayar", formatRp(result.totalBayar)]]}
+          resultElementId="hasil-perhitungan"
+          filename="kpr.pdf"
+          show={calculated}
+        />
+
+        {compareMode && calculated && (() => {
+          const harga2 = parseInt(hargaRaw.replace(/\D/g, ""), 10) || 0;
+          const dp2 = harga2 * (parseFloat(dpPct) || 0) / 100;
+          const pinjaman2 = harga2 - dp2;
+          const tenorYears2 = parseInt(tenor) || 0;
+          const n2 = tenorYears2 * 12;
+          const r2 = (parseFloat(bunga2) || 0) / 100 / 12;
+          const pow2 = Math.pow(1 + r2, n2);
+          const cicilan2 = pinjaman2 > 0 && n2 > 0 && r2 > 0 ? pinjaman2 * (r2 * pow2) / (pow2 - 1) : 0;
+          const totalBayar2 = cicilan2 * n2;
+          const totalBunga2 = totalBayar2 - pinjaman2;
+          const bedaCicilan = result.cicilan - cicilan2;
+          const bedaBunga = result.totalBunga - totalBunga2;
+
+          return (
+            <div className="mt-6 rounded-xl border-2 border-primary/20 bg-primary/5 p-6">
+              <h3 className="text-lg font-bold text-ink mb-4 text-center">🔀 Perbandingan Bank</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="rounded-lg bg-white border border-blue-200 p-4 text-center">
+                  <p className="text-sm font-bold text-blue-700 mb-2">Bank A — Bunga {bunga}%</p>
+                  <p className="text-xs text-ink-tertiary mb-1">Cicilan/bulan</p>
+                  <p className="text-xl font-bold text-ink">{formatRp(result.cicilan)}</p>
+                  <p className="text-xs text-ink-tertiary mt-2">Total bunga</p>
+                  <p className="text-sm font-semibold text-error">{formatRp(result.totalBunga)}</p>
+                </div>
+                <div className="rounded-lg bg-white border border-emerald-200 p-4 text-center">
+                  <p className="text-sm font-bold text-emerald-700 mb-2">Bank B — Bunga {bunga2}%</p>
+                  <p className="text-xs text-ink-tertiary mb-1">Cicilan/bulan</p>
+                  <p className="text-xl font-bold text-ink">{formatRp(cicilan2)}</p>
+                  <p className="text-xs text-ink-tertiary mt-2">Total bunga</p>
+                  <p className="text-sm font-semibold text-error">{formatRp(totalBunga2)}</p>
+                </div>
+              </div>
+              {bedaCicilan !== 0 && (
+                <p className="mt-4 text-center text-sm font-semibold text-ink">
+                  {bedaCicilan > 0 ? "🏆 Bank B lebih hemat" : "🏆 Bank A lebih hemat"} {formatRp(Math.abs(bedaCicilan))}/bulan — Total hemat {formatRp(Math.abs(bedaBunga))}
+                </p>
+              )}
+            </div>
+          );
+        })()}
+
         {/* SEO content */}
         <section className="mt-12 border-t border-border pt-8">
           <h2 className="text-xl font-bold text-ink mb-4">
@@ -420,25 +499,6 @@ export default function KprPage() {
               adalah <strong className="text-ink">10-20%</strong> dari harga
               properti, tergantung jenis properti dan kebijakan bank. Beberapa
               bank menawarkan promo DP rendah bahkan 0% untuk properti tertentu.
-            </p>
-            <h3 className="text-base font-semibold text-ink mt-6">
-              Apa bedanya bunga fixed dan floating?
-            </h3>
-            <p>
-              <strong className="text-ink">Bunga fixed</strong> tetap sama selama
-              periode tertentu (biasanya 1-5 tahun pertama), sementara{' '}
-              <strong className="text-ink">bunga floating</strong> mengikuti
-              suku bunga acuan BI dan bisa berubah setiap saat. Umumnya bank
-              menawarkan bunga fixed di awal lalu beralih ke floating.
-            </p>
-            <h3 className="text-base font-semibold text-ink mt-6">
-              Bagaimana cara kurangi total bunga KPR?
-            </h3>
-            <p>
-              Beberapa strategi: bayar DP lebih besar, pilih tenor lebih pendek,
-              lakukan pelunasan dipercepat (top-up pokok) saat ada dana lebih,
-              atau negosiasikan bunga floating ke bank. Setiap kali suku bunga BI
-              turun, ajukan peninjauan ulang bunga KPR Anda.
             </p>
           </div>
         </section>

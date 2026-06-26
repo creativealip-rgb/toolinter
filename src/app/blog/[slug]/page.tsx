@@ -6,6 +6,7 @@ import { blogPosts } from "@/data/blog";
 import { ArrowLeft, Clock, Calendar, Tag, User } from "lucide-react";
 import AiInsightBox from "@/components/ai-insight-box";
 import JsonLd from "@/components/json-ld";
+import ViewCounter from "@/components/view-counter";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -42,6 +43,9 @@ export default async function BlogPostPage({ params }: PageProps) {
   const post = allPosts.find((p) => p.slug === slug);
 
   if (!post || post.status !== "published") notFound();
+
+  const today = new Date().toISOString().split("T")[0];
+  if (post.date > today) notFound();
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -89,6 +93,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <Clock className="h-3 w-3" />
             {post.readTime}
           </span>
+          <ViewCounter slug={post.slug} initialViews={post.views || 0} />
           <span className="inline-flex items-center gap-1 text-xs text-ink-muted">
             <User className="h-3 w-3" />
             {post.author}
@@ -189,27 +194,40 @@ export default async function BlogPostPage({ params }: PageProps) {
           </Link>
         </div>
 
-        {/* Related posts */}
+        {/* Baca Juga — Related posts */}
         <div className="mt-12 border-t border-border pt-8">
           <h3 className="mb-4 text-lg font-semibold text-ink">
-            Artikel Lainnya
+            📖 Baca Juga
           </h3>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {allPosts
-              .filter((p) => p.slug !== slug && p.status === "published")
-              .slice(0, 2)
-              .map((related) => (
+          <div className="grid gap-4 sm:grid-cols-3">
+            {(() => {
+              const sameCategory = allPosts.filter(
+                (p) => p.slug !== slug && p.status === "published" && p.category === post.category
+              );
+              const others = allPosts.filter(
+                (p) => p.slug !== slug && p.status === "published" && p.category !== post.category
+              );
+              const related = [...sameCategory, ...others].slice(0, 3);
+              return related.map((r) => (
                 <Link
-                  key={related.slug}
-                  href={`/blog/${related.slug}`}
-                  className="group rounded-lg border border-border bg-surface p-4 transition hover:border-primary"
+                  key={r.slug}
+                  href={`/blog/${r.slug}`}
+                  className="group overflow-hidden rounded-lg border border-border bg-surface transition hover:border-primary hover:shadow-sm"
                 >
-                  <span className="text-xs text-primary">{related.category}</span>
-                  <p className="mt-1 text-sm font-medium text-ink group-hover:text-primary">
-                    {related.title}
-                  </p>
+                  {r.featuredImage ? (
+                    <img src={r.featuredImage} alt={r.title} className="h-28 w-full object-cover" />
+                  ) : (
+                    <div className="flex h-28 items-center justify-center bg-gray-100 text-2xl text-gray-300">📄</div>
+                  )}
+                  <div className="p-3">
+                    <span className="text-xs text-primary">{r.category}</span>
+                    <p className="mt-1 text-sm font-medium text-ink group-hover:text-primary line-clamp-2">
+                      {r.title}
+                    </p>
+                  </div>
                 </Link>
-              ))}
+              ));
+            })()}
           </div>
         </div>
       </article>

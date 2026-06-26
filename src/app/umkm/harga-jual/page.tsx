@@ -1,13 +1,17 @@
-import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, DollarSign } from "lucide-react";
 import HargaJualCalculator from "@/components/harga-jual-calculator";
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Kalkulator Harga Jual Online — Toolinter",
-  description:
-    "Hitung harga jual produk UMKM Anda secara gratis. Masukkan HPP, target margin, biaya operasional, dan diskon marketplace untuk mendapatkan harga jual yang optimal.",
-};
+export const metadata = generateToolMetadata({
+  title: "Kalkulator Harga Jual",
+  description: "Tentukan harga jual produk berdasarkan HPP dan margin keuntungan.",
+  path: "/umkm/harga-jual",
+});
+
+
+
+
 
 export default function HargaJualPage() {
   return (

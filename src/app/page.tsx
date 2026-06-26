@@ -1,7 +1,6 @@
 import { FileText, Image, Calculator, FileDown, Briefcase, Wrench, Zap, Shield, Download, Users, TrendingUp, Star, GraduationCap, Clock, CreditCard, Calendar } from "lucide-react";
 import { Search } from "lucide-react";
 import HeroSearch from "@/components/hero-search";
-import ThemeToggle from "@/components/theme-toggle";
 import { blogPosts } from "@/data/blog";
 import JsonLd from "@/components/json-ld";
 
@@ -116,31 +115,6 @@ const faq = [
 
 // ─── Components ───
 
-function Header() {
-  return (
-    <header className="sticky top-0 z-50 bg-canvas border-b border-border">
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="/" className="text-xl font-bold text-ink-deep">
-          Tool<span className="text-primary">inter</span>
-        </a>
-        <nav className="hidden md:flex items-center gap-8">
-          {categories.slice(0, 4).map((cat) => (
-            <a key={cat.href} href={cat.href} className="text-sm font-medium text-ink-tertiary hover:text-primary transition-colors">
-              {cat.title.split(" & ")[0]}
-            </a>
-          ))}
-        </nav>
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <a href="/tools" className="text-sm font-semibold text-primary hover:text-primary-hover transition-colors">
-            Semua Tool →
-          </a>
-        </div>
-      </div>
-    </header>
-  );
-}
-
 function HeroSection() {
   return (
     <section className="py-20 px-6 text-center">
@@ -184,7 +158,7 @@ function CategoryGrid() {
             <a
               key={cat.href}
               href={cat.href}
-              className="group block p-6 bg-canvas border border-border rounded-xl hover:shadow-lg hover:border-primary/20 transition-all"
+              className="group block p-5 bg-white border border-gray-200 rounded-xl hover:shadow-lg hover:border-blue-400 hover:-translate-y-0.5 transition-all duration-200"
             >
               <div className={`w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4`}>
                 <cat.icon className="w-6 h-6 text-primary" />
@@ -215,7 +189,7 @@ function PopularTools() {
             <a
               key={tool.href}
               href={tool.href}
-              className="group flex items-start gap-4 p-4 bg-canvas border border-border rounded-lg hover:shadow-md hover:border-primary/20 transition-all"
+              className="group flex items-start gap-4 p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md hover:border-blue-400 transition-all duration-200"
             >
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <tool.icon className="w-5 h-5 text-primary" />
@@ -298,7 +272,7 @@ function BlogPreview() {
             <a
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group block p-6 bg-canvas border border-border rounded-xl hover:shadow-lg hover:border-primary/20 transition-all"
+              className="group block p-5 bg-white border border-gray-200 rounded-xl hover:shadow-lg hover:border-blue-400 hover:-translate-y-0.5 transition-all duration-200"
             >
               <span className="inline-block text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
                 {post.category}
@@ -372,51 +346,6 @@ function FAQSection() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="mt-auto border-t border-border bg-ink-deep text-on-dark">
-      <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
-          <div>
-            <h3 className="font-bold text-lg mb-4">Toolinter</h3>
-            <p className="text-sm text-on-dark/70 leading-relaxed">
-              Kumpulan tool online gratis untuk kebutuhan sehari-hari. Cepat, ringan, dan bisa langsung download hasil.
-            </p>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-4">Kategori</h4>
-            <ul className="space-y-2 text-sm text-on-dark/70">
-              {categories.slice(0, 4).map((cat) => (
-                <li key={cat.href}><a href={cat.href} className="hover:text-white transition-colors">{cat.title}</a></li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-4">Populer</h4>
-            <ul className="space-y-2 text-sm text-on-dark/70">
-              {popularTools.slice(0, 4).map((tool) => (
-                <li key={tool.href}><a href={tool.href} className="hover:text-white transition-colors">{tool.title}</a></li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-4">Perusahaan</h4>
-            <ul className="space-y-2 text-sm text-on-dark/70">
-              <li><a href="/about" className="hover:text-white transition-colors">Tentang Kami</a></li>
-              <li><a href="/contact" className="hover:text-white transition-colors">Hubungi Kami</a></li>
-              <li><a href="/privacy" className="hover:text-white transition-colors">Kebijakan Privasi</a></li>
-              <li><a href="/terms" className="hover:text-white transition-colors">Syarat & Ketentuan</a></li>
-            </ul>
-          </div>
-        </div>
-        <div className="pt-8 border-t border-on-dark/10 text-center text-sm text-on-dark/50">
-          <p>© {new Date().getFullYear()} Toolinter. Semua hak dilindungi.</p>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 // ─── Page ───
 
 export default function HomePage() {
@@ -451,7 +380,6 @@ export default function HomePage() {
     <>
       <JsonLd data={websiteSchema} />
       <JsonLd data={faqSchema} />
-      <Header />
       <main>
         <HeroSection />
         <TrustBadges />
@@ -463,7 +391,6 @@ export default function HomePage() {
         <WhyUsSection />
         <FAQSection />
       </main>
-      <Footer />
     </>
   );
 }

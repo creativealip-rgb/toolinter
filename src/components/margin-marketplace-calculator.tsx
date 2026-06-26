@@ -1,5 +1,7 @@
 'use client';
 
+import AiInsightBox from "./ai-insight-box";
+import { ActionBar } from "./action-bar";
 import { useState } from "react";
 import { TrendingUp, Info, ChevronDown } from "lucide-react";
 
@@ -15,8 +17,8 @@ const platforms = [
 ];
 
 export default function MarginMarketplaceCalculator() {
-  const [hargaProdukRaw, setHargaProdukRaw] = useState("");
-  const [biayaProdukRaw, setBiayaProdukRaw] = useState("");
+  const [hargaProdukRaw, setHargaProdukRaw] = useState("100000");
+  const [biayaProdukRaw, setBiayaProdukRaw] = useState("50000");
   const [platformIdx, setPlatformIdx] = useState(0);
   const [customFeeRaw, setCustomFeeRaw] = useState("");
   const [calculated, setCalculated] = useState(false);
@@ -150,7 +152,7 @@ export default function MarginMarketplaceCalculator() {
 
       {/* Results */}
       {calculated && (
-        <div className="rounded-xl border border-border bg-canvas p-6 space-y-4">
+        <div id="hasil-perhitungan" className="rounded-xl border border-border bg-canvas p-6 space-y-4">
           <h2 className="text-lg font-semibold text-ink">Hasil Perhitungan</h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -209,6 +211,29 @@ export default function MarginMarketplaceCalculator() {
           termasuk dalam kalkulasi ini.
         </span>
       </div>
+
+      {/* AI Insight */}
+      {calculated && (
+        <div className="mt-4">
+          <AiInsightBox
+            title="AI Marketplace Advisor"
+            description="Minta AI analisis margin, saran pricing, dan strategi marketplace."
+            placeholder="Contoh: margin segini udah bagus belum buat jualan di Shopee?"
+            buttonLabel="Analisis Margin dengan AI"
+            context={`Data margin marketplace:\nHarga produk: ${hargaProdukRaw}\nBiaya produk: ${biayaProdukRaw}\nHarga jual: ${result.hargaJual}\nPotongan platform: ${result.potonganPlatform}\nMargin bersih: ${result.margin}%`}
+            system="Kamu adalah advisor e-commerce Indonesia. Analisis margin marketplace, saran pricing, dan strategi jualan di Shopee/Tokopedia/Lazada."
+          />
+        </div>
+      )}
+
+      <ActionBar
+        tool="umkm-margin"
+        toolName="Kalkulator Margin Marketplace"
+        shareItems={[["Harga Jual", formatRp(result.hargaJual)], ["Keuntungan", formatRp(result.keuntungan)], ["Margin", `${result.margin.toFixed(1)}%`]]}
+        resultElementId="hasil-perhitungan"
+        filename="umkm-margin.pdf"
+        show={calculated}
+      />
     </div>
   );
 }

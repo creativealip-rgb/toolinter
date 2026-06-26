@@ -25,7 +25,7 @@ export default function PendidikanPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
           <Link
             href="/pendidikan/kalender"
-            className="group bg-canvas rounded-xl border border-border p-6 hover:shadow-lg hover:border-primary/20 transition-all"
+            className="group relative flex flex-col rounded-xl border border-gray-200 bg-white p-5 transition-all duration-200 hover:border-blue-400 hover:shadow-lg hover:-translate-y-0.5"
           >
             <Calendar className="w-8 h-8 text-primary mb-3" />
             <h2 className="font-semibold text-ink text-lg mb-2 group-hover:text-primary transition-colors">

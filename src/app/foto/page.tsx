@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Camera, ArrowRight, Shrink } from "lucide-react";
+import { Camera, ArrowRight, Shrink,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Foto Dokumen Online — Toolinter",
@@ -67,7 +68,7 @@ export default function FotoPage() {
           {fotoTools.map((tool) => (
             <div
               key={tool.slug}
-              className="bg-canvas rounded-xl border border-border p-6 flex flex-col"
+              className="group relative flex flex-col rounded-xl border border-gray-200 bg-white p-5 transition-all duration-200 hover:border-blue-400 hover:shadow-lg hover:-translate-y-0.5"
             >
               {tool.icon === "shrink" ? (
                 <Shrink className="w-8 h-8 text-primary mb-3" />

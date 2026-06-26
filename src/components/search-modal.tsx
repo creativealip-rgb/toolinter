@@ -34,6 +34,7 @@ const searchIndex: SearchItem[] = [
   { title: 'Surat Tagihan', description: 'Generator surat tagihan pembayaran', href: '/surat/tagihan', category: 'Surat' },
   { title: 'Surat Kesanggupan', description: 'Template surat kesanggupan dan pernyataan', href: '/surat/kesanggupan', category: 'Surat' },
   { title: 'Surat Permohonan', description: 'Buat surat permohonan berbagai keperluan', href: '/surat/permohonan', category: 'Surat' },
+  { title: 'Generator Surat Dinas', description: 'Buat surat dinas resmi untuk instansi pemerintah', href: '/surat/dinas', category: 'Surat' },
 
   // Foto (7)
   { title: 'Resize Foto 3x4', description: 'Ubah ukuran pas foto 3x4 untuk dokumen', href: '/foto/resize-3x4', category: 'Foto' },
@@ -51,6 +52,7 @@ const searchIndex: SearchItem[] = [
   { title: 'Kalkulator BPJS', description: 'Hitung iuran BPJS Kesehatan dan Ketenagakerjaan', href: '/gaji/bpjs', category: 'Gaji' },
   { title: 'Kalkulator Lembur', description: 'Hitung upah lembur sesuai peraturan', href: '/gaji/lembur', category: 'Gaji' },
   { title: 'Kalkulator Prorata', description: 'Hitung gaji prorata untuk hari kerja', href: '/gaji/prorata', category: 'Gaji' },
+  { title: 'Info UMR 2025', description: 'Daftar UMR 34 kota Indonesia dan bandingkan', href: '/gaji/umr', category: 'Gaji' },
 
   // PDF (6)
   { title: 'Gabung PDF', description: 'Gabungkan beberapa file PDF jadi satu', href: '/pdf/gabung', category: 'PDF' },
@@ -67,6 +69,7 @@ const searchIndex: SearchItem[] = [
   { title: 'CV BUMN', description: 'Template CV untuk lamaran BUMN', href: '/cv/cv-bumn', category: 'CV' },
   { title: 'Contoh Surat Lamaran', description: 'Contoh surat lamaran kerja yang menarik HR', href: '/cv/contoh-surat-lamaran', category: 'CV' },
   { title: 'Cover Letter', description: 'Generator cover letter profesional', href: '/cv/cover-letter', category: 'CV' },
+  { title: 'Generator CV AI', description: 'Buat CV profesional dengan bantuan AI', href: '/cv/generator', category: 'CV' },
 
   // UMKM (6)
   { title: 'Kalkulator HPP', description: 'Hitung harga pokok penjualan produk UMKM', href: '/umkm/hpp', category: 'UMKM' },
@@ -80,6 +83,7 @@ const searchIndex: SearchItem[] = [
   { title: 'Kalkulator KPR', description: 'Hitung cicilan KPR rumah per bulan', href: '/keuangan/kpr', category: 'Keuangan' },
   { title: 'Cek NPWP', description: 'Panduan cek dan daftar NPWP online', href: '/keuangan/cek-npwp', category: 'Keuangan' },
   { title: 'Cek Pinjol Legal', description: 'Daftar pinjaman online legal OJK', href: '/keuangan/pinjol', category: 'Keuangan' },
+  { title: 'Kalkulator Investasi', description: 'Proyeksi pertumbuhan investasi compound interest', href: '/keuangan/investasi', category: 'Keuangan' },
 
   // Blog (15)
   { title: 'Cara Membuat Surat Resign', description: 'Panduan lengkap cara membuat surat pengunduran diri yang baik', href: '/blog/cara-membuat-surat-resign', category: 'Blog' },
@@ -100,14 +104,14 @@ const searchIndex: SearchItem[] = [
 ];
 
 const categoryColors: Record<string, string> = {
-  Surat: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300',
-  Foto: 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300',
-  Gaji: 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300',
-  PDF: 'bg-teal-100 text-teal-700 dark:bg-teal-900 dark:text-teal-300',
-  CV: 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300',
-  UMKM: 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300',
-  Keuangan: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300',
-  Blog: 'bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300',
+  Surat: 'bg-blue-100 text-blue-700900300',
+  Foto: 'bg-red-100 text-red-700900300',
+  Gaji: 'bg-green-100 text-green-700900300',
+  PDF: 'bg-teal-100 text-teal-700900300',
+  CV: 'bg-purple-100 text-purple-700900300',
+  UMKM: 'bg-orange-100 text-orange-700900300',
+  Keuangan: 'bg-yellow-100 text-yellow-700900300',
+  Blog: 'bg-pink-100 text-pink-700900300',
 };
 
 const MAX_RESULTS = 8;
@@ -168,27 +172,27 @@ export default function SearchModal({ open, onClose }: { open: boolean; onClose:
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh] bg-black/50 dark:bg-black/70 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh] bg-black/5070 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-2xl mx-4 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden"
+        className="w-full max-w-2xl mx-4 bg-white800 rounded-2xl shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search input */}
-        <div className="flex items-center gap-3 px-5 py-4 border-b border-border dark:border-gray-700">
-          <Search className="w-5 h-5 text-ink-muted dark:text-gray-400 flex-shrink-0" />
+        <div className="flex items-center gap-3 px-5 py-4 border-b border-border700">
+          <Search className="w-5 h-5 text-ink-muted400 flex-shrink-0" />
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Cari tool atau panduan..."
-            className="flex-1 text-lg bg-transparent text-ink dark:text-white placeholder:text-ink-muted dark:placeholder:text-gray-400 outline-none"
+            className="flex-1 text-lg bg-transparent text-ink placeholder:text-ink-muted400 outline-none"
           />
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg hover:bg-surface dark:hover:bg-gray-700 transition-colors text-ink-muted dark:text-gray-400"
+            className="p-1.5 rounded-lg hover:bg-surface700 transition-colors text-ink-muted400"
           >
             <X className="w-5 h-5" />
           </button>
@@ -197,7 +201,7 @@ export default function SearchModal({ open, onClose }: { open: boolean; onClose:
         {/* Results */}
         <div ref={resultsRef} className="max-h-[60vh] overflow-y-auto">
           {query.trim() && results.length === 0 && (
-            <div className="px-5 py-12 text-center text-ink-muted dark:text-gray-400">
+            <div className="px-5 py-12 text-center text-ink-muted400">
               <p className="text-lg font-medium">Tidak ditemukan</p>
               <p className="text-sm mt-1">Coba kata kunci lain</p>
             </div>
@@ -209,25 +213,25 @@ export default function SearchModal({ open, onClose }: { open: boolean; onClose:
               href={item.href}
               className={`flex items-center gap-4 px-5 py-3 transition-colors ${
                 i === selectedIndex
-                  ? 'bg-primary/10 dark:bg-primary/20'
-                  : 'hover:bg-surface dark:hover:bg-gray-700'
+                  ? 'bg-primary/1020'
+                  : 'hover:bg-surface700'
               }`}
               onMouseEnter={() => setSelectedIndex(i)}
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="font-medium text-ink dark:text-white truncate">
+                  <span className="font-medium text-ink truncate">
                     {item.title}
                   </span>
                   <span
                     className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium flex-shrink-0 ${
-                      categoryColors[item.category] || 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                      categoryColors[item.category] || 'bg-gray-100 text-gray-700700300'
                     }`}
                   >
                     {item.category}
                   </span>
                 </div>
-                <p className="text-sm text-ink-tertiary dark:text-gray-400 truncate mt-0.5">
+                <p className="text-sm text-ink-tertiary400 truncate mt-0.5">
                   {item.description}
                 </p>
               </div>
@@ -237,10 +241,10 @@ export default function SearchModal({ open, onClose }: { open: boolean; onClose:
 
         {/* Footer hint */}
         {query.trim() && results.length > 0 && (
-          <div className="px-5 py-2.5 border-t border-border dark:border-gray-700 flex items-center gap-4 text-xs text-ink-muted dark:text-gray-500">
-            <span><kbd className="px-1.5 py-0.5 bg-surface dark:bg-gray-700 rounded text-xs">↑↓</kbd> navigasi</span>
-            <span><kbd className="px-1.5 py-0.5 bg-surface dark:bg-gray-700 rounded text-xs">↵</kbd> buka</span>
-            <span><kbd className="px-1.5 py-0.5 bg-surface dark:bg-gray-700 rounded text-xs">esc</kbd> tutup</span>
+          <div className="px-5 py-2.5 border-t border-border700 flex items-center gap-4 text-xs text-ink-muted500">
+            <span><kbd className="px-1.5 py-0.5 bg-surface700 rounded text-xs">↑↓</kbd> navigasi</span>
+            <span><kbd className="px-1.5 py-0.5 bg-surface700 rounded text-xs">↵</kbd> buka</span>
+            <span><kbd className="px-1.5 py-0.5 bg-surface700 rounded text-xs">esc</kbd> tutup</span>
           </div>
         )}
       </div>

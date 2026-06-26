@@ -1,13 +1,17 @@
-import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, UtensilsCrossed } from "lucide-react";
 import FoodCostCalculator from "@/components/food-cost-calculator";
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Kalkulator Food Cost F&B — Toolinter",
-  description:
-    "Hitung food cost percentage usaha F&B Anda secara gratis. Masukkan biaya bahan baku dan total penjualan untuk mengetahui apakah bisnis kuliner Anda sudah efisien.",
-};
+export const metadata = generateToolMetadata({
+  title: "Kalkulator Food Cost",
+  description: "Hitung food cost percentage untuk bisnis kuliner dan restoran.",
+  path: "/umkm/food-cost",
+});
+
+
+
+
 
 export default function FoodCostPage() {
   return (

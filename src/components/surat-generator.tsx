@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Download, Eye, FileText, Loader2, Sparkles } from "lucide-react";
+import AiInsightBox from "./ai-insight-box";
 
 interface SuratField {
   name: string;
@@ -920,6 +921,15 @@ Tuliskan surat lengkap dengan format yang benar.`;
             </div>
           )}
         </div>
+
+        <AiInsightBox
+          title="AI Surat Assistant"
+          description="Minta AI bantu perbaiki bahasa, format, atau isi surat Anda."
+          placeholder="Contoh: tolong perbaiki bahasa surat ini agar lebih formal..."
+          buttonLabel="Minta Saran AI"
+          context={slug === "pengunduran-diri" || slug === "resign" ? "User sedang buat surat pengunduran diri. Sarankan cara profesional & sopan." : slug === "lamaran-kerja" ? "User sedang buat surat lamaran kerja. Bantu personalisasi & perkuat motivasi." : `User sedang buat surat: ${title}. Beri saran perbaikan format & bahasa.`}
+          system="Anda adalah ahli administrasi & HRD. Bantu user menulis surat resmi yang profesional, sopan, dan sesuai format Indonesia."
+        />
       </div>
     </div>
   );

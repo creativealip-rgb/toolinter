@@ -1,13 +1,17 @@
-import { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft, FileText } from "lucide-react";
 import FotoKePdf from "@/components/foto-ke-pdf";
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Foto ke PDF Online — Toolinter",
-  description:
-    "Ubah foto JPG, PNG, WEBP menjadi PDF. Gratis, proses di browser, langsung download. Cocok untuk cetak dan pengiriman dokumen.",
-};
+export const metadata = generateToolMetadata({
+  title: "Foto ke PDF",
+  description: "Ubah foto/jadi PDF. Bisa gabung beberapa foto.",
+  path: "/pdf/foto-ke-pdf",
+});
+
+
+
+
 
 export default function FotoKePdfPage() {
   return (

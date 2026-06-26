@@ -1,5 +1,7 @@
 'use client';
 
+import AiInsightBox from "./ai-insight-box";
+import { ActionBar } from "./action-bar";
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, BookOpen, Info, TrendingUp, TrendingDown } from "lucide-react";
@@ -13,7 +15,7 @@ function parseNum(raw: string): number {
 }
 
 export default function CatatanKeuanganCalculator() {
-  const [saldoAwalRaw, setSaldoAwalRaw] = useState("");
+  const [saldoAwalRaw, setSaldoAwalRaw] = useState("5000000");
   const [pemasukanRaw, setPemasukanRaw] = useState("");
   const [pengeluaranRaw, setPengeluaranRaw] = useState("");
   const [calculated, setCalculated] = useState(false);
@@ -104,7 +106,7 @@ export default function CatatanKeuanganCalculator() {
 
       {/* Results */}
       {calculated && (
-        <div className="rounded-xl border border-border bg-canvas p-6 space-y-4">
+        <div id="hasil-perhitungan" className="rounded-xl border border-border bg-canvas p-6 space-y-4">
           <h2 className="text-lg font-semibold text-ink">Ringkasan</h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -171,6 +173,29 @@ export default function CatatanKeuanganCalculator() {
           atau konsultasikan dengan akuntan.
         </span>
       </div>
+
+      {/* AI Insight */}
+      {calculated && (
+        <div className="mt-4">
+          <AiInsightBox
+            title="AI Keuangan Advisor"
+            description="Minta AI ringkas kondisi keuangan dan saran penghematan."
+            placeholder="Contoh: pengeluaran saya wajar gak?"
+            buttonLabel="Analisis Keuangan dengan AI"
+            context={`Data keuangan user:\nSaldo awal: ${formatRp(result.saldoAwal)}\nPemasukan: ${formatRp(result.pemasukan)}\nPengeluaran: ${formatRp(result.pengeluaran)}\nSaldo akhir: ${formatRp(result.saldoAkhir)}\nSelisih: ${result.untung ? "untung" : "rugi"} ${formatRp(Math.abs(result.selisih))}`}
+            system="Kamu adalah advisor keuangan pribadi Indonesia. Analisis cashflow, saran penghematan, dan tips atur uang."
+          />
+        </div>
+      )}
+
+      <ActionBar
+        tool="umkm-catatan"
+        toolName="Catatan Keuangan UMKM"
+        shareItems={[["Saldo Akhir", formatRp(result.saldoAkhir)], ["Pemasukan", formatRp(result.pemasukan)], ["Pengeluaran", formatRp(result.pengeluaran)]]}
+        resultElementId="hasil-perhitungan"
+        filename="umkm-catatan.pdf"
+        show={calculated}
+      />
     </div>
   );
 }

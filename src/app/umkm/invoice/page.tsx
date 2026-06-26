@@ -1,13 +1,17 @@
-import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, FileText } from "lucide-react";
 import InvoiceGenerator from "@/components/invoice-generator";
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Generator Invoice Online — Toolinter",
-  description:
-    "Buat invoice profesional untuk UMKM Anda secara gratis. Input data usaha, pelanggan, dan daftar barang. Download sebagai PDF langsung dari browser.",
-};
+export const metadata = generateToolMetadata({
+  title: "Generator Invoice",
+  description: "Buat invoice profesional untuk UMKM. Download PDF langsung.",
+  path: "/umkm/invoice",
+});
+
+
+
+
 
 export default function InvoicePage() {
   return (

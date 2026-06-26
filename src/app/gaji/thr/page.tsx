@@ -1,6 +1,9 @@
 'use client';
 
+import AiInsightBox from "@/components/ai-insight-box";
+import { ActionBar } from "@/components/action-bar";
 import { useState } from "react";
+import BlogLink from "@/components/blog-link";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -25,9 +28,9 @@ function formatRp(n: number): string {
 }
 
 export default function THRPage() {
-  const [gajiRaw, setGajiRaw] = useState("");
+  const [gajiRaw, setGajiRaw] = useState("5000000");
   const [tenureIdx, setTenureIdx] = useState(0);
-  const [bulanKerjaRaw, setBulanKerjaRaw] = useState("");
+  const [bulanKerjaRaw, setBulanKerjaRaw] = useState("12");
   const [calculated, setCalculated] = useState(false);
 
   const [result, setResult] = useState({
@@ -171,8 +174,8 @@ export default function THRPage() {
         </div>
 
         {/* Results */}
-        {calculated && result.gaji > 0 && (
-          <div className="space-y-6">
+        {calculated && (
+          <div id="hasil-perhitungan" className="space-y-6">
             {/* THR result */}
             <div className="bg-success rounded-xl p-6 text-center">
               <p className="text-white/80 text-sm font-medium mb-1">
@@ -277,6 +280,30 @@ export default function THRPage() {
             </div>
           </div>
         )}
+
+        {/* AI Insight */}
+        {calculated && (
+          <div className="mt-6">
+            <AiInsightBox
+              title="AI THR Advisor"
+              description="Minta AI jelaskan hak THR, cara hitung, dan saran negosiasi."
+              placeholder="Contoh: THR saya kurang dari gaji 1 bulan, apa yang bisa saya lakukan?"
+              buttonLabel="Analisis THR dengan AI"
+              context={`Data THR user:\nGaji pokok: ${formatRp(result.gaji)}\nBulan kerja: ${result.bulanKerja}\nTHR: ${formatRp(result.thr)}`}
+              system="Kamu adalah asisten edukasi hak ketenagakerjaan Indonesia. Jelaskan aturan THR (PP 78/2015), hak karyawan, dan saran praktis."
+            />
+          </div>
+        )}
+
+        <BlogLink toolPath="/gaji/thr" />
+            <ActionBar
+          tool="gaji-thr"
+          toolName="Kalkulator THR"
+          shareItems={[["Gaji Pokok", formatRp(result.gaji)], ["THR", formatRp(result.thr)]]}
+          resultElementId="hasil-perhitungan"
+          filename="gaji-thr.pdf"
+          show={calculated}
+        />
 
         {/* SEO content */}
         <section className="mt-12 border-t border-border pt-8">

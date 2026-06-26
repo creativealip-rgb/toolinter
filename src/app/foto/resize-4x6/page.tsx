@@ -1,13 +1,18 @@
-import { Metadata } from "next";
+import BlogLink from "@/components/blog-link";
 import Link from "next/link";
 import { ChevronLeft, Camera } from "lucide-react";
 import FotoResizer from "@/components/foto-resizer";
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Resize Foto 4×6 Online — Toolinter",
-  description:
-    "Ubah ukuran foto ke 4×6 cm untuk SKCK, visa, paspor, SIM, dan dokumen internasional. Gratis, langsung download.",
-};
+export const metadata = generateToolMetadata({
+  title: "Resize Foto 4x6 Online",
+  description: "Ubah ukuran pas foto 4x6 untuk dokumen resmi.",
+  path: "/foto/resize-4x6",
+});
+
+
+
+
 
 export default function Resize4x6Page() {
   return (

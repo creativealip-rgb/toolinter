@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { FileText, ArrowRight } from "lucide-react";
+import { FileText, ArrowRight, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "PDF Tools Online — Toolinter",
@@ -14,34 +14,40 @@ const pdfTools = [
     title: "Gabung PDF",
     description:
       "Gabungkan beberapa file PDF menjadi satu. Upload, atur urutan, dan download hasilnya.",
+    ai: true,
   },
   {
     slug: "kompres",
     title: "Kompres PDF",
     description:
       "Kurangi ukuran file PDF tanpa mengurangi kualitas secara signifikan. Cocok untuk lampiran email.",
+    ai: true,
   },
   {
     slug: "foto-ke-pdf",
     title: "Foto ke PDF",
     description:
       "Ubah foto JPG, PNG, WEBP menjadi PDF. Setiap foto jadi satu halaman A4.",
+    ai: true,
   },
   {
     slug: "halaman",
     title: "Ambil Halaman PDF",
     description:
       "Ekstrak halaman tertentu dari file PDF. Pilih dengan rentang seperti 1-3,5,7-9.",
+    ai: true,
   },
   {
     slug: "pdf-ke-word",
     title: "PDF ke Word",
     description: "Ubah file PDF menjadi dokumen Word yang bisa diedit.",
+    ai: true,
   },
   {
     slug: "word-ke-pdf",
     title: "Word ke PDF",
     description: "Ubah dokumen Word menjadi PDF dengan formatting tetap rapi.",
+    ai: true,
   },
 ];
 
@@ -69,12 +75,17 @@ export default function PdfPage() {
           {pdfTools.map((tool) => (
             <div
               key={tool.slug}
-              className="bg-canvas rounded-xl border border-border p-6 flex flex-col"
+              className="group relative flex flex-col rounded-xl border border-gray-200 bg-white p-5 transition-all duration-200 hover:border-blue-400 hover:shadow-lg hover:-translate-y-0.5"
             >
               <FileText className="w-8 h-8 text-primary mb-3" />
               <h2 className="font-semibold text-ink text-lg mb-2">
                 {tool.title}
               </h2>
+              {tool.ai && (
+                <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary flex items-center gap-1 w-fit mb-2">
+                  <Sparkles className="w-3 h-3" /> AI
+                </span>
+              )}
               <p className="text-ink-tertiary text-sm mb-4 flex-1">
                 {tool.description}
               </p>

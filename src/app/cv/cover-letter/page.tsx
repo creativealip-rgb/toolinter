@@ -1,12 +1,11 @@
-import type { Metadata } from 'next';
+import { generateToolMetadata } from "@/lib/seo";
 import CoverLetter from '@/components/cover-letter';
 
-export const metadata: Metadata = {
-  title: 'Template Cover Letter Online — Toolinter',
-  description:
-    'Buat cover letter profesional dalam bahasa Indonesia dan Inggris. Isi formulir, preview, download PDF. Gratis, tanpa registrasi.',
-  alternates: { canonical: '/cv/cover-letter' },
-};
+export const metadata = generateToolMetadata({
+  title: "Template Cover Letter",
+  description: "Buat cover letter profesional dalam bahasa Indonesia dan Inggris.",
+  path: "/cv/cover-letter",
+});
 
 export default function CoverLetterPage() {
   return (

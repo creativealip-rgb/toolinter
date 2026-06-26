@@ -1,5 +1,7 @@
 'use client';
 
+import AiInsightBox from "@/components/ai-insight-box";
+import { ActionBar } from "@/components/action-bar";
 import { useState } from "react";
 import Link from "next/link";
 import {
@@ -69,9 +71,9 @@ function calcOvertime(
 // --- Component ---
 
 export default function LemburPage() {
-  const [gajiRaw, setGajiRaw] = useState("");
-  const [jamLembur, setJamLembur] = useState("");
-  const [hariLembur, setHariLembur] = useState("");
+  const [gajiRaw, setGajiRaw] = useState("5000000");
+  const [jamLembur, setJamLembur] = useState("1");
+  const [hariLembur, setHariLembur] = useState("1");
   const [jenisHari, setJenisHari] = useState("weekday");
   const [calculated, setCalculated] = useState(false);
 
@@ -269,8 +271,8 @@ export default function LemburPage() {
         </div>
 
         {/* Results */}
-        {calculated && result.gajiPokok > 0 && (
-          <div className="space-y-6">
+        {calculated && (
+          <div id="hasil-perhitungan" className="space-y-6">
             {/* Info cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {infoCards.map((card) => {
@@ -402,6 +404,29 @@ export default function LemburPage() {
             </div>
           </div>
         )}
+
+        {/* AI Insight */}
+        {calculated && (
+          <div className="mt-6">
+            <AiInsightBox
+              title="AI Lembur Advisor"
+              description="Minta AI cek rate lembur, kesesuaian UU, dan saran."
+              placeholder="Contoh: rate lembur saya sesuai aturan gak?"
+              buttonLabel="Analisis Lembur dengan AI"
+              context={`Data lembur user:\nGaji pokok: ${formatRp(result.gajiPokok)}\nGaji/jam: ${formatRp(result.gajiPerJam)}\nTotal/bulan: ${formatRp(result.totalPerBulan)}`}
+              system="Kamu adalah asisten edukasi ketenagakerjaan Indonesia. Jelaskan aturan lembur (PP 35/2021), tarif yang benar, dan hak karyawan."
+            />
+          </div>
+        )}
+
+        <ActionBar
+          tool="gaji-lembur"
+          toolName="Kalkulator Lembur"
+          shareItems={[["Gaji/Jam", formatRp(result.gajiPerJam)], ["Total Lembur/Bulan", formatRp(result.totalPerBulan)]]}
+          resultElementId="hasil-perhitungan"
+          filename="gaji-lembur.pdf"
+          show={calculated}
+        />
 
         {/* SEO content */}
         <section className="mt-12 border-t border-border pt-8">

@@ -11,7 +11,10 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   const allPosts = readPosts();
-  const posts = allPosts.filter((p) => p.status === "published");
+  const today = new Date().toISOString().split("T")[0];
+  const posts = allPosts.filter(
+    (p) => p.status === "published" && p.date <= today
+  );
 
   return (
     <main className="min-h-screen bg-canvas">

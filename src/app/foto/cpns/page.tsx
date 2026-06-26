@@ -1,12 +1,14 @@
-import { Metadata } from "next";
+import { generateToolMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Camera, ArrowRight, ChevronRight, FileCheck } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Foto CPNS 2026 — Syarat Ukuran dan Format — Toolinter",
-  description:
-    "Persyaratan foto CPNS 2026: ukuran 3×4 dan 4×6 cm, format JPG, maks 200 KB. Resize foto CPNS online gratis di browser.",
-};
+export const metadata = generateToolMetadata({
+  title: "Panduan Foto CPNS",
+  description: "Panduan ukuran foto untuk pendaftaran CPNS.",
+  path: "/foto/cpns",
+});
+
+
 
 const specs3x4 = [
   { label: "Ukuran Cetak", value: "3 × 4 cm" },

@@ -12,6 +12,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { jsPDF } from "jspdf";
+import AiInsightBox from "./ai-insight-box";
 
 /* ---------- Types ---------- */
 
@@ -847,6 +848,17 @@ export function CvGenerator() {
           <Download size={16} />
           Download PDF
         </button>
+      </div>
+
+      <div className="mt-8">
+        <AiInsightBox
+          title="AI CV Analyst"
+          description="Minta AI review CV Anda dan beri saran perbaikan agar ATS-friendly."
+          placeholder="Contoh: review CV saya untuk posisi staff admin..."
+          buttonLabel="Analisis CV"
+          context="User sedang buat CV. Beri saran perbaikan: kekuatan, kelemahan, keyword yang kurang, dan tips agar lolos ATS."
+          system="Anda adalah HRD profesional dengan 10 tahun pengalaman. Analisis CV user dan beri feedback konkret, actionable, dalam bahasa Indonesia."
+        />
       </div>
     </div>
   );

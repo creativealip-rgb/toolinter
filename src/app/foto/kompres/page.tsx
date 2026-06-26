@@ -1,13 +1,17 @@
-import { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft, Shrink } from "lucide-react";
 import FotoKompressor from "@/components/foto-kompressor";
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Kompres Foto Online — Toolinter",
-  description:
-    "Kompres foto untuk CPNS, SNBP, dan upload dokumen. Pilih target ukuran, langsung download JPG. Gratis dan aman.",
-};
+export const metadata = generateToolMetadata({
+  title: "Kompres Foto Online",
+  description: "Kecilkan ukuran foto tanpa blur. Langsung di browser.",
+  path: "/foto/kompres",
+});
+
+
+
+
 
 export default function KompresPage() {
   return (

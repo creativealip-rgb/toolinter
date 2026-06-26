@@ -1,13 +1,17 @@
-import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, TrendingUp } from "lucide-react";
 import MarginMarketplaceCalculator from "@/components/margin-marketplace-calculator";
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Kalkulator Margin Marketplace — Toolinter",
-  description:
-    "Hitung margin keuntungan setelah potongan fee marketplace Tokopedia, Shopee, Lazada. Gratis, cepat, dan langsung di browser.",
-};
+export const metadata = generateToolMetadata({
+  title: "Kalkulator Margin Marketplace",
+  description: "Hitung margin keuntungan jual di Tokopedia, Shopee, dan marketplace lain.",
+  path: "/umkm/margin-marketplace",
+});
+
+
+
+
 
 export default function MarginMarketplacePage() {
   return (

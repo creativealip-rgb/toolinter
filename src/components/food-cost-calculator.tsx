@@ -1,5 +1,7 @@
 'use client';
 
+import AiInsightBox from "./ai-insight-box";
+import { ActionBar } from "./action-bar";
 import { useState } from "react";
 import {
   Calculator,
@@ -16,8 +18,8 @@ function formatRp(n: number): string {
 }
 
 export default function FoodCostCalculator() {
-  const [bahanBakuRaw, setBahanBakuRaw] = useState("");
-  const [penjualanRaw, setPenjualanRaw] = useState("");
+  const [bahanBakuRaw, setBahanBakuRaw] = useState("500000");
+  const [penjualanRaw, setPenjualanRaw] = useState("1000000");
   const [calculated, setCalculated] = useState(false);
 
   const [result, setResult] = useState({
@@ -161,8 +163,8 @@ export default function FoodCostCalculator() {
       </div>
 
       {/* Results */}
-      {calculated && result.foodCostPercent > 0 && (
-        <div className="space-y-6">
+      {calculated && (
+        <div id="hasil-perhitungan" className="space-y-6">
           {/* Food Cost Percentage — big highlight */}
           <div className="bg-primary rounded-xl p-6 text-center">
             <p className="text-white/80 text-sm font-medium mb-1">
@@ -310,6 +312,29 @@ export default function FoodCostCalculator() {
           </ul>
         </div>
       </div>
+
+      {/* AI Insight */}
+      {calculated && (
+        <div className="mt-4">
+          <AiInsightBox
+            title="AI Food Cost Advisor"
+            description="Minta AI analisis food cost, benchmark industri, dan saran efisiensi."
+            placeholder="Contoh: food cost 35% itu ideal gak untuk restoran?"
+            buttonLabel="Analisis Food Cost dengan AI"
+            context={`Data food cost user:\nTotal bahan baku: ${bahanBakuRaw}\nTotal penjualan: ${penjualanRaw}\nFood cost: ${result.foodCostPercent.toFixed(1)}%\nMargin tersisa: ${(100 - result.foodCostPercent).toFixed(1)}%`}
+            system="Kamu adalah advisor bisnis F&B Indonesia. Analisis food cost, benchmark industri, dan saran efisiensi biaya bahan baku."
+          />
+        </div>
+      )}
+
+      <ActionBar
+        tool="umkm-food-cost"
+        toolName="Kalkulator Food Cost"
+        shareItems={[["Food Cost", `${result.foodCostPercent.toFixed(1)}%`], ["Bahan Baku", formatRp(parseNum(bahanBakuRaw))], ["Penjualan", formatRp(parseNum(penjualanRaw))]]}
+        resultElementId="hasil-perhitungan"
+        filename="umkm-food-cost.pdf"
+        show={calculated}
+      />
     </div>
   );
 }

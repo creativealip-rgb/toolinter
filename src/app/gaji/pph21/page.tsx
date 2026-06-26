@@ -1,6 +1,9 @@
 'use client';
 
+import AiInsightBox from "@/components/ai-insight-box";
+import { ActionBar } from "@/components/action-bar";
 import { useState } from "react";
+import BlogLink from "@/components/blog-link";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -60,7 +63,7 @@ function calcPPh21Progressive(pkp: number): BracketResult[] {
 }
 
 export default function PPh21Page() {
-  const [brutoRaw, setBrutoRaw] = useState("");
+  const [brutoRaw, setBrutoRaw] = useState("5000000");
   const [ptkpIdx, setPtkpIdx] = useState(0);
   const [calculated, setCalculated] = useState(false);
 
@@ -182,8 +185,8 @@ export default function PPh21Page() {
         </div>
 
         {/* Results */}
-        {calculated && result.bruto > 0 && (
-          <div className="space-y-6">
+        {calculated && (
+          <div id="hasil-perhitungan" className="space-y-6">
             {/* Summary */}
             <div className="bg-canvas border border-border rounded-xl p-6">
               <h2 className="text-lg font-semibold text-ink mb-4">
@@ -276,6 +279,30 @@ export default function PPh21Page() {
             </div>
           </div>
         )}
+
+        {/* AI Insight */}
+        {calculated && (
+          <div className="mt-6">
+            <AiInsightBox
+              title="AI PPh21 Explainer"
+              description="Minta AI jelaskan perhitungan pajak, cara optimasi, dan saran penghematan PPh21."
+              placeholder="Contoh: gimana cara kurangi PPh21 secara legal?"
+              buttonLabel="Analisis Pajak dengan AI"
+              context={`Data PPh21 user:\nBruto/tahun: ${formatRp(result.bruto)}\nPTKP: ${formatRp(result.ptkp)}\nPKP: ${formatRp(result.pkp)}\nPPh21/tahun: ${formatRp(result.totalTax)}\nPPh21/bulan: ${formatRp(result.totalTax / 12)}`}
+              system="Kamu adalah asisten edukasi pajak Indonesia. Jelaskan PPh21, cara legal mengurangi pajak, dan saran praktis. Jangan beri saran ilegal."
+            />
+          </div>
+        )}
+
+        <BlogLink toolPath="/gaji/pph21" />
+            <ActionBar
+          tool="gaji-pph21"
+          toolName="Kalkulator PPh21"
+          shareItems={[["Bruto/Tahun", formatRp(result.bruto)], ["PPh21/Tahun", formatRp(result.totalTax)], ["PPh21/Bulan", formatRp(result.totalTax / 12)]]}
+          resultElementId="hasil-perhitungan"
+          filename="gaji-pph21.pdf"
+          show={calculated}
+        />
 
         {/* SEO content */}
         <section className="mt-12 border-t border-border pt-8">

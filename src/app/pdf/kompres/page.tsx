@@ -1,13 +1,18 @@
-import { Metadata } from "next";
+import BlogLink from "@/components/blog-link";
 import Link from "next/link";
 import { ChevronLeft, FileText } from "lucide-react";
 import PdfCompressor from "@/components/pdf-compressor";
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Kompres PDF Online — Toolinter",
-  description:
-    "Kurangi ukuran file PDF secara online. Gratis, proses di browser, langsung download.",
-};
+export const metadata = generateToolMetadata({
+  title: "Kompres PDF Online",
+  description: "Kecilkan ukuran PDF tanpa mengurangi kualitas.",
+  path: "/pdf/kompres",
+});
+
+
+
+
 
 export default function KompresPdfPage() {
   return (

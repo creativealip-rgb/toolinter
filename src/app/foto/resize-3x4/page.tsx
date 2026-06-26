@@ -1,12 +1,30 @@
-import { Metadata } from "next";
+import BlogLink from "@/components/blog-link";
 import Link from "next/link";
+import JsonLd from "@/components/json-ld";
 import { ChevronLeft, Camera } from "lucide-react";
 import FotoResizer from "@/components/foto-resizer";
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Resize Foto 3×4 Online — Toolinter",
-  description:
-    "Ubah ukuran foto ke 3×4 cm untuk CPNS, SNBP, SKCK, dan dokumen resmi lainnya. Gratis, langsung download.",
+export const metadata = generateToolMetadata({
+  title: "Resize Foto 3x4 Online",
+  description: "Ubah ukuran pas foto 3x4 untuk dokumen, CPNS, SNBP, dan lamaran kerja.",
+  path: "/foto/resize-3x4",
+});
+
+
+
+
+
+const toolSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Resize Foto 3x4",
+  "url": "https://toolinter.net/foto/resize-3x4",
+  "description": "Ubah ukuran pas foto 3x4 online",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web Browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" },
+  "inLanguage": "id",
 };
 
 export default function Resize3x4Page() {

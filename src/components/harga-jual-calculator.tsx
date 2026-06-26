@@ -9,16 +9,17 @@ import {
   Tag,
   Info,
 } from "lucide-react";
-import AiInsightBox from "@/components/ai-insight-box";
+import AiInsightBox from './ai-insight-box';
+import { ActionBar } from './action-bar';
 
 function formatRp(n: number): string {
   return "Rp " + Math.round(n).toLocaleString("id-ID");
 }
 
 export default function HargaJualCalculator() {
-  const [hppRaw, setHppRaw] = useState("");
+  const [hppRaw, setHppRaw] = useState("50000");
   const [margin, setMargin] = useState(30);
-  const [operasionalRaw, setOperasionalRaw] = useState("");
+  const [operasionalRaw, setOperasionalRaw] = useState("10000");
   const [diskon, setDiskon] = useState(0);
   const [calculated, setCalculated] = useState(false);
 
@@ -171,7 +172,7 @@ export default function HargaJualCalculator() {
       </div>
 
       {/* Results */}
-      {calculated && result.hpp > 0 && (
+      {calculated && (
         <div className="space-y-6">
           {/* Breakdown cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -245,7 +246,7 @@ export default function HargaJualCalculator() {
         </div>
       )}
 
-      {calculated && result.hpp > 0 && (
+      {calculated && (
         <AiInsightBox
           title="AI UMKM Price Advisor"
           description="Minta AI cek apakah harga jual sudah aman, margin cukup, dan strategi diskon/marketplace."
@@ -279,6 +280,15 @@ export default function HargaJualCalculator() {
           </div>
         </div>
       )}
+
+      <ActionBar
+        tool="umkm-harga-jual"
+        toolName="Kalkulator Harga Jual"
+        shareItems={[["HPP/unit", formatRp(result.hpp)], ["Harga Jual", formatRp(result.hargaJualFinal)], ["Margin", `${margin}%`]]}
+        resultElementId="hasil-perhitungan"
+        filename="harga-jual.pdf"
+        show={calculated}
+      />
     </div>
   );
 }

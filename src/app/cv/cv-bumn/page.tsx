@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Download, ArrowLeft } from "lucide-react";
+import AiInsightBox from "@/components/ai-insight-box";
 import { jsPDF } from "jspdf";
 import Link from "next/link";
 
@@ -225,6 +226,17 @@ export default function CvBumnPage() {
           <li>Daftar di portal resmi rekrutmen BUMN: <strong>rekrutmenbersama.fhcibumn.id</strong>.</li>
         </ul>
       </section>
+
+        <div className="mt-8">
+          <AiInsightBox
+            title="AI CV BUMN Analyst"
+            description="Minta AI review {'CV BUMN'} Anda dan beri saran perbaikan."
+            placeholder="Contoh: review CV saya untuk posisi CPNS BUMN..."
+            buttonLabel="Analisis dengan AI"
+            context="User sedang buat CV BUMN. Beri saran perbaikan: kekuatan, kelemahan, keyword ATS, dan tips lolos screening."
+            system="Anda adalah HRD profesional. Analisis dokumen user dan beri feedback konkret, actionable, dalam bahasa Indonesia."
+          />
+        </div>
     </main>
   );
 }

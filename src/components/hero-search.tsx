@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Search } from 'lucide-react';
-import SearchModal from './search-modal';
+import { LazySearchModal as SearchModal } from './lazy-components';
 
 export default function HeroSearch() {
   const [searchOpen, setSearchOpen] = useState(false);

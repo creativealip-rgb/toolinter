@@ -1,5 +1,7 @@
 'use client';
 
+import AiInsightBox from "./ai-insight-box";
+import { ActionBar } from "./action-bar";
 import { useState } from "react";
 import { Plus, Trash2, Download, Eye, FileText, Printer } from "lucide-react";
 
@@ -374,9 +376,33 @@ export default function InvoiceGenerator() {
               <p className="text-xs font-medium text-ink-muted uppercase tracking-wide mb-1">Catatan:</p>
               <p className="text-sm text-ink-tertiary">{catatan}</p>
             </div>
-          )}
+            )}
+
         </div>
       )}
+
+      {/* AI Insight */}
+      <div className="mt-4">
+        <AiInsightBox
+          title="AI Invoice Advisor"
+          description="Minta AI saran template profesional, klausul pembayaran, dan tips penagihan."
+          placeholder="Contoh: gimana cara nagih klien yang telat bayar?"
+          buttonLabel="Saran Invoice dengan AI"
+          context={`Invoice user:\nUsaha: ${namaUsaha}\nPelanggan: ${namaPelanggan}\nJumlah item: ${items.length}\nTotal: ${formatRp(total())}`}
+          system="Kamu adalah advisor bisnis kecil Indonesia. Saran template invoice profesional, klausul pembayaran, dan tips penagihan."
+        />
+      </div>
+
+      <ActionBar
+        tool="umkm-invoice"
+        toolName="Generator Invoice"
+        shareItems={[["Usaha", namaUsaha || "-"], ["Pelanggan", namaPelanggan || "-"], ["Total", formatRp(total())]]}
+        resultElementId="hasil-perhitungan"
+        filename="invoice.pdf"
+        show={!!isFormValid}
+      />
     </div>
   );
 }
+
+

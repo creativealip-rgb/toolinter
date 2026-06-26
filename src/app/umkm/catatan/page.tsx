@@ -1,13 +1,17 @@
-import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, BookOpen } from "lucide-react";
 import CatatanKeuanganCalculator from "@/components/catatan-keuangan-calculator";
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Catatan Keuangan Sederhana — Toolinter",
-  description:
-    "Hitung saldo akhir bisnis UMKM Anda. Masukkan saldo awal, pemasukan, dan pengeluaran untuk mengetahui untung atau rugi. Gratis dan langsung di browser.",
-};
+export const metadata = generateToolMetadata({
+  title: "Catatan Keuangan UMKM",
+  description: "Catat pemasukan dan pengeluaran usaha. Download laporan PDF.",
+  path: "/umkm/catatan",
+});
+
+
+
+
 
 export default function CatatanPage() {
   return (

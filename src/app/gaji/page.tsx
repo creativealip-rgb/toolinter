@@ -9,6 +9,7 @@ import {
   CalendarDays,
   ArrowRight,
   Calculator,
+  Sparkles,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ const tools = [
     icon: Wallet,
     color: "text-primary",
     bg: "bg-primary/10",
+    ai: true,
     ready: true,
   },
   {
@@ -36,6 +38,7 @@ const tools = [
     icon: Receipt,
     color: "text-warning",
     bg: "bg-warning/10",
+    ai: true,
     ready: true,
   },
   {
@@ -46,6 +49,7 @@ const tools = [
     icon: Gift,
     color: "text-success",
     bg: "bg-success/10",
+    ai: true,
     ready: true,
   },
   {
@@ -56,6 +60,7 @@ const tools = [
     icon: Shield,
     color: "text-primary",
     bg: "bg-primary/10",
+    ai: true,
     ready: true,
   },
   {
@@ -66,6 +71,7 @@ const tools = [
     icon: Clock,
     color: "text-warning",
     bg: "bg-warning/10",
+    ai: true,
     ready: true,
   },
   {
@@ -76,6 +82,7 @@ const tools = [
     icon: CalendarDays,
     color: "text-success",
     bg: "bg-success/10",
+    ai: true,
     ready: true,
   },
 ];
@@ -115,6 +122,11 @@ export default function GajiPage() {
                     <h2 className="text-lg font-semibold text-ink">
                       {tool.title}
                     </h2>
+                    {"ai" in tool && tool.ready && (
+                      <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary flex items-center gap-1">
+                        <Sparkles className="w-3 h-3" /> AI
+                      </span>
+                    )}
                     {!tool.ready && (
                       <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-surface text-ink-muted">
                         Segera
@@ -137,14 +149,14 @@ export default function GajiPage() {
               <Link
                 key={tool.href}
                 href={tool.href}
-                className="block rounded-xl border border-border bg-canvas p-6 transition-all hover:shadow-lg hover:border-primary/30 cursor-pointer"
+                className="group block rounded-xl border border-gray-200 bg-white p-5 transition-all duration-200 hover:border-blue-400 hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
               >
                 {content}
               </Link>
             ) : (
               <div
                 key={tool.href}
-                className="rounded-xl border border-border bg-canvas p-6 transition-all opacity-70 cursor-default"
+                className="rounded-xl border border-gray-200 bg-white p-5 transition-all opacity-50 cursor-default"
               >
                 {content}
               </div>

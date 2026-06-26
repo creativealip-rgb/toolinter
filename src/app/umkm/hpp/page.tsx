@@ -1,12 +1,30 @@
-import { Metadata } from "next";
+import BlogLink from "@/components/blog-link";
 import Link from "next/link";
+import JsonLd from "@/components/json-ld";
 import { ArrowLeft, Calculator } from "lucide-react";
 import HppCalculator from "@/components/hpp-calculator";
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Kalkulator HPP Online — Toolinter",
-  description:
-    "Hitung Harga Pokok Penjualan (HPP) produk UMKM Anda secara gratis. Masukkan biaya bahan baku, tenaga kerja, dan overhead untuk mendapatkan HPP per unit dan harga jual yang tepat.",
+export const metadata = generateToolMetadata({
+  title: "Kalkulator HPP",
+  description: "Hitung Harga Pokok Penjualan (HPP) produk UMKM Anda secara gratis.",
+  path: "/umkm/hpp",
+});
+
+
+
+
+
+const toolSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Kalkulator HPP",
+  "url": "https://toolinter.net/umkm/hpp",
+  "description": "Hitung Harga Pokok Penjualan produk UMKM",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Web Browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" },
+  "inLanguage": "id",
 };
 
 export default function HppPage() {

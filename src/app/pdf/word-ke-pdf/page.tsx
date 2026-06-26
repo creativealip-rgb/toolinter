@@ -1,13 +1,17 @@
-import { Metadata } from 'next';
 import Link from 'next/link';
 import { ChevronLeft, FileText } from 'lucide-react';
 import WordKePdf from '@/components/word-ke-pdf';
+import { generateToolMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: 'Word ke PDF Online — Toolinter',
-  description:
-    'Ubah dokumen Word (.docx) menjadi PDF. Konversi Word ke PDF online, 100% di browser, gratis.',
-};
+export const metadata = generateToolMetadata({
+  title: "Word ke PDF",
+  description: "Konversi dokumen Word (DOCX) ke PDF online.",
+  path: "/pdf/word-ke-pdf",
+});
+
+
+
+
 
 export default function WordKePdfPage() {
   return (

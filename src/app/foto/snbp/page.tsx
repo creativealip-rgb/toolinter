@@ -1,12 +1,14 @@
-import { Metadata } from "next";
+import { generateToolMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Camera, ArrowRight, ChevronRight, FileCheck, Shrink } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Foto SNBP/SNBT 2026 — Ukuran dan Cara Resize — Toolinter",
-  description:
-    "Persyaratan foto SNBP dan SNBT 2026: ukuran 4×6 cm, background putih, format JPG, maks 200 KB. Resize dan kompres foto online gratis.",
-};
+export const metadata = generateToolMetadata({
+  title: "Panduan Foto SNBP",
+  description: "Panduan ukuran foto untuk pendaftaran SNBP.",
+  path: "/foto/snbp",
+});
+
+
 
 const snbpSpecs = [
   { label: "Ukuran Cetak", value: "4 × 6 cm" },
