@@ -5,7 +5,6 @@ import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import { I18nProvider } from "@/lib/i18n";
 import NextTopLoader from "nextjs-toploader";
-import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://toolinter.net"),
@@ -42,20 +41,19 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Toolinter" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
         <script defer data-domain="toolinter.net" src="https://plausible.io/js/script.js" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-CNK84V0DY8"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-CNK84V0DY8');
+            `,
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col">
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-CNK84V0DY8"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-CNK84V0DY8');
-          `}
-        </Script>
         <NextTopLoader color="#1A8FE3" showSpinner={false} height={3} />
         <I18nProvider>
           <SiteHeader />
