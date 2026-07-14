@@ -1,6 +1,6 @@
-# Toolinter — 70+ Tool Online Gratis Indonesia
+# Toolinter — Tool Online Gratis Indonesia
 
-Kumpulan tool online gratis untuk kebutuhan sehari-hari. Cepat, ringan, dan bisa langsung download hasil. Proses 100% di browser — file tidak diupload ke server.
+Kumpulan tool online gratis untuk kebutuhan sehari-hari. Cepat, ringan, dan bisa langsung download hasil. Proses 100% di browser — file tidak diupload ke server. Fokus pasar Indonesia (keunggulan lokal, bukan tool generik global).
 
 **Live:** [toolinter.net](https://toolinter.net)
 
@@ -8,18 +8,20 @@ Kumpulan tool online gratis untuk kebutuhan sehari-hari. Cepat, ringan, dan bisa
 
 ## Fitur Utama
 
-### 7 Kategori Tool
+### 7 Kategori Tool (~43 halaman tool; 65 jika tiap template surat dihitung)
 
 | Kategori | Jumlah | Contoh Tool |
 |----------|--------|-------------|
-| **Surat & Dokumen** | 22 | Surat resign, izin sekolah, lamaran kerja, kuasa, pernyataan |
-| **Foto & Dokumen** | 4 | Resize 3×4, 4×6, 2×3 cm, kompres foto |
-| **Gaji & Keuangan** | 6 | Gaji bersih, PPh21, THR, BPJS, lembur, prorata |
-| **PDF & Converter** | 6 | Gabung PDF, kompres, foto ke Word, PDF ke Word |
+| **Surat & Dokumen** | 22 template | Surat resign, izin sekolah, lamaran kerja, kuasa, pernyataan |
+| **Foto & Dokumen** | 8 | Resize 3×4/4×6/2×3, kompres, foto KTP/CPNS/SNBP, ganti background |
+| **Gaji** | 8 | Gaji bersih, PPh21, THR, BPJS, lembur, prorata, UMR, pesangon |
+| **PDF & Converter** | 6 | Gabung PDF, kompres, foto ke PDF, PDF ke Word, Word ke PDF |
 | **CV & Lamaran** | 7 | CV ATS, fresh graduate, CV admin, BUMN, cover letter |
-| **UMKM & Bisnis** | 7 | HPP, harga jual, food cost, invoice, margin marketplace |
-| **Keuangan** | 3 | KPR, pinjol OJK, cek NPWP/NIK |
+| **UMKM & Bisnis** | 7 | HPP, harga jual, food cost, invoice, margin marketplace, caption |
+| **Keuangan** | 5 | KPR, investasi, zakat, pinjol OJK, cek NPWP/NIK |
 | **Pendidikan** | 1 | Kalender akademik Indonesia |
+
+Setiap halaman tool dilengkapi paket SEO lengkap: OG image dinamis (`/api/og`), breadcrumb JSON-LD, related tools, dan FAQ (visible + FAQPage schema).
 
 ### Fitur Pembeda
 
@@ -32,11 +34,12 @@ Kumpulan tool online gratis untuk kebutuhan sehari-hari. Cepat, ringan, dan bisa
 
 ### Blog & SEO
 
-- **650 artikel** (20 published + 630 scheduled Jul-Sep 2026)
-- **7 artikel/hari** — 1 per kategori, auto-publish berdasarkan tanggal
-- **Date-gated** — Artikel scheduled return 404 sampai tanggal rilis
+- **115+ artikel unik** (didedup dari 650 doorway lama → 111 baseline, terus tumbuh via mesin harian)
+- **Publish WordPress-style — TANPA rebuild.** Artikel disimpan di `persistent-data/posts.json` (Docker volume). Halaman blog `force-dynamic`, jadi artikel baru langsung live begitu ditulis ke store. Lihat [Arsitektur Konten](#arsitektur-konten).
+- **Mesin artikel harian** — cron Hermes generate 2 artikel unik berkualitas/hari (`scripts/publish-article.mjs`), guard anti thin-content (min 400 kata, dedup, CTA wajib ke tool)
+- **12 artikel per halaman** di listing `/blog` (grid 3 kolom penuh)
 - **Sitemap.xml** + **robots.txt** ter-generate otomatis
-- **JSON-LD Schema** untuk SEO
+- **JSON-LD Schema** (BlogPosting, FAQPage, BreadcrumbList) untuk SEO
 - **View counter** per artikel
 
 ### Dashboard Admin
@@ -55,7 +58,7 @@ Kumpulan tool online gratis untuk kebutuhan sehari-hari. Cepat, ringan, dan bisa
 - **Styling:** Tailwind CSS 4
 - **Icons:** Lucide React
 - **AI:** OpenRouter API (GPT-4o, Claude, Gemini)
-- **Database:** JSON file (`data/posts.json`)
+- **Database:** JSON file (`persistent-data/posts.json`, Docker volume — persisten lintas deploy)
 - **Upload:** Sharp (WebP + MozJPEG compression)
 - **Deploy:** Docker + Dokploy + Traefik
 - **VPS:** DigitalOcean Singapore (168.144.37.19)
@@ -134,7 +137,7 @@ src/
 │   ├── surat-generator.tsx # Letter form & preview
 │   └── pwa-install.tsx   # PWA install prompt
 ├── data/
-│   ├── blog.ts           # Blog articles (650)
+│   ├── blog.ts           # Blog seed/baseline (111 artikel — recovery)
 │   ├── surat.ts          # Letter templates (22)
 │   └── umr.ts            # UMR data by city
 ├── lib/
@@ -151,7 +154,7 @@ src/
 ### Docker (recommended)
 
 ```bash
-# Build
+# Build (hanya perlu saat ubah SOURCE CODE, bukan saat publish artikel)
 docker compose build --no-cache
 
 # Run
@@ -160,6 +163,10 @@ docker compose up -d
 # Check
 docker ps | grep toolinter
 ```
+
+> **Penting:** `docker-compose.yml` mount volume `./persistent-data:/app/data`. Direktori ini menyimpan `posts.json` (semua artikel) dan HARUS ikut ter-backup. Owner file harus UID `1001:65533` (user `nextjs`). Kalau volume kosong saat start, `posts.json` di-seed otomatis dari `src/data/blog.ts`.
+>
+> **Publish artikel TIDAK perlu build** — cukup tulis ke `persistent-data/posts.json` (via `scripts/publish-article.mjs`), langsung live. Build hanya untuk perubahan kode (komponen, tool, styling).
 
 ### Dokploy
 
@@ -201,19 +208,31 @@ Features:
 
 ---
 
-## Content Calendar
+## Arsitektur Konten
 
-650 artikel terjadwal 3 bulan (Jul-Sep 2026):
+**Model publish: WordPress-style, TANPA rebuild image** (sejak 14 Juli 2026).
 
-- **7 artikel/hari** — 1 per kategori
-- **Auto-publish** — Artikel muncul di listing saat tanggal rilis
-- **Scheduled = 404** — Artikel masa depan tidak bisa diakses publik
+### Cara kerja
+- Artikel hidup di `persistent-data/posts.json` — di-mount sebagai Docker volume ke `/app/data` (lihat `docker-compose.yml`).
+- Halaman `/blog` dan `/blog/[slug]` pakai `export const dynamic = "force-dynamic"` → dibaca ulang tiap request.
+- Nulis artikel ke posts.json = **langsung live**, tanpa `docker compose build`, tanpa deploy.
 
-| Status | Jumlah |
-|--------|--------|
-| Published | 20 |
-| Scheduled | 630 |
-| **Total** | **650** |
+### Dua jalur konten
+| Jalur | File | Butuh rebuild? | Kapan dipakai |
+|-------|------|----------------|---------------|
+| **Runtime store** (utama) | `persistent-data/posts.json` | Tidak | Publish artikel harian |
+| **Seed/baseline** | `src/data/blog.ts` | Ya | Ubah default set yang re-seed volume kosong |
+
+`posts-store.ts` otomatis nge-seed posts.json dari `blog.ts` (111 artikel baseline) kalau store kosong. Jadi `blog.ts` = jaring pengaman recovery.
+
+### Mesin artikel harian
+- **Script:** `scripts/publish-article.mjs <file.json>` — validasi (dedup slug, min 400 kata, min 4 section, kategori valid, CTA), backup, tulis ke store.
+- **Antrian topik:** `scripts/keyword-bank.json` (topik unik + angle + CTA, ditandai `used` setelah dipakai).
+- **Cron Hermes:** tiap hari 09:00 WIB, 2 artikel/hari, deliver laporan ke Telegram.
+- **Skill:** `toolinter-daily-article-engine` (workflow + quality bar lengkap).
+- **Prinsip:** kualitas > volume. Konservatif 2/hari untuk hindari risiko doorway/thin-content (alasan 650 clone lama didedup).
+
+> ⚠️ `persistent-data/` gitignored (data runtime, seperti DB). JANGAN `git add persistent-data/` atau `src/data/blog.ts`. Commit hanya `scripts/`.
 
 ---
 
