@@ -129,33 +129,58 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             {currentPage > 1 && (
               <Link
                 href={pageHref(currentPage - 1)}
-                className="inline-flex h-9 items-center rounded-lg border border-border px-3 text-sm text-ink-secondary transition hover:border-primary hover:text-primary"
+                className="inline-flex h-9 items-center justify-center rounded-lg border border-border px-3 text-sm text-ink-secondary transition hover:border-primary hover:text-primary"
                 rel="prev"
+                aria-label="Halaman sebelumnya"
               >
-                ← Sebelumnya
+                ←
               </Link>
             )}
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
-              <Link
-                key={n}
-                href={pageHref(n)}
-                aria-current={n === currentPage ? "page" : undefined}
-                className={
-                  n === currentPage
-                    ? "inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-semibold text-white"
-                    : "inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border text-sm text-ink-secondary transition hover:border-primary hover:text-primary"
-                }
-              >
-                {n}
-              </Link>
-            ))}
+            {(() => {
+              // Compact window: page 1, last page, and current ± 1, with ellipsis gaps.
+              const pages: (number | "...")[] = [];
+              const add = (n: number) => {
+                if (n >= 1 && n <= totalPages && !pages.includes(n)) pages.push(n);
+              };
+              add(1);
+              if (currentPage - 1 > 2) pages.push("...");
+              add(currentPage - 1);
+              add(currentPage);
+              add(currentPage + 1);
+              if (currentPage + 1 < totalPages - 1) pages.push("...");
+              add(totalPages);
+              return pages.map((p, i) =>
+                p === "..." ? (
+                  <span
+                    key={`e${i}`}
+                    className="inline-flex h-9 w-6 items-center justify-center text-sm text-ink-muted"
+                  >
+                    …
+                  </span>
+                ) : (
+                  <Link
+                    key={p}
+                    href={pageHref(p)}
+                    aria-current={p === currentPage ? "page" : undefined}
+                    className={
+                      p === currentPage
+                        ? "inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-semibold text-white"
+                        : "inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border text-sm text-ink-secondary transition hover:border-primary hover:text-primary"
+                    }
+                  >
+                    {p}
+                  </Link>
+                )
+              );
+            })()}
             {currentPage < totalPages && (
               <Link
                 href={pageHref(currentPage + 1)}
-                className="inline-flex h-9 items-center rounded-lg border border-border px-3 text-sm text-ink-secondary transition hover:border-primary hover:text-primary"
+                className="inline-flex h-9 items-center justify-center rounded-lg border border-border px-3 text-sm text-ink-secondary transition hover:border-primary hover:text-primary"
                 rel="next"
+                aria-label="Halaman berikutnya"
               >
-                Berikutnya →
+                →
               </Link>
             )}
           </nav>
