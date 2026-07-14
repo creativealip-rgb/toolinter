@@ -41,14 +41,14 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Toolinter" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
         <script defer data-domain="toolinter.net" src="https://plausible.io/js/script.js" />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-CNK84V0DY8"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3T31T7GX9H"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-CNK84V0DY8');
+              gtag('config', 'G-3T31T7GX9H');
             `,
           }}
         />
