@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { generateToolMetadata } from "@/lib/seo";
 import RelatedTools from "@/components/related-tools";
 import BreadcrumbJsonLd from "@/components/breadcrumb-jsonld";
+import ToolFaq from "@/components/tool-faq";
 
 export const metadata: Metadata = generateToolMetadata({
   title: "Buat CV untuk Lamar BUMN & CPNS (Format Benar)",
@@ -15,6 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <BreadcrumbJsonLd toolPath="/cv/cv-bumn" title="Buat CV untuk Lamar BUMN & CPNS (Format Benar)" />
       {children}
       <div className="mx-auto w-full max-w-3xl px-4 pb-12">
+        <ToolFaq toolPath="/cv/cv-bumn" />
         <RelatedTools toolPath="/cv/cv-bumn" />
       </div>
     </>

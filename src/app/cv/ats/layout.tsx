@@ -5,11 +5,11 @@ import ToolFaq from "@/components/tool-faq";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <BreadcrumbJsonLd toolPath="/foto/cpns" title="Foto CPNS Sesuai SSCASN" />
+      <BreadcrumbJsonLd toolPath="/cv/ats" title="Generator CV ATS" />
       {children}
       <div className="mx-auto w-full max-w-3xl px-4 pb-12">
-        <ToolFaq toolPath="/foto/cpns" />
-        <RelatedTools toolPath="/foto/cpns" />
+        <ToolFaq toolPath="/cv/ats" />
+        <RelatedTools toolPath="/cv/ats" />
       </div>
     </>
   );

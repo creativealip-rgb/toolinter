@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { generateToolMetadata } from "@/lib/seo";
 import RelatedTools from "@/components/related-tools";
 import BreadcrumbJsonLd from "@/components/breadcrumb-jsonld";
+import ToolFaq from "@/components/tool-faq";
 
 export const metadata: Metadata = generateToolMetadata({
   title: "Contoh Surat Lamaran Kerja & Generator Gratis",
@@ -15,6 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <BreadcrumbJsonLd toolPath="/cv/contoh-surat-lamaran" title="Contoh Surat Lamaran Kerja & Generator Gratis" />
       {children}
       <div className="mx-auto w-full max-w-3xl px-4 pb-12">
+        <ToolFaq toolPath="/cv/contoh-surat-lamaran" />
         <RelatedTools toolPath="/cv/contoh-surat-lamaran" />
       </div>
     </>

@@ -208,6 +208,30 @@ export const relatedToolsMap: Record<string, RelatedTool[]> = {
     { path: "/cv/contoh-surat-lamaran", title: "Surat Lamaran Kerja" },
     { path: "/cv/generator", title: "CV Generator ATS" },
   ],
+
+  // --- Tambahan: tool yang sebelumnya belum punya related ---
+  "/cv/ats": [
+    { path: "/cv/generator", title: "CV Generator ATS" },
+    { path: "/cv/fresh-graduate", title: "CV Fresh Graduate" },
+    { path: "/cv/contoh-surat-lamaran", title: "Surat Lamaran Kerja" },
+    { path: "/cv/cover-letter", title: "Cover Letter" },
+  ],
+  "/cv/cover-letter": [
+    { path: "/cv/generator", title: "CV Generator ATS" },
+    { path: "/cv/contoh-surat-lamaran", title: "Surat Lamaran Kerja" },
+    { path: "/cv/ats", title: "Generator CV ATS" },
+  ],
+  "/foto/resize-2x3": [
+    { path: "/foto/resize-3x4", title: "Resize Foto 3x4" },
+    { path: "/foto/resize-4x6", title: "Resize Foto 4x6" },
+    { path: "/foto/kompres", title: "Kompres Foto" },
+    { path: "/pdf/foto-ke-pdf", title: "Foto ke PDF" },
+  ],
+  "/pendidikan/kalender": [
+    { path: "/foto/snbp", title: "Foto SNBP" },
+    { path: "/cv/fresh-graduate", title: "CV Fresh Graduate" },
+    { path: "/keuangan/investasi", title: "Kalkulator Investasi" },
+  ],
 };
 
 export function getRelatedTools(toolPath: string): RelatedTool[] {

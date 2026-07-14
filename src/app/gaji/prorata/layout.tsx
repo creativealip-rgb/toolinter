@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { generateToolMetadata } from "@/lib/seo";
 import RelatedTools from "@/components/related-tools";
 import BreadcrumbJsonLd from "@/components/breadcrumb-jsonld";
+import ToolFaq from "@/components/tool-faq";
 
 export const metadata: Metadata = generateToolMetadata({
   title: "Kalkulator Gaji Prorata Masuk Tengah Bulan",
@@ -15,6 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <BreadcrumbJsonLd toolPath="/gaji/prorata" title="Kalkulator Gaji Prorata Masuk Tengah Bulan" />
       {children}
       <div className="mx-auto w-full max-w-3xl px-4 pb-12">
+        <ToolFaq toolPath="/gaji/prorata" />
         <RelatedTools toolPath="/gaji/prorata" />
       </div>
     </>
