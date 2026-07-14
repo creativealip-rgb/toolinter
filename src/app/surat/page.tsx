@@ -1,12 +1,15 @@
 import { Metadata } from "next";
+import { generateToolMetadata } from "@/lib/seo";
 import { suratTypes } from "@/data/surat";
 import SuratWorkspace from "@/components/surat-workspace";
 import { Sparkles } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Generator Surat Online Gratis — Toolinter",
-  description: "Buat surat resign, izin sekolah, lamaran kerja, pernyataan, kuasa, dan 15+ template surat lainnya. Download langsung dalam format PDF.",
-};
+export const metadata: Metadata = generateToolMetadata({
+  title: "Generator Surat Online Gratis",
+  description:
+    "Buat surat resign, izin sekolah, lamaran kerja, pernyataan, kuasa, dan 15+ template surat lainnya. Download langsung dalam format PDF.",
+  path: "/surat",
+});
 
 export default function SuratPage() {
   const types = suratTypes.map((s) => ({

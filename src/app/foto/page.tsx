@@ -1,13 +1,15 @@
 import { Metadata } from "next";
+import { generateToolMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Camera, ArrowRight, Shrink, Wand2,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Foto Dokumen Online — Toolinter",
+export const metadata: Metadata = generateToolMetadata({
+  title: "Foto Dokumen Online",
   description:
     "Resize foto untuk CPNS, SNBP, KTP, visa, SKCK, dan dokumen resmi lainnya. Gratis, proses di browser, langsung download JPG.",
-};
+  path: "/foto",
+});
 
 const fotoTools = [
   {

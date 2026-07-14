@@ -1,12 +1,14 @@
 import { Metadata } from "next";
+import { generateToolMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { FileText, ArrowRight, Sparkles } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "PDF Tools Online — Toolinter",
+export const metadata: Metadata = generateToolMetadata({
+  title: "PDF Tools Online",
   description:
     "Gabung, kompres, dan kelola file PDF langsung di browser. Gratis, aman, tanpa upload ke server.",
-};
+  path: "/pdf",
+});
 
 const pdfTools = [
   {

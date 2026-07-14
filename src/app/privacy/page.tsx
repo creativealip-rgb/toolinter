@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Kebijakan Privasi — Toolinter",
+  title: "Kebijakan Privasi",
   description:
     "Kebijakan privasi Toolinter. Pelajari bagaimana kami menangani data dan privasi Anda.",
 };

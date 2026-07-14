@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Shield, Globe, Heart } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Tentang Kami — Toolinter",
+  title: "Tentang Kami",
   description:
     "Kenalan dengan Toolinter, platform tool online gratis untuk kebutuhan sehari-hari masyarakat Indonesia.",
 };

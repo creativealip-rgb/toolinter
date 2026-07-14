@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { generateToolMetadata } from "@/lib/seo";
 import { FileText, FileCheck, Mail, GraduationCap, Briefcase, Building2, FileSignature } from "lucide-react";
 import CategoryCard from "@/components/category-card";
 
-export const metadata: Metadata = {
-  title: "CV & Lamaran Kerja — Toolinter",
-  description: "Kumpulan tools untuk membuat CV ATS-friendly dan surat lamaran kerja secara online, gratis, dan tanpa registrasi.",
-  alternates: { canonical: "/cv" },
-};
+export const metadata: Metadata = generateToolMetadata({
+  title: "CV & Lamaran Kerja",
+  description:
+    "Kumpulan tools untuk membuat CV ATS-friendly dan surat lamaran kerja secara online, gratis, dan tanpa registrasi.",
+  path: "/cv",
+});
 
 const cards = [
   { title: "Generator CV ATS", desc: "Buat CV yang lolos ATS (Applicant Tracking System) dalam hitungan menit. Format bersih, satu kolom, siap download PDF.", href: "/cv/ats", icon: FileText },

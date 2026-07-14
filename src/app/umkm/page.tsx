@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolMetadata } from "@/lib/seo";
 import Link from "next/link";
 import {
   Calculator,
@@ -11,11 +12,12 @@ import {
   Sparkles,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Tools UMKM & Bisnis — Toolinter",
+export const metadata: Metadata = generateToolMetadata({
+  title: "Tools UMKM & Bisnis",
   description:
     "Kumpulan tools gratis untuk UMKM dan bisnis Indonesia. Kalkulator HPP, generator invoice, kalkulator margin, dan catatan keuangan sederhana.",
-};
+  path: "/umkm",
+});
 
 const tools = [
   {

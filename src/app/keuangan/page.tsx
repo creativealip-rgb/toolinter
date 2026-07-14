@@ -1,13 +1,15 @@
 import { Metadata } from "next";
+import { generateToolMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Calculator, FileCheck, CreditCard, ArrowRight,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Kalkulator Keuangan Online — Toolinter",
+export const metadata: Metadata = generateToolMetadata({
+  title: "Kalkulator Keuangan Online",
   description:
     "Kumpulan kalkulator keuangan: KPR, pinjol OJK, cek NPWP/NIK. Gratis, langsung pakai di browser.",
-};
+  path: "/keuangan",
+});
 
 const tools = [
   {

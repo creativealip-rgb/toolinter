@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Calendar, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Kalender Akademik & Pendidikan — Toolinter",
+  title: "Kalender Akademik & Pendidikan",
   description:
     "Kalender akademik Indonesia: jadwal SNBP, SNBT, PPDB, CPNS, beasiswa. Lengkap dengan countdown dan filter.",
 };

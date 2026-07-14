@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { generateToolMetadata } from "@/lib/seo";
 import Link from "next/link";
 import {
   Wallet,
@@ -13,11 +14,12 @@ import {
   Sparkles,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Kalkulator Gaji — Hitung Gaji Bersih, PPh21, BPJS — Toolinter",
+export const metadata: Metadata = generateToolMetadata({
+  title: "Kalkulator Gaji — Hitung Gaji Bersih, PPh21, BPJS",
   description:
     "Kalkulator gaji lengkap untuk Indonesia. Hitung gaji bersih (take home pay), PPh21, BPJS Kesehatan, BPJS Ketenagakerjaan, dan THR secara gratis.",
-};
+  path: "/gaji",
+});
 
 const tools = [
   {
