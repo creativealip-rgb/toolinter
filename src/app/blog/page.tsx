@@ -12,18 +12,28 @@ export const metadata: Metadata = {
 };
 
 interface BlogPageProps {
-  searchParams: Promise<{ preview?: string }>;
+  searchParams: Promise<{ preview?: string; page?: string }>;
 }
 
+const PER_PAGE = 10;
+
 export default async function BlogPage({ searchParams }: BlogPageProps) {
-  const { preview } = await searchParams;
+  const { preview, page } = await searchParams;
   const isPreview = preview === "1";
   const allPosts = readPosts();
   const today = new Date().toISOString().split("T")[0];
-  const posts = allPosts.filter((p) => {
+  const released = allPosts.filter((p) => {
     const isReleased = p.status === "published" || (p.status === "scheduled" && p.date <= today);
     return isPreview ? (p.status === "published" || p.status === "scheduled") : isReleased;
   });
+
+  // Newest first, then paginate 10 per page.
+  const sorted = [...released].sort((a, b) => b.date.localeCompare(a.date));
+  const totalPages = Math.max(1, Math.ceil(sorted.length / PER_PAGE));
+  const currentPage = Math.min(Math.max(1, parseInt(page || "1", 10) || 1), totalPages);
+  const posts = sorted.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
+  const pageHref = (n: number) =>
+    `/blog?${new URLSearchParams({ ...(isPreview ? { preview: "1" } : {}), ...(n > 1 ? { page: String(n) } : {}) }).toString()}`.replace(/\?$/, "");
 
   return (
     <main className="min-h-screen bg-canvas">
@@ -109,6 +119,47 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             </Link>
           ))}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <nav
+            className="mt-12 flex items-center justify-center gap-1.5"
+            aria-label="Navigasi halaman blog"
+          >
+            {currentPage > 1 && (
+              <Link
+                href={pageHref(currentPage - 1)}
+                className="inline-flex h-9 items-center rounded-lg border border-border px-3 text-sm text-ink-secondary transition hover:border-primary hover:text-primary"
+                rel="prev"
+              >
+                ← Sebelumnya
+              </Link>
+            )}
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+              <Link
+                key={n}
+                href={pageHref(n)}
+                aria-current={n === currentPage ? "page" : undefined}
+                className={
+                  n === currentPage
+                    ? "inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-semibold text-white"
+                    : "inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border text-sm text-ink-secondary transition hover:border-primary hover:text-primary"
+                }
+              >
+                {n}
+              </Link>
+            ))}
+            {currentPage < totalPages && (
+              <Link
+                href={pageHref(currentPage + 1)}
+                className="inline-flex h-9 items-center rounded-lg border border-border px-3 text-sm text-ink-secondary transition hover:border-primary hover:text-primary"
+                rel="next"
+              >
+                Berikutnya →
+              </Link>
+            )}
+          </nav>
+        )}
       </section>
     </main>
   );

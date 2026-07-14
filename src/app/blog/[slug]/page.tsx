@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { readPosts } from "@/lib/posts-store";
 import { blogPosts } from "@/data/blog";
 import { ArrowLeft, Clock, Calendar, Tag, User } from "lucide-react";
-import AiInsightBox from "@/components/ai-insight-box";
 import RichContent from "@/components/rich-content";
 import JsonLd from "@/components/json-ld";
 import ViewCounter from "@/components/view-counter";
@@ -170,17 +169,6 @@ export default async function BlogPostPage({ params, searchParams }: PageProps) 
           </div>
         )}
 
-        <div className="mt-10">
-          <AiInsightBox
-            title="AI Ringkasan & Rekomendasi Tool"
-            description="Minta AI ringkas artikel ini, kasih checklist tindakan, atau rekomendasi tool Toolinter yang relevan."
-            placeholder="Contoh: ringkas artikel ini jadi checklist 5 langkah"
-            buttonLabel="Bantu dengan AI"
-            context={`Artikel Toolinter:\nJudul: ${post.title}\nKategori: ${post.category}\nRingkasan: ${post.excerpt}\nCTA tool: ${post.ctaHref}\nIsi artikel:\n${post.content.map((section) => `${section.heading || ""}\n${section.paragraphs.join("\n")}`).join("\n\n")}`}
-            system="Kamu adalah asisten blog Toolinter. Ringkas artikel, buat checklist, dan rekomendasikan link tool internal yang paling relevan. Jawab singkat, praktis, bahasa Indonesia."
-          />
-        </div>
-
         {/* CTA */}
         <div className="mt-12 rounded-xl border border-border bg-surface p-6 text-center">
           <p className="mb-4 text-lg font-medium text-ink">
@@ -201,11 +189,16 @@ export default async function BlogPostPage({ params, searchParams }: PageProps) 
           </h3>
           <div className="grid gap-4 sm:grid-cols-3">
             {(() => {
+              const isLive = (p: (typeof allPosts)[number]) => {
+                if (p.status !== "published" && p.status !== "scheduled") return false;
+                const released = p.status === "published" || p.date <= today;
+                return isPreview ? true : released;
+              };
               const sameCategory = allPosts.filter(
-                (p) => p.slug !== slug && (p.status === "published" || (isPreview && p.status === "scheduled")) && p.category === post.category
+                (p) => p.slug !== slug && isLive(p) && p.category === post.category
               );
               const others = allPosts.filter(
-                (p) => p.slug !== slug && (p.status === "published" || (isPreview && p.status === "scheduled")) && p.category !== post.category
+                (p) => p.slug !== slug && isLive(p) && p.category !== post.category
               );
               const related = [...sameCategory, ...others].slice(0, 3);
               return related.map((r) => (
