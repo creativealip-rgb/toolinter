@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { generateToolMetadata } from "@/lib/seo";
 import Link from "next/link";
-import { Calculator, FileCheck, CreditCard, ArrowRight,
+import { Calculator, FileCheck, CreditCard, HandCoins, TrendingUp, ArrowRight,
 } from "lucide-react";
 
 export const metadata: Metadata = generateToolMetadata({
@@ -32,6 +32,20 @@ const tools = [
     description:
       "Simulasi pinjaman online: bunga harian, total bayar, perbandingan tenor, simulasi denda.",
     icon: CreditCard,
+  },
+  {
+    slug: "investasi",
+    title: "Kalkulator Investasi",
+    description:
+      "Proyeksi hasil investasi dengan bunga majemuk: modal awal, setoran rutin, dan imbal hasil.",
+    icon: TrendingUp,
+  },
+  {
+    slug: "zakat",
+    title: "Kalkulator Zakat",
+    description:
+      "Hitung zakat penghasilan, mal (tabungan & emas), dan perdagangan sesuai nisab dan kadar 2,5%.",
+    icon: HandCoins,
   },
 ];
 

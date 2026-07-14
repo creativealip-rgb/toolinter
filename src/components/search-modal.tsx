@@ -84,6 +84,7 @@ const searchIndex: SearchItem[] = [
   { title: 'Cek NPWP', description: 'Panduan cek dan daftar NPWP online', href: '/keuangan/cek-npwp', category: 'Keuangan' },
   { title: 'Cek Pinjol Legal', description: 'Daftar pinjaman online legal OJK', href: '/keuangan/pinjol', category: 'Keuangan' },
   { title: 'Kalkulator Investasi', description: 'Proyeksi pertumbuhan investasi compound interest', href: '/keuangan/investasi', category: 'Keuangan' },
+  { title: 'Kalkulator Zakat', description: 'Hitung zakat penghasilan, mal, dan perdagangan (2,5%)', href: '/keuangan/zakat', category: 'Keuangan' },
 
   // Blog (15)
   { title: 'Cara Membuat Surat Resign', description: 'Panduan lengkap cara membuat surat pengunduran diri yang baik', href: '/blog/cara-membuat-surat-resign', category: 'Blog' },

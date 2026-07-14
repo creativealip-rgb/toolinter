@@ -58,8 +58,8 @@ const categories = [
   {
     icon: CreditCard,
     title: "Keuangan",
-    desc: "Kalkulator KPR, simulasi pinjol OJK, cek format NPWP dan NIK",
-    count: 3,
+    desc: "Kalkulator KPR, investasi, zakat, simulasi pinjol OJK, cek format NPWP dan NIK",
+    count: 5,
     badge: "badge-indigo",
     href: "/keuangan",
   },

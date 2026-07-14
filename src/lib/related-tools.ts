@@ -232,6 +232,12 @@ export const relatedToolsMap: Record<string, RelatedTool[]> = {
     { path: "/cv/fresh-graduate", title: "CV Fresh Graduate" },
     { path: "/keuangan/investasi", title: "Kalkulator Investasi" },
   ],
+  "/keuangan/zakat": [
+    { path: "/gaji/bersih", title: "Kalkulator Gaji Bersih" },
+    { path: "/keuangan/investasi", title: "Kalkulator Investasi" },
+    { path: "/gaji/thr", title: "Kalkulator THR" },
+    { path: "/keuangan/cek-npwp", title: "Cek Format NPWP" },
+  ],
 };
 
 export function getRelatedTools(toolPath: string): RelatedTool[] {

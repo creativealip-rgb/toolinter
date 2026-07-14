@@ -202,6 +202,12 @@ export const toolFaq: Record<string, FaqItem[]> = {
     { q: "Berapa biaya admin di Shopee atau Tokopedia?", a: "Biaya admin bervariasi tergantung kategori produk dan program yang diikuti, seperti gratis ongkir atau promo lainnya. Karena itu sebaiknya cek tarif terbaru di masing-masing platform dan masukkan ke kalkulator." },
     { q: "Apakah kalkulator margin marketplace ini gratis?", a: "Gratis dan tanpa daftar. Cocok untuk seller yang ingin menentukan harga jual agar tetap cuan setelah semua potongan biaya marketplace." },
   ],
+  "/keuangan/zakat": [
+    { q: "Berapa persen zakat yang harus dikeluarkan?", a: "Kadar zakat untuk penghasilan, mal (tabungan/emas), dan perdagangan adalah 2,5% dari harta yang sudah mencapai nisab. Nisabnya setara nilai 85 gram emas." },
+    { q: "Apa itu nisab dan haul dalam zakat?", a: "Nisab adalah batas minimal harta agar wajib zakat, yaitu setara 85 gram emas. Haul adalah kepemilikan harta selama satu tahun; berlaku untuk zakat mal dan perdagangan, sedangkan zakat penghasilan bisa ditunaikan tiap bulan." },
+    { q: "Bagaimana cara menghitung zakat penghasilan dari gaji?", a: "Jika penghasilan sebulan mencapai nisab bulanan (nilai 85 gram emas dibagi 12), zakatnya 2,5% dari total penghasilan. Masukkan gaji dan harga emas terkini, kalkulator menghitungnya otomatis." },
+    { q: "Apakah kalkulator zakat ini gratis dan sesuai syariat?", a: "Gratis dan tanpa daftar. Perhitungan memakai kadar 2,5% dan nisab 85 gram emas sesuai acuan BAZNAS. Untuk kepastian, tunaikan lewat lembaga amil zakat resmi seperti BAZNAS atau Dompet Dhuafa." },
+  ],
 };
 
 export function getToolFaq(path: string): FaqItem[] {
