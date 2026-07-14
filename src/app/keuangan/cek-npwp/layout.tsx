@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateToolMetadata } from "@/lib/seo";
 import RelatedTools from "@/components/related-tools";
+import BreadcrumbJsonLd from "@/components/breadcrumb-jsonld";
 
 export const metadata: Metadata = generateToolMetadata({
   title: "Cek Format NPWP & Validasi NIK Online",
@@ -11,6 +12,7 @@ export const metadata: Metadata = generateToolMetadata({
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
+      <BreadcrumbJsonLd toolPath="/keuangan/cek-npwp" title="Cek Format NPWP & Validasi NIK Online" />
       {children}
       <div className="mx-auto w-full max-w-3xl px-4 pb-12">
         <RelatedTools toolPath="/keuangan/cek-npwp" />

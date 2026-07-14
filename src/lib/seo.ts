@@ -20,7 +20,10 @@ export function generateToolMetadata({
   type = "website",
 }: ToolMetaOpts): Metadata {
   const url = `${BASE}${path}`;
-  const ogImage = image || `${BASE}/og-default.png`;
+  // Derive category from first path segment (e.g. /gaji/bersih -> "gaji") for a per-category dynamic OG image.
+  const cat = path.split("/").filter(Boolean)[0] || "";
+  const dynamicOg = `${BASE}/api/og?title=${encodeURIComponent(title)}&cat=${encodeURIComponent(cat)}`;
+  const ogImage = image || dynamicOg;
 
   return {
     title,  // layout template adds "— Toolinter" automatically
