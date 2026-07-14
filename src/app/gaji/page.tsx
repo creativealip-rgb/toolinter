@@ -7,6 +7,7 @@ import {
   Shield,
   Clock,
   CalendarDays,
+  Scale,
   ArrowRight,
   Calculator,
   Sparkles,
@@ -83,6 +84,17 @@ const tools = [
     color: "text-success",
     bg: "bg-success/10",
     ai: true,
+    ready: true,
+  },
+  {
+    title: "Kalkulator Pesangon PHK",
+    description:
+      "Hitung estimasi pesangon PHK sesuai UU Cipta Kerja & PP 35/2021: UP, UPMK, dan UPH.",
+    href: "/gaji/pesangon",
+    icon: Scale,
+    color: "text-primary",
+    bg: "bg-primary/10",
+    ai: false,
     ready: true,
   },
 ];

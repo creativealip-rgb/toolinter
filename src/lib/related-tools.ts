@@ -44,6 +44,12 @@ export const relatedToolsMap: Record<string, RelatedTool[]> = {
     { path: "/gaji/lembur", title: "Kalkulator Lembur" },
     { path: "/gaji/thr", title: "Kalkulator THR" },
   ],
+  "/gaji/pesangon": [
+    { path: "/gaji/bersih", title: "Kalkulator Gaji Bersih" },
+    { path: "/gaji/thr", title: "Kalkulator THR" },
+    { path: "/gaji/pph21", title: "Kalkulator PPh 21" },
+    { path: "/keuangan/investasi", title: "Kalkulator Investasi" },
+  ],
   "/keuangan/kpr": [
     { path: "/gaji/bersih", title: "Kalkulator Gaji Bersih" },
     { path: "/keuangan/investasi", title: "Kalkulator Investasi" },
@@ -122,6 +128,13 @@ export const relatedToolsMap: Record<string, RelatedTool[]> = {
   "/foto/ktp": [
     { path: "/foto/resize-3x4", title: "Resize Foto 3x4" },
     { path: "/foto/kompres", title: "Kompres Foto" },
+    { path: "/foto/ganti-background", title: "Ganti Background Foto" },
+  ],
+  "/foto/ganti-background": [
+    { path: "/foto/resize-3x4", title: "Resize Foto 3x4" },
+    { path: "/foto/cpns", title: "Foto CPNS" },
+    { path: "/foto/kompres", title: "Kompres Foto" },
+    { path: "/cv/generator", title: "Buat CV ATS" },
   ],
 
   // --- PDF (journey: gabung -> kompres -> konversi) ---

@@ -21,6 +21,8 @@ import {
   GraduationCap,
   Building2,
   FileSignature,
+  Scale,
+  Wand2,
 } from 'lucide-react';
 
 const categories = ['Semua', 'Surat', 'Foto', 'Gaji', 'PDF', 'CV', 'UMKM'] as const;
@@ -74,12 +76,14 @@ const allTools: ToolItem[] = [
   { title: 'Resize Foto 4×6 cm', description: 'Ubah ukuran foto ke 4×6 cm untuk paspor, visa, SIM, dan dokumen internasional.', href: '/foto/resize-4x6', category: 'Foto', icon: Camera },
   { title: 'Resize Foto 2×3 cm', description: 'Ubah ukuran foto ke 2×3 cm untuk dokumen sekolah, PPDB, dan keperluan administrasi.', href: '/foto/resize-2x3', category: 'Foto', icon: Camera },
   { title: 'Kompres Foto', description: 'Kompres foto untuk upload ke portal CPNS, SNBP, dan situs pendaftaran online.', href: '/foto/kompres', category: 'Foto', icon: Shrink },
+  { title: 'Ganti Background Foto', description: 'Ubah latar pas foto jadi merah, biru, atau putih otomatis untuk lamaran & CPNS.', href: '/foto/ganti-background', category: 'Foto', icon: Wand2 },
 
   // Gaji (4)
   { title: 'Kalkulator Gaji Bersih', description: 'Hitung take home pay dari gaji kotor. Otomatis potong PPh21, BPJS Kesehatan, dan BPJS Ketenagakerjaan.', href: '/gaji/bersih', category: 'Gaji', icon: Wallet },
   { title: 'Kalkulator PPh21', description: 'Hitung pajak penghasilan PPh21 berdasarkan tarif progresif dan status PTKP.', href: '/gaji/pph21', category: 'Gaji', icon: Receipt },
   { title: 'Kalkulator THR', description: 'Hitung tunjangan hari raya berdasarkan masa kerja dan gaji terakhir.', href: '/gaji/thr', category: 'Gaji', icon: Gift },
   { title: 'Kalkulator BPJS', description: 'Hitung iuran BPJS Kesehatan dan BPJS Ketenagakerjaan (JHT, JP, JKK, JKM).', href: '/gaji/bpjs', category: 'Gaji', icon: Shield },
+  { title: 'Kalkulator Pesangon PHK', description: 'Hitung estimasi pesangon PHK sesuai UU Cipta Kerja & PP 35/2021: UP, UPMK, dan UPH.', href: '/gaji/pesangon', category: 'Gaji', icon: Scale },
 
   // PDF (4 active)
   { title: 'Gabung PDF', description: 'Gabungkan beberapa file PDF menjadi satu. Upload, atur urutan, dan download hasilnya.', href: '/pdf/gabung', category: 'PDF', icon: FileText },

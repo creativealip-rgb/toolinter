@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Camera, ArrowRight, Shrink,
+import { Camera, ArrowRight, Shrink, Wand2,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -42,6 +42,14 @@ const fotoTools = [
     size: "Target: 200 KB / 500 KB / custom",
     icon: "shrink" as const,
   },
+  {
+    slug: "ganti-background",
+    title: "Ganti Background Foto",
+    description:
+      "Ubah latar pas foto jadi merah, biru, atau putih otomatis untuk lamaran kerja, CPNS, dan dokumen.",
+    size: "Merah / Biru / Putih / Abu",
+    icon: "wand" as const,
+  },
 ];
 
 export default function FotoPage() {
@@ -72,6 +80,8 @@ export default function FotoPage() {
             >
               {tool.icon === "shrink" ? (
                 <Shrink className="w-8 h-8 text-primary mb-3" />
+              ) : tool.icon === "wand" ? (
+                <Wand2 className="w-8 h-8 text-primary mb-3" />
               ) : (
                 <Camera className="w-8 h-8 text-primary mb-3" />
               )}
@@ -86,7 +96,7 @@ export default function FotoPage() {
                 href={`/foto/${tool.slug}`}
                 className="flex items-center justify-center gap-2 bg-primary text-white font-medium py-2 px-4 rounded-xl hover:opacity-90 transition-opacity text-sm"
               >
-                {tool.icon === "shrink" ? "Mulai Kompres" : "Mulai Resize"}
+                {tool.icon === "shrink" ? "Mulai Kompres" : tool.icon === "wand" ? "Ganti Background" : "Mulai Resize"}
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

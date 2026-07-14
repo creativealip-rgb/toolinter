@@ -23,10 +23,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const toolPages = [
-    "/gaji/bersih", "/gaji/thr", "/gaji/lembur", "/gaji/bpjs", "/gaji/prorata", "/gaji/pph21", "/gaji/umr",
+    "/gaji/bersih", "/gaji/thr", "/gaji/lembur", "/gaji/bpjs", "/gaji/prorata", "/gaji/pph21", "/gaji/umr", "/gaji/pesangon",
     "/keuangan/kpr", "/keuangan/investasi", "/keuangan/cek-npwp", "/keuangan/pinjol",
     "/umkm/hpp", "/umkm/harga-jual", "/umkm/food-cost", "/umkm/margin-marketplace", "/umkm/catatan", "/umkm/invoice", "/umkm/caption",
-    "/foto/resize-3x4", "/foto/resize-4x6", "/foto/resize-2x3", "/foto/ktp", "/foto/cpns", "/foto/snbp", "/foto/kompres",
+    "/foto/resize-3x4", "/foto/resize-4x6", "/foto/resize-2x3", "/foto/ktp", "/foto/cpns", "/foto/snbp", "/foto/kompres", "/foto/ganti-background",
     "/pdf/kompres", "/pdf/gabung", "/pdf/halaman", "/pdf/foto-ke-pdf", "/pdf/pdf-ke-word", "/pdf/word-ke-pdf",
     "/cv/ats", "/cv/generator", "/cv/cover-letter", "/cv/fresh-graduate", "/cv/cv-admin", "/cv/cv-bumn", "/cv/contoh-surat-lamaran",
     "/surat/resign", "/surat/izin-sekolah", "/surat/lamaran-kerja", "/surat/dinas",

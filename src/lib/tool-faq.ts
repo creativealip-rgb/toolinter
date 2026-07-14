@@ -28,6 +28,11 @@ export const toolFaq: Record<string, FaqItem[]> = {
     { q: "Bagaimana rumus upah lembur menurut UU?", a: "Upah lembur = 1/173 × gaji sebulan × faktor pengali. Jam pertama 1,5×, jam berikutnya 2×; berbeda untuk lembur di hari libur." },
     { q: "Apakah semua karyawan berhak uang lembur?", a: "Karyawan dengan jabatan tertentu (golongan pemikir/perencana) bisa dikecualikan. Selebihnya berhak upah lembur sesuai perhitungan Kepmenaker." },
   ],
+  "/gaji/pesangon": [
+    { q: "Bagaimana cara menghitung pesangon PHK?", a: "Pesangon terdiri dari Uang Pesangon (UP), Uang Penghargaan Masa Kerja (UPMK), dan Uang Penggantian Hak (UPH). Besarannya berdasarkan masa kerja dikali faktor pengali sesuai jenis PHK menurut PP 35/2021." },
+    { q: "Berapa pesangon untuk masa kerja 4 tahun?", a: "Masa kerja 4 tahun mendapat Uang Pesangon 5 bulan upah + UPMK 2 bulan upah. Totalnya dikali faktor pengali sesuai alasan PHK (misal efisiensi cegah kerugian pakai faktor 1×)." },
+    { q: "Apakah semua PHK dapat pesangon yang sama?", a: "Tidak. Faktor pengali berbeda tiap jenis PHK: efisiensi karena rugi 0,5×, pensiun 1,75×, meninggal/sakit berkepanjangan 2×. Perjanjian kerja/PKB bisa mengatur lebih besar." },
+  ],
   "/keuangan/kpr": [
     { q: "Apa beda bunga KPR fixed dan floating?", a: "Fixed: bunga tetap selama periode tertentu, cicilan stabil. Floating: bunga mengikuti pasar, cicilan bisa naik-turun. Umumnya fixed di awal lalu floating." },
     { q: "Apakah simulasi ini mengikat ke bank?", a: "Tidak. Ini simulasi estimasi cicilan untuk perencanaan. Angka final tetap mengikuti penawaran resmi bank." },
@@ -51,6 +56,11 @@ export const toolFaq: Record<string, FaqItem[]> = {
   "/foto/kompres": [
     { q: "Sampai berapa kecil ukuran foto bisa dikompres?", a: "Bisa disesuaikan target ukuran (misal 100KB atau 200KB) sambil menjaga kualitas sebaik mungkin. Cocok untuk syarat unggah dokumen online." },
     { q: "Apakah kualitas foto turun setelah dikompres?", a: "Kompresi mengurangi ukuran file dengan penurunan kualitas minimal yang biasanya tidak terlihat untuk kebutuhan dokumen." },
+  ],
+  "/foto/ganti-background": [
+    { q: "Apakah foto saya aman saat ganti background?", a: "Ya. Seluruh proses pemisahan objek dan penggantian latar berjalan di browser kamu, foto tidak diupload ke server mana pun." },
+    { q: "Warna background apa saja yang tersedia?", a: "Tersedia merah, biru, putih, dan abu-abu — warna yang paling umum disyaratkan untuk pas foto lamaran kerja dan dokumen resmi." },
+    { q: "Kenapa proses pertama agak lama?", a: "Saat pertama dipakai, sistem mengunduh model AI pemisah objek ke browser. Setelah itu prosesnya jauh lebih cepat. Gunakan koneksi yang stabil." },
   ],
   "/pdf/gabung": [
     { q: "Berapa banyak file PDF yang bisa digabung?", a: "Kamu bisa menggabungkan beberapa file PDF sekaligus dalam satu proses, lalu unduh hasilnya sebagai satu file." },
