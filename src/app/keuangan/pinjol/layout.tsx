@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateToolMetadata } from "@/lib/seo";
 import RelatedTools from "@/components/related-tools";
+import ToolFaq from "@/components/tool-faq";
 
 export const metadata: Metadata = generateToolMetadata({
   title: "Cek Daftar Pinjol Legal Berizin OJK 2026",
@@ -13,6 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       {children}
       <div className="mx-auto w-full max-w-3xl px-4 pb-12">
+        <ToolFaq toolPath="/keuangan/pinjol" />
         <RelatedTools toolPath="/keuangan/pinjol" />
       </div>
     </>

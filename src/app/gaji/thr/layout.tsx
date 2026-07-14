@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateToolMetadata } from "@/lib/seo";
 import RelatedTools from "@/components/related-tools";
+import ToolFaq from "@/components/tool-faq";
 
 export const metadata: Metadata = generateToolMetadata({
   title: "Kalkulator THR Karyawan (Tetap, Kontrak, Harian)",
@@ -13,6 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       {children}
       <div className="mx-auto w-full max-w-3xl px-4 pb-12">
+        <ToolFaq toolPath="/gaji/thr" />
         <RelatedTools toolPath="/gaji/thr" />
       </div>
     </>

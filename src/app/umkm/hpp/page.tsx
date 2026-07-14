@@ -30,6 +30,7 @@ const toolSchema = {
 export default function HppPage() {
   return (
     <main className="py-12 px-6">
+      <JsonLd data={toolSchema} />
       <div className="max-w-3xl mx-auto">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-ink-muted mb-6">

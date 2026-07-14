@@ -30,6 +30,7 @@ const toolSchema = {
 export default function Resize3x4Page() {
   return (
     <main className="py-12 px-6">
+      <JsonLd data={toolSchema} />
       <div className="max-w-6xl mx-auto">
         {/* Breadcrumb */}
         <Link
