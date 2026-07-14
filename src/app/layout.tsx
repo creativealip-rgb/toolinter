@@ -9,7 +9,7 @@ import NextTopLoader from "nextjs-toploader";
 export const metadata: Metadata = {
   metadataBase: new URL("https://toolinter.net"),
   title: {
-    default: "Toolinter — 70+ Tool Online Gratis Indonesia",
+    default: "Toolinter — Tool Online Gratis Indonesia",
     template: "%s — Toolinter",
   },
   description: "Kumpulan tool online gratis untuk surat, foto, CV, PDF, pajak, gaji, dan UMKM. Cepat, ringan, bisa langsung download hasil.",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     locale: "id_ID",
     siteName: "Toolinter",
     url: "https://toolinter.net",
-    images: [{ url: "/og-default.png", width: 1200, height: 630, alt: "Toolinter — 70+ Tool Online Gratis" }],
+    images: [{ url: "/og-default.png", width: 1200, height: 630, alt: "Toolinter — Tool Online Gratis" }],
   },
   twitter: { card: "summary_large_image", images: ["/og-default.png"] },
   icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },

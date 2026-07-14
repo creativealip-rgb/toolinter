@@ -17,7 +17,7 @@ export default function ToolsPage() {
             Semua Tool Online
           </h1>
           <p className="text-lg text-ink-tertiary max-w-2xl mx-auto">
-            45 tool gratis siap pakai — surat, foto, gaji, PDF, CV, dan UMKM.
+            Tool gratis siap pakai — surat, foto, gaji, PDF, CV, dan UMKM.
             Proses di browser, tanpa registrasi.
           </p>
         </div>
@@ -32,7 +32,7 @@ export default function ToolsPage() {
           </h2>
           <div className="text-ink-secondary text-sm leading-relaxed space-y-3">
             <p>
-              Toolinter menyediakan <strong>45+ tool online gratis</strong> yang
+              Toolinter menyediakan <strong>puluhan tool online gratis</strong> yang
               dirancang khusus untuk kebutuhan masyarakat Indonesia. Mulai dari
               generator surat resmi, resize foto dokumen, kalkulator gaji dan
               pajak, pengelolaan PDF, pembuatan CV ATS-friendly, hingga tools

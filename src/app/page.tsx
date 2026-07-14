@@ -135,7 +135,7 @@ function TrustBadges() {
     <div className="flex flex-wrap justify-center gap-8 py-6 px-6 bg-surface">
       {[
         { value: "100%", label: "Gratis" },
-        { value: "70+", label: "Tool Tersedia" },
+        { value: "Di Browser", label: "Proses Aman" },
         { value: "Tanpa", label: "Install" },
       ].map((item) => (
         <div key={item.label} className="text-center">
