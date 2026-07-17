@@ -30,16 +30,29 @@ export async function generateMetadata({
   const post = allPosts.find((p) => p.slug === slug);
   if (!post) return {};
 
+  const url = `https://toolinter.net/blog/${post.slug}`;
+  const description = post.metaDescription || post.excerpt;
+
   return {
     title: `${post.title} | Blog Toolinter`,
-    description: post.metaDescription || post.excerpt,
-    robots: isPreview ? { index: false, follow: false } : undefined,
+    description,
+    robots: isPreview ? { index: false, follow: false } : { index: true, follow: true },
+    alternates: { canonical: url },
     openGraph: {
       title: post.title,
-      description: post.metaDescription || post.excerpt,
+      description,
+      url,
       type: "article",
       publishedTime: post.date,
+      siteName: "Toolinter",
+      locale: "id_ID",
       ...(post.ogImage ? { images: [{ url: post.ogImage }] } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description,
+      ...(post.ogImage ? { images: [post.ogImage] } : {}),
     },
   };
 }

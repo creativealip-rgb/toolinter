@@ -9,6 +9,16 @@ export const metadata: Metadata = {
   title: "Blog Toolinter — Tips & Panduan Gratis",
   description:
     "Kumpulan artikel tips, panduan, dan tutorial seputar dokumen, foto, gaji, CV, dan tools online gratis dari Toolinter.",
+  alternates: { canonical: "https://toolinter.net/blog" },
+  openGraph: {
+    title: "Blog Toolinter — Tips & Panduan Gratis",
+    description:
+      "Kumpulan artikel tips, panduan, dan tutorial seputar dokumen, foto, gaji, CV, dan tools online gratis dari Toolinter.",
+    url: "https://toolinter.net/blog",
+    siteName: "Toolinter",
+    locale: "id_ID",
+    type: "website",
+  },
 };
 
 interface BlogPageProps {

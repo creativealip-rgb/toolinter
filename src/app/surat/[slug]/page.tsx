@@ -16,9 +16,27 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const surat = getSuratBySlug(slug);
   if (!surat) return { title: "Surat Tidak Ditemukan — Toolinter" };
 
+  const url = `https://toolinter.net/surat/${surat.slug}`;
+  const title = `${surat.title} Online Gratis`;
+  const description = `Buat ${surat.title.toLowerCase()} online gratis. Isi data, preview, dan download langsung dalam format PDF.`;
+
   return {
-    title: `${surat.title} Online Gratis — Toolinter`,
-    description: `Buat ${surat.title.toLowerCase()} online gratis. Isi data, preview, dan download langsung dalam format PDF.`,
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${title} — Toolinter`,
+      description,
+      url,
+      siteName: "Toolinter",
+      locale: "id_ID",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} — Toolinter`,
+      description,
+    },
   };
 }
 
