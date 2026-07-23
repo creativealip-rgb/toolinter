@@ -19,7 +19,7 @@
     { "used": true, "category": "Gaji", "focusKeyword": "cara hitung gaji ke 13 pns", "title": "Cara Menghitung Gaji ke-13 PNS dan Kapan Cair", "ctaHref": "/gaji/bersih", "ctaLabel": "Hitung Gaji Bersih", "angle": "Komponen gaji pokok + tunjangan, jadwal cair, contoh" },
     { "used": true, "category": "Gaji", "focusKeyword": "cara hitung gaji prorata masuk tengah bulan", "title": "Cara Hitung Gaji Prorata untuk Karyawan Masuk Tengah Bulan", "ctaHref": "/gaji/prorata", "ctaLabel": "Hitung Gaji Prorata", "angle": "Rumus hari kerja, contoh masuk tgl 15, resign tgl 20" },
     { "used": true, "category": "PDF", "focusKeyword": "cara tanda tangan pdf di hp", "title": "Cara Tanda Tangan PDF di HP Tanpa Print", "ctaHref": "/pdf/foto-ke-pdf", "ctaLabel": "Olah PDF", "angle": "Tanda tangan digital, aman di browser, tanpa aplikasi berbayar" },
-    { "used": false, "category": "PDF", "focusKeyword": "cara ubah pdf ke word bisa diedit", "title": "Cara Ubah PDF ke Word yang Bisa Diedit, Gratis", "ctaHref": "/pdf/pdf-ke-word", "ctaLabel": "PDF ke Word", "angle": "Jaga format, kapan hasil perlu dirapikan, di browser" },
-    { "used": false, "category": "Keuangan", "focusKeyword": "cara cek npwp 16 digit nik", "title": "Cara Cek NPWP 16 Digit yang Sudah Terintegrasi NIK", "ctaHref": "/keuangan/cek-npwp", "ctaLabel": "Cek NPWP", "angle": "Integrasi NPWP-NIK, format 15 vs 16 digit, cara validasi" }
+    { "used": true, "category": "PDF", "focusKeyword": "cara ubah pdf ke word bisa diedit", "title": "Cara Ubah PDF ke Word yang Bisa Diedit, Gratis", "ctaHref": "/pdf/pdf-ke-word", "ctaLabel": "PDF ke Word", "angle": "Jaga format, kapan hasil perlu dirapikan, di browser" },
+    { "used": true, "category": "Keuangan", "focusKeyword": "cara cek npwp 16 digit nik", "title": "Cara Cek NPWP 16 Digit yang Sudah Terintegrasi NIK", "ctaHref": "/keuangan/cek-npwp", "ctaLabel": "Cek NPWP", "angle": "Integrasi NPWP-NIK, format 15 vs 16 digit, cara validasi" }
   ]
 }
