@@ -41,6 +41,11 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Toolinter" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
         <script defer data-domain="toolinter.net" src="https://plausible.io/js/script.js" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6386522863095338"
+          crossOrigin="anonymous"
+        />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-3T31T7GX9H"></script>
         <script
           dangerouslySetInnerHTML={{
