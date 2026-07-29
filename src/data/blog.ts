@@ -26,6 +26,72 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    "slug": "cara-menghitung-zakat-penghasilan-gaji",
+    "title": "Cara Menghitung Zakat Penghasilan dari Gaji Bulanan [2026]",
+    "excerpt": "Panduan lengkap menghitung zakat penghasilan dari gaji: nisab, kadar 2,5%, dan contoh perhitungan bulanan sesuai ketentuan BAZNAS.",
+    "date": "2026-07-14",
+    "category": "Keuangan",
+    "readTime": "3 menit",
+    "ctaLabel": "Hitung Zakat Online",
+    "ctaHref": "/keuangan/zakat",
+    "content": [
+      {
+        "paragraphs": [
+          "Zakat penghasilan, atau sering disebut zakat profesi, adalah zakat yang dikeluarkan dari pendapatan rutin seperti gaji, honor, atau upah dari pekerjaan halal. Berbeda dengan zakat mal yang menunggu haul satu tahun, zakat penghasilan boleh ditunaikan setiap bulan saat kamu menerima gaji, sehingga terasa lebih ringan. Kamu bisa memakai kalkulator zakat Toolinter untuk menghitungnya secara otomatis tanpa perlu daftar."
+        ]
+      },
+      {
+        "heading": "Berapa Nisab Zakat Penghasilan?",
+        "paragraphs": [
+          "Nisab adalah batas minimal harta agar seseorang wajib berzakat. Untuk zakat penghasilan, nisab yang dipakai setara dengan nilai 85 gram emas per tahun. Karena penghasilan diterima bulanan, banyak orang menghitung nisab bulanan dengan membagi nilai 85 gram emas dengan 12 bulan.",
+          "Misalnya, jika harga emas Rp1.350.000 per gram, maka nisab setahun adalah 85 x Rp1.350.000 = Rp114.750.000. Dibagi 12, nisab bulanannya sekitar Rp9.562.500. Artinya, jika penghasilan bersih kamu dalam sebulan mencapai atau melebihi angka itu, kamu sudah wajib menunaikan zakat penghasilan.",
+          "Karena harga emas berfluktuasi, nilai nisab ikut berubah setiap saat. Itulah kenapa penting memakai harga emas terkini ketika menghitung, bukan angka lama yang bisa jadi sudah tidak akurat."
+        ]
+      },
+      {
+        "heading": "Berapa Persen Kadar Zakat Penghasilan?",
+        "paragraphs": [
+          "Kadar zakat penghasilan adalah 2,5% dari total penghasilan yang sudah mencapai nisab. Persentase ini sama dengan kadar zakat mal, karena zakat profesi diqiyaskan (dianalogikan) dengan zakat harta.",
+          "Sebagian ulama berpendapat zakat dihitung dari penghasilan bruto (kotor), sebagian lain dari penghasilan neto setelah dikurangi kebutuhan pokok. BAZNAS umumnya mengacu pada penghasilan bruto untuk kemudahan. Kamu bisa memilih pendekatan yang sesuai keyakinanmu, namun pastikan konsisten."
+        ]
+      },
+      {
+        "heading": "Contoh Perhitungan Zakat Penghasilan",
+        "paragraphs": [
+          "Misalkan gaji dan tunjangan tetap kamu Rp10.000.000 per bulan, sementara nisab bulanan Rp9.562.500. Karena penghasilan melebihi nisab, kamu wajib zakat.",
+          "Zakat yang ditunaikan = 2,5% x Rp10.000.000 = Rp250.000 per bulan. Jumlah ini bisa kamu bayarkan langsung tiap bulan, atau diakumulasikan lalu dibayar sekaligus.",
+          "Sebaliknya, jika penghasilan kamu Rp5.000.000 per bulan dan berada di bawah nisab bulanan, maka belum ada kewajiban zakat penghasilan. Meski begitu, kamu tetap dianjurkan bersedekah sesuai kemampuan."
+        ]
+      },
+      {
+        "heading": "Kapan dan Ke Mana Membayar Zakat Penghasilan?",
+        "paragraphs": [
+          "Zakat penghasilan paling praktis ditunaikan saat menerima gaji setiap bulan. Cara ini membuat kewajiban terasa ringan dibandingkan menumpuknya menjadi satu tahun.",
+          "Salurkan zakat melalui lembaga amil zakat resmi seperti BAZNAS, Dompet Dhuafa, atau Rumah Zakat agar tercatat dan disalurkan kepada delapan golongan penerima (mustahik) yang berhak. Menyalurkan lewat lembaga resmi juga memudahkan pelaporan dan memastikan zakat tepat sasaran."
+        ]
+      },
+      {
+        "heading": "Hitung Zakat Penghasilan Secara Otomatis",
+        "paragraphs": [
+          "Daripada menghitung manual dan berisiko keliru, kamu bisa memakai kalkulator zakat Toolinter. Cukup masukkan penghasilan bulanan dan harga emas terkini, lalu sistem otomatis menampilkan apakah kamu sudah mencapai nisab beserta besaran zakat yang perlu ditunaikan. Gratis, tanpa daftar, dan hasilnya bisa langsung kamu jadikan acuan."
+        ]
+      }
+    ],
+    "status": "published",
+    "metaDescription": "Panduan lengkap menghitung zakat penghasilan dari gaji: nisab, kadar 2,5%, dan contoh perhitungan bulanan sesuai ketentuan BAZNAS.",
+    "focusKeyword": "cara menghitung zakat penghasilan",
+    "tags": [
+      "zakat",
+      "zakat penghasilan",
+      "gaji",
+      "keuangan islam"
+    ],
+    "author": "Toolinter",
+    "featuredImage": "",
+    "ogImage": "",
+    "views": 0
+  },
+  {
     "slug": "cara-membuat-surat-resign",
     "title": "Cara Membuat Surat Resign yang Sopan dan Profesional [2026]",
     "excerpt": "Panduan lengkap cara membuat surat pengunduran diri yang baik. Contoh surat resign, tips, dan template gratis.",
